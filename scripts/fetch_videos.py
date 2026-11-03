@@ -5,7 +5,7 @@ RSSは1本あたり直近15件までしか返さないため、取得した分�
 
 出力の形:
   {"videos": [...メインチャンネル...], "sub": [...サブチャンネル...]}
-各動画: id, title, published, short, kind("video"|"live"|"short"), views, excerpt
+各動画: id, title, published, short, kind("video"|"live"|"short"), views, excerpt, description
 """
 import json
 import re
@@ -89,6 +89,8 @@ def parse(xml_bytes, kind="all"):
             "kind": "short" if is_short else ("live" if kind == "live" else "video"),
             "views": views,
             "excerpt": pick_excerpt(desc),
+            # 攻略ページ（scripts/build_pages.py）の材料。ショートは使わないので保存しない
+            "description": "" if is_short else desc.strip()[:5000],
         })
     return videos
 

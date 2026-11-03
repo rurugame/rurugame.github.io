@@ -25,7 +25,10 @@ main ブランチに push すると数分で反映される（ビルド工程な
 | `index.html` | サイト本体。CSSとJSもこの1ファイルに入っている |
 | `data/videos.json` | YouTubeの投稿一覧。**手で編集しない**（自動更新で上書きされる） |
 | `scripts/fetch_videos.py` | YouTubeのRSSから投稿を取得して `data/videos.json` に蓄積する |
-| `.github/workflows/update-videos.yml` | 上のスクリプトを毎時17分に実行し、変更があればコミットする |
+| `scripts/build_pages.py` | `data/videos.json` から動画ごとの攻略ページ `videos/<動画ID>.html`、一覧 `videos/index.html`、`sitemap.xml` を作る |
+| `videos/` | 攻略ページ。**手で編集しない**（毎時作り直される）。見た目や構成を変えるときは `build_pages.py` を直す |
+| `robots.txt` | サイトマップの場所を検索エンジンに伝える |
+| `.github/workflows/update-videos.yml` | 上の2つのスクリプトを毎時17分に実行し、変更があればコミットする |
 
 ### 動画の自動更新の仕組み
 
@@ -33,6 +36,16 @@ main ブランチに push すると数分で反映される（ビルド工程な
 - `data/videos.json` は `{"videos": [メイン], "sub": [サブチャンネル]}` の形。各動画は `id, title, published, short, kind, views, excerpt`
 - ページは `raw.githubusercontent.com` の JSON を先に読み、失敗したら同じサイト内の `data/videos.json` を読む（Pagesの再ビルドを待たずに反映させるため）
 - 読み込めなかった場合は、YouTubeの再生リスト埋め込みとリンクが表示される
+
+### 攻略ページの仕組み（SEO対策）
+
+- 動画1本につき1ページ。中身は**動画の概要欄**から作る：本文は「この動画のポイント」、`00:00 〜` の行は「目次」（押すとその場面から再生）
+- 概要欄のURL・ハッシュタグ・「チャンネル登録」などの宣伝行は自動で外す（`SKIP_WORDS`）
+- 本文も目次もない動画のページは `noindex` にし、サイトマップにも入れない（中身の薄いページで評価を下げないため）
+- 動画の構造化データ（VideoObject、目次は Clip）を入れている
+- トップページの「最新の動画」の横の一覧と「これまでの投稿」は、YouTubeではなく攻略ページにリンクする
+- ページを充実させる一番の方法は、るるさんが概要欄に「この動画のポイント」を書くこと。柴崎さんは概要欄の改善も含めてるるゲームのコンサルをしている
+- 字幕からの自動文字起こしは、YouTubeがGitHubのサーバーからの取得をブロックするため断念した。詳しい記事が欲しい動画は、YouTubeスタジオから字幕をダウンロードしてもらい、それを元に手で書き足す
 
 ## デザインの決まりごと
 

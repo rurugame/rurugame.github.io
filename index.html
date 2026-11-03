@@ -560,7 +560,7 @@
           <h2>これまでの投稿</h2>
           <p>攻略、縛りプレイ、視聴者さんと作った企画。気になるものからどうぞ。</p>
         </div>
-        <a class="more" href="https://www.youtube.com/@RuLgames/streams" target="_blank" rel="noopener">配信のアーカイブ</a>
+        <a class="more" href="videos/">攻略ページ一覧</a>
       </div>
       <div class="archive" id="archive-box">
         <p class="fallback">過去の動画は<a href="https://www.youtube.com/@RuLgames/videos" target="_blank" rel="noopener">YouTubeの動画一覧</a>から見られます。</p>
@@ -756,6 +756,8 @@
   ];
   const thumb = (id, size = 'hqdefault') => `https://i.ytimg.com/vi/${id}/${size}.jpg`;
   const watch = v => v.short ? `https://www.youtube.com/shorts/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`;
+  // メインチャンネルの通常動画・配信アーカイブは、サイト内の攻略ページ（scripts/build_pages.py が作る）へ
+  const page = v => v.short ? watch(v) : `videos/${v.id}.html`;
   const day = iso => {
     const d = new Date(iso);
     return isNaN(d) ? '' : `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
@@ -794,7 +796,7 @@
         <div class="side">
           <p class="side-label">その前の動画</p>
           ${rest.slice(0, 3).map(v => `
-            <a href="${watch(v)}" target="_blank" rel="noopener">
+            <a href="${page(v)}">
               <img src="${thumb(v.id, 'mqdefault')}" alt="" loading="lazy">
               <div><strong>${esc(v.title)}</strong><div class="meta">${day(v.published)}</div></div>
             </a>`).join('')}
@@ -804,7 +806,7 @@
       const archive = rest.slice(3, 12);
       if (archive.length) {
         document.getElementById('archive-box').innerHTML = archive.map(v => `
-          <a class="post" href="${watch(v)}" target="_blank" rel="noopener">
+          <a class="post" href="${page(v)}">
             <img src="${thumb(v.id)}" alt="" loading="lazy">
             <h3>${esc(v.title)}</h3>
             <p>${v.kind === 'live' ? '配信アーカイブ ／ ' : ''}${day(v.published)}${v.excerpt && !/^\d{1,2}:\d{2}/.test(v.excerpt) ? '<br>' + esc(v.excerpt) : ''}</p>
