@@ -19,11 +19,14 @@ OUT = ROOT / "videos"
 SITE = "https://rurugame.github.io"
 CHANNEL = "https://www.youtube.com/@RuLgames"
 
-# 概要欄のうち、攻略の内容ではない行（宣伝・リンク・素材のクレジットなど）
-SKIP_WORDS = ("http", "チャンネル登録", "メンバーシップ", "メンバー登録", "BGM", "素材", "お借り", "効果音",
-              "Twitter", "ツイッター", "X（旧", "X(旧", "サブチャンネル", "ご視聴", "高評価")
+# 概要欄のうち、攻略の内容ではない行（宣伝・素材のクレジットなど）
+SKIP_WORDS = ("チャンネル登録", "メンバーシップ", "メンバー登録", "メンバーになると", "メンバー限定", "BGM", "素材",
+              "お借り", "効果音", "Twitter", "ツイッター", "サブチャンネル", "ご視聴", "高評価")
 CHAPTER = re.compile(r"^\s*(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\s*[-－:：]?\s*(.*)$")
-LIST_MARK = re.compile(r"^\s*([①-⑳]|[・•\-－]|\d+[\.．、)）])\s*")
+LIST_MARK = re.compile(r"^\s*([①-⑳]|[・•■□◆▶▷\-－]|\d+[\.．、)）])\s*")
+URL = re.compile(r"(https?://\S+|(?:www\.)?(?:youtu\.be|youtube\.com|twitter\.com|x\.com)/\S+)")
+VIDEO_ID = re.compile(r"(?:youtu\.be/|[?&]v=|/shorts/|/live/)([\w-]{11})")
+LABEL = re.compile(r"^【(.+)】$")
 
 e = html.escape
 
@@ -39,40 +42,84 @@ def stamp(sec):
 
 
 def parse_description(desc):
-    """概要欄を「目次」と「本文のかたまり（段落か箇条書き）」に分ける"""
-    chapters, blocks, current = [], [], []
+    """概要欄を読み分ける。
+
+    戻り値: (目次, 本文, 関連動画, 出演者)
+      目次     [(秒, 見出し)]  … 「00:00 オープニング」の行
+      本文     [("h", 見出し) | ("p", [行]) | ("ul", [行])]
+      関連動画 [(ラベル, 動画ID)] … 「【対赤四天王】」の次の行にYouTubeの動画URLがある形
+      出演者   [(名前, URL)]     … 「あんみんさん」の次の行にチャンネルURLがある形
+    """
+    lines = [l.strip() for l in desc.splitlines()]
+    chapters, blocks, links, people, cur = [], [], [], [], []
 
     def flush():
-        if current:
-            blocks.append(list(current))
-            current.clear()
+        if cur:
+            kind = "ul" if len(cur) > 1 and all(LIST_MARK.match(l) for l in cur) else "p"
+            blocks.append((kind, list(cur)))
+            cur.clear()
 
-    for raw in desc.splitlines():
-        line = raw.strip()
-        m = CHAPTER.match(line)
-        if m and m.group(4):
-            chapters.append((seconds(m[1], m[2], m[3]), m[4].strip()))
-            flush()
-            continue
+    def next_line(i):
+        for j in range(i + 1, len(lines)):
+            if lines[j]:
+                return lines[j]
+        return ""
+
+    label = None
+    for i, line in enumerate(lines):
         if not line:
             flush()
             continue
+        m = CHAPTER.match(line)
+        if m and m.group(4):
+            flush()
+            chapters.append((seconds(m[1], m[2], m[3]), m[4].strip()))
+            continue
+        url = URL.search(line)
+        if url:
+            flush()
+            text = (label or line[:url.start()].strip(" ：:→▶")).strip()
+            vid = VIDEO_ID.search(url.group(1))
+            if vid and text and not any(w in text for w in SKIP_WORDS):
+                links.append((text, vid.group(1)))
+            elif ("/@" in url.group(1) or "/channel/" in url.group(1)) and text \
+                    and not any(w in text for w in SKIP_WORDS) and text not in ("X", "YouTube"):
+                people.append((text, url.group(1) if url.group(1).startswith("http") else "https://" + url.group(1)))
+            label = None
+            continue
         if line.startswith("#") or any(w in line for w in SKIP_WORDS):
             flush()
+            label = None
             continue
-        current.append(line)
+        following = next_line(i)
+        lab = LABEL.match(line)
+        if URL.search(following) and (lab or len(line) <= 30):
+            flush()
+            label = lab.group(1) if lab else line  # 次の行のURLの名前
+            continue
+        if lab:
+            flush()
+            if not LABEL.match(following):  # 【…】が続くだけの行（URLのない予告）は飛ばす
+                blocks.append(("h", lab.group(1)))
+            continue
+        label = None
+        cur.append(line)
     flush()
-    return chapters, blocks
+    return chapters, blocks, links, people
 
 
 def render_blocks(blocks):
     out = []
-    for block in blocks:
-        if len(block) > 1 and all(LIST_MARK.match(l) for l in block):
-            items = "".join(f"<li>{e(LIST_MARK.sub('', l))}</li>" for l in block)
-            out.append(f"<ul>{items}</ul>")
+    for kind, value in blocks:
+        if kind == "h":
+            out.append(f"<h3>{e(value)}</h3>")
+        elif kind == "ul":
+            out.append("<ul>" + "".join(f"<li>{e(LIST_MARK.sub('', l))}</li>" for l in value) + "</ul>")
+        elif len(value) > 1 and re.match(r"^[①-⑳■]", value[0]):
+            # 「①ルール名」の下に説明が続く形は、1行目を太字にする
+            out.append(f"<p><strong>{e(value[0])}</strong><br>" + "<br>".join(e(l) for l in value[1:]) + "</p>")
         else:
-            out.append("<p>" + "<br>".join(e(l) for l in block) + "</p>")
+            out.append("<p>" + "<br>".join(e(l) for l in value) + "</p>")
     return "\n".join(out)
 
 
@@ -135,6 +182,8 @@ STYLE = """
   article p, article ul { margin: 0 0 1.2em; }
   article ul { padding-left: 1.3em; }
   article li { margin-bottom: .4em; }
+  article h3 { font-size: 17px; font-weight: 900; margin: 32px 0 8px; }
+  .links a { font-weight: 700; color: var(--red); }
   .toc { list-style: none; padding: 0; margin: 0; border-top: 1px solid rgba(59,13,9,.15); }
   .toc li { margin: 0; border-bottom: 1px solid rgba(59,13,9,.15); }
   .toc a { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 10px 4px; text-decoration: none; }
@@ -238,9 +287,9 @@ def card(v, prefix=""):
 
 
 def video_page(v, videos):
-    chapters, blocks = parse_description(v.get("description", ""))
+    chapters, blocks, links, people = parse_description(v.get("description", ""))
     has_content = bool(blocks or chapters)
-    first_line = blocks[0][0] if blocks else ""
+    first_line = next((val[0] for kind, val in blocks if kind == "p"), "")
     title = plain_title(v["title"])
     page_title = f"{title}｜にゃんこ大戦争の攻略 るるゲーム"
     desc = (first_line or f"るるゲームの動画「{title}」の内容と目次です。")[:120]
@@ -252,7 +301,7 @@ def video_page(v, videos):
         "@context": "https://schema.org",
         "@type": "VideoObject",
         "name": v["title"],
-        "description": (" ".join(" ".join(b) for b in blocks) or desc)[:500],
+        "description": (" ".join(" ".join(val) for kind, val in blocks if kind != "h") or desc)[:500],
         "thumbnailUrl": [thumb, f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg"],
         "uploadDate": v["published"],
         "embedUrl": f"https://www.youtube.com/embed/{v['id']}",
@@ -276,6 +325,19 @@ def video_page(v, videos):
     points = f"<h2>この動画のポイント</h2>\n{body}" if body else (
         "" if chapters else '<p class="empty">この動画の解説は準備中です。動画で確認してください。</p>')
 
+    known = {x["id"] for x in videos}
+    series = ""
+    if links:
+        items = "".join(
+            f'<li><a href="{lid}.html">{e(text)}</a></li>' if lid in known and lid != v["id"]
+            else (f'<li>{e(text)}（この動画）</li>' if lid == v["id"]
+                  else f'<li><a href="https://www.youtube.com/watch?v={lid}" target="_blank" rel="noopener">{e(text)}</a></li>')
+            for text, lid in links)
+        series = f"<h2>関連する動画</h2>\n<ul class=\"links\">{items}</ul>"
+    cast = ""
+    if people:
+        items = "".join(f'<li><a href="{e(u)}" target="_blank" rel="noopener">{e(n)}</a></li>' for n, u in people)
+        cast = f"<h2>いっしょに出てくれた人</h2>\n<ul class=\"links\">{items}</ul>"
     rel = "".join(card(r) for r in related(v, videos))
     return head(page_title, desc, url, thumb, noindex=not has_content, extra=extra) + f"""
 <main class="wrap">
@@ -288,6 +350,8 @@ def video_page(v, videos):
       aria-label="{e(v['title'])} を再生"></button>
     {points}
     {toc}
+    {series}
+    {cast}
     <section class="cta">
       <h2>わからないステージは、生配信で聞いてください</h2>
       <p>るるゲームでは、詰まったステージの編成や立ち回りを、配信でいっしょに考えています。</p>
@@ -336,7 +400,7 @@ def main():
         name = f"{v['id']}.html"
         (OUT / name).write_text(video_page(v, videos), encoding="utf-8")
         keep.add(name)
-        chapters, blocks = parse_description(v.get("description", ""))
+        chapters, blocks, _, _ = parse_description(v.get("description", ""))
         if chapters or blocks:
             indexable.append(v)
     (OUT / "index.html").write_text(index_page(videos), encoding="utf-8")
