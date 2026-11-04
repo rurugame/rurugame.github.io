@@ -140,16 +140,46 @@
   .meter span { display: block; height: 100%; width: 25.1%; background: var(--gold); border-radius: 99px; }
 
   /* 戦場のレーン（昼の草原。奥の丘の道を、るるを乗せた車が走る） */
-  .lane { position: relative; height: 170px; margin-top: 28px; }
-  .hills { position: absolute; left: 0; bottom: 40px; width: 100%; height: 110px; }
-  .car { position: absolute; left: 0; bottom: 63px; width: 64px; height: 30px; animation: drive 22s linear infinite; }
+  .lane { position: relative; height: 184px; margin-top: 28px; overflow: hidden; }
+  .hills { position: absolute; left: 0; bottom: 54px; width: 100%; height: 110px; }
+  .car { position: absolute; left: 0; bottom: 77px; width: 64px; height: 30px; animation: drive 22s linear infinite; }
   @keyframes drive { from { transform: translateX(-80px); } to { transform: translateX(calc(100vw + 80px)); } }
   .ground {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 40px;
+    position: absolute; left: 0; right: 0; bottom: 0; height: 54px;
     background: var(--grass-deep);
     background-image: repeating-linear-gradient(90deg, transparent 0 56px, rgba(0,0,0,.1) 56px 58px);
   }
-  .castle { position: absolute; bottom: 40px; width: 84px; height: 96px; }
+  .castle { position: absolute; bottom: 54px; width: 84px; height: 96px; }
+  .castle .hp { position: absolute; left: 6px; right: 6px; top: -9px; height: 5px; background: rgba(59,13,9,.25); border-radius: 3px; overflow: hidden; }
+  .castle .hp span { display: block; height: 100%; width: 100%; background: var(--gold); transition: width .2s; }
+  .castle.enemy .hp span { background: var(--red); }
+
+  /* ミニバトルのユニット（オリジナルの形） */
+  .u { position: absolute; left: 0; bottom: 54px; will-change: transform; transition: opacity .35s, filter .1s; }
+  .u.p { background: var(--cream); border-radius: 11px 11px 4px 4px; }
+  .u.p::before, .u.p::after { content: ""; position: absolute; top: 9px; width: 3px; height: 6px; background: var(--ink); border-radius: 2px; }
+  .u.p::before { left: 28%; } .u.p::after { right: 28%; }
+  .u.e { background: var(--red-night); border-radius: 7px 7px 3px 3px; }
+  .u.e::before, .u.e::after { content: ""; position: absolute; top: 9px; width: 6px; height: 3px; background: var(--cream); border-radius: 2px; }
+  .u.e::before { left: 24%; } .u.e::after { right: 24%; }
+  .u.hit { filter: brightness(1.8); }
+  .u.dead { opacity: 0; }
+
+  /* ミニバトルの操作（お金・出撃ボタン・お財布レベル） */
+  .lane-ui { position: absolute; left: 0; right: 0; bottom: 0; height: 54px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 12px; }
+  .wallet { min-width: 112px; text-align: right; color: var(--cream); font: 900 14px/1.2 var(--font); font-variant-numeric: tabular-nums; }
+  .wallet small { display: block; font-size: 11px; font-weight: 700; color: var(--cream-dim); }
+  .ubtn {
+    position: relative; overflow: hidden; min-width: 76px; height: 42px; padding: 0 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 0; border-radius: var(--radius); background: var(--cream); color: var(--ink);
+    font: 700 13px/1.2 var(--font); cursor: pointer;
+  }
+  .ubtn small { font-size: 11px; color: var(--red); }
+  .ubtn::after { content: ""; position: absolute; inset: 0; background: rgba(59,13,9,.45); transform: scaleX(var(--cd, 0)); transform-origin: left; pointer-events: none; }
+  .ubtn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+  .ubtn.worker { background: var(--gold); }
+  .ubtn.worker small { color: var(--ink); opacity: .7; }
   .castle.mine { right: 3%; }
   .castle.enemy { left: 3%; }
   .castle .body { position: absolute; inset: 22px 0 0 0; background: var(--cream); border-radius: 4px 4px 0 0; }
@@ -159,24 +189,8 @@
   .castle .door { position: absolute; left: 50%; bottom: 0; width: 24px; height: 30px; transform: translateX(-50%); background: var(--red); border-radius: 12px 12px 0 0; }
   .castle.enemy .door { background: var(--ink); }
   .flag { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--ink-dim); }
-  .unit {
-    position: absolute; bottom: 40px; right: 15%;
-    width: 26px; height: 30px; background: var(--cream);
-    border-radius: 11px 11px 4px 4px;
-    animation: march 8s linear infinite;
-  }
-  .unit::before, .unit::after { content: ""; position: absolute; top: 9px; width: 3px; height: 6px; background: var(--ink); border-radius: 2px; }
-  .unit::before { left: 7px; } .unit::after { right: 7px; }
-  .unit.u2 { animation-delay: -2.7s; height: 40px; }
-  .unit.u3 { animation-delay: -5.4s; width: 36px; }
-  @keyframes march {
-    0% { transform: translate(0, 0); }
-    4% { transform: translate(-1.6vw, -4px); }
-    8% { transform: translate(-3.2vw, 0); }
-    100% { transform: translate(-64vw, 0); }
-  }
   .beam {
-    position: absolute; bottom: 54px; right: calc(3% + 84px); height: 30px; width: 0;
+    position: absolute; bottom: 68px; right: calc(3% + 84px); height: 30px; width: 0;
     background: var(--gold); border-radius: 15px 0 0 15px; opacity: 0;
   }
   .beam.fire { animation: fire 1.1s ease-out forwards; }
@@ -522,6 +536,9 @@
     .week { grid-template-columns: 1fr 1fr; }
     .side a { grid-template-columns: 120px 1fr; }
     .castle { transform: scale(.75); transform-origin: bottom; }
+    .lane-ui { gap: 4px; padding: 0 8px; }
+    .wallet { min-width: 0; font-size: 12px; }
+    .ubtn { min-width: 0; flex: 1; padding: 0 4px; font-size: 12px; }
     .goal { min-width: 0; }
     .sun { top: 64px; right: 16px; width: 56px; }
     /* スマホでは文字を絵の上に分けて、絵と重ならないようにする */
@@ -532,8 +549,6 @@
     .scene-inside figcaption { text-align: left; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .unit { animation: none; }
-    .unit.u2 { right: 32%; } .unit.u3 { right: 50%; }
     .car { animation: none; left: 30%; }
     .smoke path, .flame { animation: none; }
     .swing { animation: none; transform: rotate(-34deg); }
@@ -621,21 +636,25 @@
     </div>
   </div>
 
-  <div class="lane" aria-hidden="true">
-    <svg class="hills" viewBox="0 0 1200 110" preserveAspectRatio="none">
+  <div class="lane" id="lane">
+    <svg class="hills" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
       <path class="c-hill" d="M0 72 Q100 22 220 52 T460 42 T720 30 T980 46 T1200 36 V110 H0 Z"/>
       <rect class="c-road" y="80" width="1200" height="10"/>
       <rect class="c-grass" y="90" width="1200" height="20"/>
     </svg>
-    <svg class="car" viewBox="0 0 120 56"><use href="#car"/></svg>
-    <div class="castle enemy"><span class="flag">敵の城</span><div class="roof"></div><div class="body"></div><div class="door"></div></div>
-    <div class="unit"></div>
-    <div class="unit u2"></div>
-    <div class="unit u3"></div>
-    <div class="beam" id="beam"></div>
-    <div class="castle mine"><span class="flag">るるの城</span><div class="roof"></div><div class="body"></div><div class="door"></div></div>
-    <div class="shout" id="shout">配信で会いましょう</div>
-    <div class="ground"></div>
+    <svg class="car" viewBox="0 0 120 56" aria-hidden="true"><use href="#car"/></svg>
+    <div class="castle enemy" aria-hidden="true"><span class="flag">敵の城</span><div class="hp"><span id="hp-enemy"></span></div><div class="roof"></div><div class="body"></div><div class="door"></div></div>
+    <div class="beam" id="beam" aria-hidden="true"></div>
+    <div class="castle mine" aria-hidden="true"><span class="flag">るるの城</span><div class="hp"><span id="hp-mine"></span></div><div class="roof"></div><div class="body"></div><div class="door"></div></div>
+    <div class="shout" id="shout" role="status">配信で会いましょう</div>
+    <div class="ground" aria-hidden="true"></div>
+    <div class="lane-ui" role="group" aria-label="ミニバトル：お金をためてユニットを出撃させ、敵の城を壊そう">
+      <div class="wallet"><span id="wallet">0円</span><small id="wallet-max">上限 300円</small></div>
+      <button class="ubtn" type="button" data-unit="kabe">かべ<small>50円</small></button>
+      <button class="ubtn" type="button" data-unit="noppo">のっぽ<small>100円</small></button>
+      <button class="ubtn" type="button" data-unit="oogara">おおがら<small>200円</small></button>
+      <button class="ubtn worker" type="button" id="worker">お財布 Lv1<small>60円</small></button>
+    </div>
   </div>
 </header>
 
@@ -645,7 +664,7 @@
     <a class="slot" href="https://www.youtube.com/@RuLgames?sub_confirmation=1" target="_blank" rel="noopener">チャンネル登録<span class="cost">0円</span></a>
     <a class="slot" href="https://www.youtube.com/@RuLgames/shorts" target="_blank" rel="noopener">ショートを見る<span class="cost">0円</span></a>
     <a class="slot" href="https://www.youtube.com/@RuLgames/join" target="_blank" rel="noopener">メンバーになる<span class="cost">月140円</span></a>
-    <button class="slot cannon" type="button" id="cannon">にゃんこ砲<span class="cost">発射</span></button>
+    <button class="slot cannon" type="button" id="cannon">にゃんこ砲<span class="cost" id="cannon-state">チャージ中</span></button>
   </div>
 </div>
 
@@ -1413,15 +1432,200 @@
 (() => {
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // にゃんこ砲
+  // ミニバトル：お金をためてユニットを出撃させ、敵の城を壊せば勝ち。
+  // にゃんこ大戦争の遊び方（お金・お財布レベル・再出撃の待ち時間・ノックバック・にゃんこ砲のチャージ）に近づけている。
+  // 絵とユニットの名前はオリジナル。だれも触っていない間は自動で戦うデモになる
+  const lane = document.getElementById('lane');
   const beam = document.getElementById('beam');
   const shout = document.getElementById('shout');
-  let timer;
-  document.getElementById('cannon').addEventListener('click', () => {
-    beam.classList.remove('fire'); void beam.offsetWidth; beam.classList.add('fire');
+  const walletEl = document.getElementById('wallet');
+  const walletMax = document.getElementById('wallet-max');
+  const workerBtn = document.getElementById('worker');
+  const cannonBtn = document.getElementById('cannon');
+  const cannonState = document.getElementById('cannon-state');
+  const unitBtns = [...lane.querySelectorAll('[data-unit]')];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const PLAYER = {
+    kabe:   { cost: 50,  hp: 120, atk: 8,  range: 14, speed: 30, rate: 1.0, cd: 2, w: 26, h: 30, kb: 2 },
+    noppo:  { cost: 100, hp: 360, atk: 10, range: 14, speed: 18, rate: 1.2, cd: 5, w: 26, h: 44, kb: 2 },
+    oogara: { cost: 200, hp: 220, atk: 50, range: 70, speed: 22, rate: 1.7, cd: 8, w: 40, h: 34, kb: 3 },
+  };
+  const ENEMY = {
+    teki:  { hp: 100, atk: 10, range: 14, speed: 22, rate: 1.1, w: 28, h: 28, kb: 2, reward: 25 },
+    dekai: { hp: 560, atk: 32, range: 20, speed: 14, rate: 1.6, w: 42, h: 40, kb: 3, reward: 90 },
+  };
+  const CASTLE_HP = 800, CANNON_SEC = 14, MAX_UNITS = 14;
+
+  let G, units, money, lv, cool, charge, castle, spawnIn, elapsed, over, demo = true, demoIn = 0;
+  const msg = (text, ms = 1800) => {
+    shout.textContent = text;
     shout.classList.add('show');
-    clearTimeout(timer);
-    timer = setTimeout(() => shout.classList.remove('show'), 1800);
+    clearTimeout(msg.t);
+    msg.t = setTimeout(() => shout.classList.remove('show'), ms);
+  };
+  const measure = () => {
+    const L = lane.getBoundingClientRect();
+    G = {
+      eFront: lane.querySelector('.castle.enemy').getBoundingClientRect().right - L.left,
+      mFront: lane.querySelector('.castle.mine').getBoundingClientRect().left - L.left,
+    };
+  };
+  const walletCap = () => 300 + 200 * (lv - 1);
+  const walletRate = () => 14 + 8 * (lv - 1);
+  const workerCost = () => 60 * lv;
+
+  function reset() {
+    (units || []).forEach(u => u.el.remove());
+    units = []; money = 100; lv = 1; charge = 0; spawnIn = 2.5; elapsed = 0; over = false;
+    cool = { kabe: 0, noppo: 0, oogara: 0 };
+    castle = { e: CASTLE_HP, p: CASTLE_HP };
+    measure();
+  }
+
+  function spawn(side, type) {
+    if (units.filter(u => u.side === side && !u.dead).length >= MAX_UNITS) return;
+    const s = side === 'p' ? PLAYER[type] : ENEMY[type];
+    const el = document.createElement('div');
+    el.className = `u ${side}`;
+    el.setAttribute('aria-hidden', 'true');
+    el.style.width = s.w + 'px';
+    el.style.height = s.h + 'px';
+    lane.insertBefore(el, beam);
+    const x = side === 'p' ? G.mFront - s.w / 2 : G.eFront + s.w / 2;
+    units.push({ side, s, el, x, hp: s.hp, kbDone: 0, kbT: 0, atkT: 0.3, dead: false });
+  }
+
+  function deploy(type) {
+    const s = PLAYER[type];
+    if (over || money < s.cost || cool[type] > 0) return false;
+    money -= s.cost; cool[type] = s.cd;
+    spawn('p', type);
+    return true;
+  }
+
+  function damage(u, d) {
+    if (u.dead) return;
+    u.hp -= d;
+    u.el.classList.add('hit');
+    setTimeout(() => u.el.classList.remove('hit'), 90);
+    // 体力が決まった割合まで減るたびに、後ろへ押し戻される（ノックバック）
+    const next = u.s.hp * (1 - (u.kbDone + 1) / u.s.kb);
+    if (u.hp <= next || u.hp <= 0) { u.kbDone++; u.kbT = 0.35; }
+    if (u.hp <= 0) {
+      u.dead = true;
+      u.el.classList.add('dead');
+      setTimeout(() => u.el.remove(), 400);
+      if (u.side === 'e') money = Math.min(walletCap(), money + u.s.reward);
+    }
+  }
+
+  function hitCastle(side, d) {
+    castle[side] = Math.max(0, castle[side] - d);
+    if (castle[side] > 0 || over) return;
+    over = 3.6;
+    msg(side === 'e' ? '勝利！ 配信で会いましょう' : 'やられた…もう一回！', 3200);
+  }
+
+  function step(dt) {
+    if (over && (over -= dt) <= 0) { reset(); return; }
+    elapsed += dt;
+    money = Math.min(walletCap(), money + walletRate() * dt);
+    charge = Math.min(1, charge + dt / CANNON_SEC);
+    for (const k in cool) cool[k] = Math.max(0, cool[k] - dt);
+
+    if (!over && (spawnIn -= dt) <= 0) {
+      spawn('e', elapsed > 25 && Math.random() < 0.3 ? 'dekai' : 'teki');
+      spawnIn = 5 + Math.random() * 3 - Math.min(2.5, elapsed / 40);
+    }
+
+    // だれも触っていない間は、自動で出撃する
+    if (demo && !over && (demoIn -= dt) <= 0) {
+      demoIn = 0.8;
+      if (lv < 3 && money >= workerCost() + 60) { money -= workerCost(); lv++; }
+      else deploy(money >= 220 ? 'oogara' : Math.random() < 0.35 ? 'noppo' : 'kabe');
+    }
+
+    for (const u of units) {
+      if (u.dead) continue;
+      const dir = u.side === 'p' ? -1 : 1;
+      if (u.kbT > 0) { u.x -= dir * 90 * dt; u.kbT -= dt; continue; }
+      const front = u.x + dir * u.s.w / 2;
+      let gap = u.side === 'p' ? front - G.eFront : G.mFront - front, target = null;
+      for (const o of units) {
+        if (o.dead || o.side === u.side) continue;
+        const of = o.x - dir * o.s.w / 2;
+        const g = u.side === 'p' ? front - of : of - front;
+        if (g > -o.s.w && g < gap) { gap = g; target = o; }
+      }
+      if (gap <= u.s.range) {
+        if ((u.atkT -= dt) <= 0) {
+          u.atkT = u.s.rate;
+          if (target) damage(target, u.s.atk); else if (!over) hitCastle(u.side === 'p' ? 'e' : 'p', u.s.atk);
+        }
+      } else {
+        u.x += dir * u.s.speed * dt;
+        u.atkT = Math.min(u.atkT, 0.3);
+      }
+    }
+    units = units.filter(u => !u.dead || u.el.isConnected);
+  }
+
+  function draw() {
+    for (const u of units) {
+      const hop = u.kbT > 0 ? -Math.sin((u.kbT / 0.35) * Math.PI) * 8 : 0;
+      u.el.style.transform = `translate(${u.x - u.s.w / 2}px, ${hop}px)`;
+    }
+    walletEl.textContent = `${Math.floor(money)}円`;
+    walletMax.textContent = `上限 ${walletCap()}円`;
+    unitBtns.forEach(b => {
+      const t = b.dataset.unit, s = PLAYER[t];
+      b.style.setProperty('--cd', (cool[t] / s.cd).toFixed(3));
+      b.setAttribute('aria-disabled', money < s.cost || cool[t] > 0 ? 'true' : 'false');
+    });
+    workerBtn.innerHTML = lv >= 5 ? 'お財布 Lv5<small>最大</small>' : `お財布 Lv${lv}<small>${workerCost()}円</small>`;
+    workerBtn.setAttribute('aria-disabled', lv >= 5 || money < workerCost() ? 'true' : 'false');
+    cannonState.textContent = charge >= 1 ? '発射できる' : `チャージ ${Math.floor(charge * 100)}%`;
+    document.getElementById('hp-enemy').style.width = (castle.e / CASTLE_HP * 100) + '%';
+    document.getElementById('hp-mine').style.width = (castle.p / CASTLE_HP * 100) + '%';
+  }
+
+  let running = false, visible = true, last = 0;
+  function frame(t) {
+    if (!running) return;
+    const dt = Math.min(0.05, (t - (last || t)) / 1000);
+    last = t;
+    step(dt); draw();
+    requestAnimationFrame(frame);
+  }
+  const start = () => {
+    if (running || !visible || document.hidden) return;
+    running = true; last = 0; requestAnimationFrame(frame);
+  };
+  const stop = () => { running = false; };
+  const play = () => { demo = false; start(); };
+
+  reset(); draw();
+  addEventListener('resize', measure);
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible && (!reduceMotion || !demo) ? start() : stop(); }).observe(lane);
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : (!reduceMotion || !demo) && start());
+
+  unitBtns.forEach(b => b.addEventListener('click', () => { play(); deploy(b.dataset.unit); draw(); }));
+  workerBtn.addEventListener('click', () => {
+    play();
+    if (lv < 5 && money >= workerCost()) { money -= workerCost(); lv++; }
+    draw();
+  });
+
+  // にゃんこ砲：時間でチャージして、たまったら発射。敵をまとめて押し戻す
+  cannonBtn.addEventListener('click', () => {
+    play();
+    if (charge < 1) { msg(`にゃんこ砲はチャージ中（${Math.floor(charge * 100)}%）`, 1200); return; }
+    charge = 0;
+    beam.classList.remove('fire'); void beam.offsetWidth; beam.classList.add('fire');
+    units.filter(u => u.side === 'e' && !u.dead).forEach(u => { u.kbT = 0.35; damage(u, 60); });
+    msg('配信で会いましょう');
+    draw();
   });
 
   // 動画一覧（GitHub Actions が1時間ごとに更新する data/videos.json）
