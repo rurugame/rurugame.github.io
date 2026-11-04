@@ -61,6 +61,7 @@
     --beam: #5A3A22;
     --futon: #E9DCCB;
     --mountain: #1B1535;
+    --gas: #7FB2F0;
 
     --font: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
     --radius: 6px;
@@ -127,7 +128,7 @@
   .goal-num { font-weight: 900; font-size: 30px; line-height: 1.3; font-variant-numeric: tabular-nums; }
   .goal-num small { font-size: 15px; font-weight: 700; color: var(--dim); }
   .meter { height: 10px; background: var(--red-night); border-radius: 99px; overflow: hidden; margin-top: 8px; }
-  .meter span { display: block; height: 100%; width: 23%; background: var(--gold); border-radius: 99px; }
+  .meter span { display: block; height: 100%; width: 25.1%; background: var(--gold); border-radius: 99px; }
 
   /* 戦場のレーン（昼の草原。奥の丘の道を、るるを乗せた車が走る） */
   .lane { position: relative; height: 170px; margin-top: 28px; }
@@ -286,10 +287,11 @@
   }
   .scene figcaption b { display: block; font-size: 22px; font-weight: 900; }
   .scene-arrive { background: var(--sky-afternoon); color: var(--ink); }
-  .scene-bbq { background: linear-gradient(var(--sky-sunset), var(--red) 90%); color: var(--ink); }
+  .scene-cook { background: var(--room-shade); color: var(--ink); }
   .scene-fire { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
   .scene-inside { background: var(--room); color: var(--ink); height: 300px; }
   .scene-inside figcaption { left: auto; right: max(24px, calc((100% - 1120px) / 2)); text-align: right; }
+  .scene-swing { background: var(--night-deep); color: var(--cream); }
   .scene-drive { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
   .scene-nabe { background: var(--night-ground); color: var(--cream); }
   .scene-bed { background: var(--night-deep); color: var(--cream); }
@@ -318,6 +320,18 @@
   .noodle { fill: none; stroke: var(--cream); stroke-width: 2; stroke-linecap: round; }
   .sleepy { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
   .q { fill: var(--cream); opacity: .45; font: 900 26px var(--font); }
+  .c-gas { fill: var(--gas); }
+  .q-ink { fill: var(--ink); opacity: .55; font: 900 15px var(--font); }
+  .sun-a { stop-color: var(--sky-sunset); } .sun-b { stop-color: var(--red); }
+  .win-frame { fill: none; stroke: var(--beam); stroke-width: 6; stroke-linejoin: round; }
+  .toss { fill: none; stroke: var(--cream); stroke-width: 2; stroke-dasharray: 4 6; opacity: .4; }
+  .grill-mark { fill: none; stroke: var(--ink); stroke-width: 2; opacity: .5; }
+  .net { fill: none; stroke: var(--silver-dark); stroke-width: 1.5; }
+  .frame { fill: none; stroke: var(--silver-dark); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .rope { fill: none; stroke: var(--cream-dim); stroke-width: 2; }
+  .deck { fill: none; stroke: var(--mountain); stroke-width: 4; }
+  .swing { transform-box: view-box; transform-origin: 580px 30px; animation: swing 2.2s ease-in-out infinite alternate; }
+  @keyframes swing { from { transform: rotate(36deg); } to { transform: rotate(-50deg); } }
   .cat-o { color: var(--cat-orange); } .cat-g { color: var(--cat-gray); } .cat-k { color: var(--cat-black); --eye: var(--gold); }
   .glow-a { stop-color: var(--fire); stop-opacity: .5; } .glow-b { stop-color: var(--fire); stop-opacity: 0; }
   .zzz { fill: var(--cream); font: 900 22px var(--font); }
@@ -371,13 +385,33 @@
   .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
   .steps h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
   .steps ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); counter-reset: step; }
-  .steps ol[start="6"] { counter-reset: step 5; }
+  .steps ol[start="7"] { counter-reset: step 6; }
   .steps li { display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--line); counter-increment: step; }
   .steps li::before { content: counter(step); font-weight: 900; font-size: 26px; line-height: 1.2; color: var(--red); }
   .steps li b { display: block; font-size: 16px; }
   .steps li span { color: var(--dim); font-size: 15px; }
-  .start-note { margin: 36px 0 0; color: var(--dim); }
-  .start-note a { font-weight: 700; color: var(--ink); }
+  .steps li span a, .trouble a { font-weight: 700; color: var(--ink); }
+  .stores { display: flex; gap: 12px; flex-wrap: wrap; }
+  .store {
+    display: flex; flex-direction: column; min-width: 220px; padding: 14px 24px;
+    background: var(--ink); color: var(--cream); border-radius: var(--radius);
+    font-weight: 900; font-size: 18px; line-height: 1.4; text-decoration: none;
+  }
+  .store small { font-size: 12px; font-weight: 700; color: var(--cream-dim); }
+  .store:hover { background: var(--red); }
+  .store-note { margin: 12px 0 0; font-size: 14px; color: var(--dim); }
+  .ready { margin: 48px 0 56px; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ready h3, .trouble h3 { margin: 0 0 12px; font-size: 18px; font-weight: 900; }
+  .ready ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .ready li { color: var(--dim); font-size: 15px; }
+  .ready li b { display: block; color: var(--ink); font-size: 16px; }
+  .trouble { margin-top: 56px; }
+  .trouble dl, .words dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0 20px; border-top: 1px solid var(--line); }
+  .trouble dt, .trouble dd, .words dt, .words dd { padding: 14px 0; border-bottom: 1px solid var(--line); margin: 0; }
+  .trouble dt, .words dt { font-weight: 900; white-space: nowrap; }
+  .trouble dd, .words dd { color: var(--dim); font-size: 15px; }
+  .words h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
+  #watch { background: linear-gradient(var(--sky-afternoon), var(--sky-afternoon)); }
 
   /* ゴール（メンバーシップ） */
   #join { background: var(--night-deep); text-align: center; padding-top: 72px; }
@@ -430,6 +464,9 @@
     .slots { grid-template-columns: 1fr 1fr; }
     .slot.cannon { grid-column: span 2; }
     .latest, .story, .work, .sub-grid, .x-area, .steps { grid-template-columns: 1fr; gap: 40px; }
+    .ready ul { grid-template-columns: 1fr; gap: 16px; }
+    .trouble dl, .words dl { grid-template-columns: 1fr; }
+    .trouble dt, .words dt { border-bottom: 0; padding-bottom: 0; }
     .archive { grid-template-columns: 1fr 1fr; }
     .vows { grid-template-columns: 1fr; }
     .vow, .vow + .vow { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--line); }
@@ -457,6 +494,7 @@
     .unit.u2 { right: 32%; } .unit.u3 { right: 50%; }
     .car { animation: none; left: 30%; }
     .smoke path, .flame { animation: none; }
+    .swing { animation: none; transform: rotate(-34deg); }
     .beam.fire { animation-duration: .01s; }
     html { scroll-behavior: auto; }
   }
@@ -531,7 +569,7 @@
     </div>
     <div class="goal" aria-label="登録者10万人への進み具合">
       <div class="goal-label"><span>るるの城の体力</span><span>目標 10万人</span></div>
-      <div class="goal-num">約23,000<small> 人</small></div>
+      <div class="goal-num">約2.51万<small> 人</small></div>
       <div class="meter"><span></span></div>
     </div>
   </div>
@@ -666,31 +704,94 @@
       <div class="head">
         <div>
           <h2>にゃんこ大戦争を、はじめてみよう</h2>
-          <p>にゃんこ大戦争は、スマホで遊ぶゲームです。インストールしてから、最初のチュートリアルを終えるまでを順番に案内します。</p>
+          <p>にゃんこ大戦争は、スマホで遊ぶゲームです。基本プレイは無料。アプリを入れてから、最初のバトルに勝つまでを、ひとつずつ案内します。</p>
+        </div>
+      </div>
+
+      <div class="stores">
+        <a class="store" href="https://apps.apple.com/jp/app/id547145938" target="_blank" rel="noopener"><small>iPhone・iPadの人</small>App Store で入手</a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=jp.co.ponos.battlecats" target="_blank" rel="noopener"><small>Androidの人</small>Google Play で入手</a>
+      </div>
+      <p class="store-note">このページをスマホで開いてボタンを押すと、ストアのにゃんこ大戦争のページが開きます。パソコンで見ている人は、スマホで rurugame.github.io を開いてください。</p>
+
+      <div class="ready">
+        <h3>はじめる前に、ここだけ確認</h3>
+        <ul>
+          <li><b>Wi-Fi</b>はじめにゲームのデータを読み込むので、Wi-Fiにつながっているところだと安心です。</li>
+          <li><b>スマホの空き容量</b>容量がいっぱいだとインストールできません。写真やアプリを少し整理しておきましょう。</li>
+          <li><b>おうちの人</b>子どもの人は、アプリを入れる前におうちの人に相談してね。ゲームの中で課金するときも、かならず相談してください。</li>
+        </ul>
+      </div>
+
+      <div class="steps">
+        <div>
+          <h3>アプリを入れる</h3>
+          <ol>
+            <li><div><b>上のボタンを押す</b><span>iPhone・iPadなら「App Store で入手」、Androidなら「Google Play で入手」。ボタンが使えないときは、ストアのアプリを開いて「にゃんこ大戦争」と検索します。</span></div></li>
+            <li><div><b>名前と提供元を確かめる</b><span>名前が「にゃんこ大戦争」、提供元が「PONOS Corporation」になっていれば正解です。同じ会社のにゃんこの別のゲームもあるので、名前をよく見てください。</span></div></li>
+            <li><div><b>「入手」か「インストール」を押す</b><span>ダウンロードは無料です。iPhoneでは、顔認証やパスワードを聞かれることがあります。</span></div></li>
+            <li><div><b>ホーム画面のアイコンを押す</b><span>インストールが終わると、ホーム画面ににゃんこ大戦争のアイコンが出てきます。</span></div></li>
+            <li><div><b>データの読み込みを待つ</b><span>はじめて開いたときは、データの読み込みに少し時間がかかります。終わるまでアプリを閉じずに待ちましょう。</span></div></li>
+            <li><div><b>表示された内容を確認して進む</b><span>利用規約などが出てきたら、内容を確認して進みます。子どもの人は、おうちの人といっしょに読んでね。</span></div></li>
+          </ol>
+        </div>
+        <div>
+          <h3>最初のバトルに勝つ</h3>
+          <ol start="7">
+            <li><div><b>画面の案内にしたがう</b><span>はじめて遊ぶときは、画面の案内にそってバトルのやり方を教えてもらえます。まずは案内のとおりにタップしてみましょう。</span></div></li>
+            <li><div><b>ネコを出撃させる</b><span>バトル中は時間がたつとお金がたまります。たまったら画面下のネコのボタンをタップ。ネコが敵の城に向かって進んでいきます。</span></div></li>
+            <li><div><b>ワーカーキャットを上げる</b><span>お金に余裕があれば、ワーカーキャットのレベルを上げます。お金がたまる速さが上がって、どんどんネコを出せるようになります。</span></div></li>
+            <li><div><b>ピンチになったら、にゃんこ砲</b><span>にゃんこ砲がたまったら発射。近くの敵をまとめて押し戻せます。</span></div></li>
+            <li><div><b>敵の城を壊したら勝ち</b><span>最初のバトルに勝てたら、いよいよ「日本編」の冒険が始まります。負けても大丈夫。ネコのレベルを上げて、もう一度挑戦しましょう。</span></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="trouble">
+        <h3>こまったときは</h3>
+        <dl>
+          <dt>ダウンロードが進まない</dt><dd>Wi-Fiにつながっているか、スマホの空き容量が足りているかを確認して、アプリを開き直してみてください。</dd>
+          <dt>スマホを買いかえるとき</dt><dd>ゲームの中の「データ引き継ぎ」で、新しいスマホにデータを移せます。古いスマホを手放す前に、かならず引き継ぎの手順を確認してください。</dd>
+          <dt>遊び方がわからない</dt><dd>夜の焚き火のそばの<a href="#qa">にゃんこ一問一答</a>を見るか、すぐ下の見かたを読んで、配信で聞いてみてください。</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="watch" class="sky-day">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2>はじめての、配信の見かた</h2>
+          <p>配信のコメント欄は、長く遊んでいる人の話でいっぱいに見えるかもしれません。でも大丈夫。るるゲームは、生配信で攻略を教える先生のチャンネルです。はじめての人の質問こそ、待っています。</p>
         </div>
       </div>
       <div class="steps">
         <div>
-          <h3>インストールする</h3>
+          <h3>配信に入ってみる</h3>
           <ol>
-            <li><div><b>スマホを用意する</b><span>iPhoneでも、Androidのスマホでも遊べます。タブレットでも大丈夫です。</span></div></li>
-            <li><div><b>アプリのストアを開く</b><span>iPhoneは「App Store」、Androidは「Google Play ストア」を開きます。</span></div></li>
-            <li><div><b>「にゃんこ大戦争」で検索する</b><span>似た名前のアプリとまちがえないように、提供元が「PONOS」になっているものを選びます。</span></div></li>
-            <li><div><b>インストールする</b><span>「入手」または「インストール」を押します。ダウンロードは無料です。</span></div></li>
-            <li><div><b>アプリを開く</b><span>はじめて開いたときは、ゲームのデータを読み込むのに少し時間がかかります。Wi-Fiにつながっているところで始めると安心です。</span></div></li>
+            <li><div><b>YouTubeでるるゲームを開く</b><span><a href="https://www.youtube.com/@RuLgames/streams" target="_blank" rel="noopener">るるゲームのライブ一覧</a>を開きます。いま配信中のものには「ライブ」の印がついています。</span></div></li>
+            <li><div><b>先にチャンネル登録をしておく</b><span>配信によっては、チャンネル登録をしている人だけがコメントできる設定になっています。コメントしたいときは、先に<a href="https://www.youtube.com/@RuLgames?sub_confirmation=1" target="_blank" rel="noopener">チャンネル登録</a>をしておきましょう。無料です。</span></div></li>
+            <li><div><b>最初のひとことは「初見です」でOK</b><span>はじめて来たことを伝えるだけで十分です。あいさつだけでも、るるはうれしいです。</span></div></li>
+            <li><div><b>わからない言葉は、そのまま聞く</b><span>「初心者です！超本能ってなんですか？」のように聞いてOK。上級者の話の途中でも、気にせず書いてください。</span></div></li>
+            <li><div><b>詰まっているステージを持ってくる</b><span>「日本編の〇〇が勝てません」と書いてもらえたら、編成や立ち回りをいっしょに考えます。</span></div></li>
           </ol>
         </div>
-        <div>
-          <h3>チュートリアルを進める</h3>
-          <ol start="6">
-            <li><div><b>画面の案内にしたがう</b><span>はじめて遊ぶときは、画面の案内にそってバトルのやり方を教えてもらえます。まずは案内のとおりにタップしてみましょう。</span></div></li>
-            <li><div><b>ネコを出撃させる</b><span>お金がたまったら、画面下のネコのボタンをタップ。ネコが敵の城に向かって進んでいきます。</span></div></li>
-            <li><div><b>ワーカーキャットとにゃんこ砲を使う</b><span>お金に余裕があればワーカーキャットのレベルを上げ、にゃんこ砲がたまったら発射。敵をまとめて押し戻せます。</span></div></li>
-            <li><div><b>敵の城を壊したら勝ち</b><span>最初のバトルに勝てたら、いよいよ「日本編」の冒険が始まります。</span></div></li>
-          </ol>
+        <div class="words">
+          <h3>配信でよく聞く言葉</h3>
+          <dl>
+            <dt>初見</dt><dd>その配信やチャンネルを、はじめて見ること。</dd>
+            <dt>ネコ基地</dt><dd>ネコの強化や編成などをする、ゲームのメニュー画面。</dd>
+            <dt>XP</dt><dd>経験値のこと。ネコのレベル上げやパワーアップに使います。</dd>
+            <dt>超激レア</dt><dd>ネコのめずらしさのひとつ。レア、激レア、超激レア、伝説レアの順に出にくくなります。</dd>
+            <dt>レアチケット</dt><dd>レアガチャを1回引けるチケット。</dd>
+            <dt>第三形態</dt><dd>進化の3段階目。第2形態からさらに進化した姿です。</dd>
+            <dt>本能・超本能</dt><dd>ネコの能力を、さらにのばす仕組み。超本能はそのさらに上の強化です。</dd>
+            <dt>ティア表</dt><dd>キャラの強さを、SSS・SS・S+ のようなランクに分けて並べた表。</dd>
+            <dt>周回</dt><dd>アイテムや経験値を集めるために、同じステージを何度もくり返し遊ぶこと。</dd>
+          </dl>
         </div>
       </div>
-      <p class="start-note">わからない言葉が出てきたら、夜の焚き火のそばの<a href="#qa">にゃんこ一問一答</a>も見てみてください。ゲームの中で課金をするときは、かならずおうちの人に相談してね。</p>
     </div>
   </section>
 
@@ -726,29 +827,61 @@
     </div>
   </section>
 
-  <figure class="scene scene-bbq">
+  <figure class="scene scene-cook">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <circle class="c-gold" cx="890" cy="214" r="72"/>
-      <path class="c-red-deep" d="M0 212 L120 150 L230 200 L360 132 L500 206 L640 162 L760 212 L880 176 L1000 206 L1120 150 L1200 190 V260 H0 Z"/>
-      <use href="#dome" x="150" y="150" width="140" height="81"/>
-      <rect class="c-red-night" y="228" width="1200" height="32"/>
-      <use href="#cat" class="cat-o" x="436" y="170" width="52" height="61"/>
-      <use href="#ruru" x="502" y="150" width="50" height="80"/>
-      <path class="pipe" d="M580 228 L592 194 M620 228 L608 194 M600 228 V194"/>
-      <path class="c-ink" d="M558 180 Q600 216 642 180 Z"/>
-      <rect class="c-fire" x="566" y="179" width="68" height="4" rx="2"/>
-      <rect class="c-silver-d" x="554" y="175" width="92" height="5" rx="2"/>
-      <rect class="c-meat" x="566" y="166" width="18" height="10" rx="4"/>
-      <rect class="c-meat" x="591" y="166" width="18" height="10" rx="4"/>
-      <rect class="c-meat" x="616" y="166" width="18" height="10" rx="4"/>
-      <g class="smoke">
-        <path d="M586 158 Q574 144 588 130 Q600 118 590 102"/>
-        <path d="M614 158 Q626 140 612 126 Q600 112 614 96"/>
+      <defs>
+        <linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1"><stop class="sun-a" offset="0"/><stop class="sun-b" offset="1"/></linearGradient>
+        <clipPath id="win"><path d="M690 150 L740 40 H1060 L1020 150 Z"/></clipPath>
+      </defs>
+      <rect class="c-room-shade" width="1200" height="260"/>
+      <g clip-path="url(#win)">
+        <rect width="1200" height="260" fill="url(#sunset)"/>
+        <circle class="c-gold" cx="880" cy="150" r="40"/>
+        <path class="c-red-deep" d="M690 150 L770 112 L850 140 L940 102 L1060 150 Z"/>
       </g>
-      <use href="#cat" class="cat-g" x="660" y="170" width="52" height="61"/>
-      <use href="#cat" class="cat-k" x="722" y="178" width="45" height="53"/>
+      <path class="win-frame" d="M690 150 L740 40 H1060 L1020 150 Z M900 40 L855 150"/>
+      <rect class="c-carpet" y="228" width="1200" height="32"/>
+
+      <!-- スマホでも全員が見えるように、少し縮めて中央に寄せている -->
+      <g transform="translate(48 18.24) scale(.92)">
+      <use href="#cat" class="cat-k" x="272" y="176" width="44" height="52"/>
+
+      <!-- るる：フライパンとカセットコンロで料理 -->
+      <use href="#ruru" x="326" y="150" width="48" height="77"/>
+      <rect class="c-beam" x="380" y="198" width="140" height="8" rx="3"/>
+      <rect class="c-beam" x="392" y="206" width="6" height="22"/><rect class="c-beam" x="502" y="206" width="6" height="22"/>
+      <rect class="c-silver-d" x="404" y="184" width="88" height="14" rx="3"/>
+      <circle class="c-ink" cx="414" cy="191" r="3"/>
+      <path class="c-gas flame" d="M430 184 l4 -7 l4 7 Z M446 184 l4 -7 l4 7 Z M462 184 l4 -7 l4 7 Z"/>
+      <path class="c-ink" d="M414 172 Q448 188 482 172 Z"/>
+      <rect class="c-ink" x="372" y="169" width="44" height="5" rx="2"/>
+      <ellipse class="c-red" cx="448" cy="172" rx="34" ry="5"/>
+      <path class="noodle" d="M424 172 q6 -3 12 0 t12 0 t12 0 t12 0"/>
+      <g class="smoke">
+        <path d="M440 162 Q428 148 442 134 Q454 122 444 106"/>
+        <path d="M462 162 Q474 144 460 130 Q448 116 462 100"/>
+      </g>
+
+      <!-- 黒毛和牛のステーキ -->
+      <use href="#cat" class="cat-o" x="556" y="172" width="48" height="56"/>
+      <rect class="c-silver-d" x="612" y="186" width="84" height="12" rx="3"/>
+      <rect class="c-ink" x="614" y="176" width="80" height="10" rx="4"/>
+      <rect class="c-ink" x="694" y="178" width="30" height="4" rx="2"/>
+      <rect class="c-meat" x="634" y="166" width="40" height="12" rx="5"/>
+      <path class="grill-mark" d="M642 168 l8 8 M654 168 l8 8 M666 168 l6 6"/>
+      <text class="q-ink" x="626" y="156">ジュー</text>
+
+      <!-- お餅 -->
+      <rect class="c-ink" x="732" y="184" width="70" height="14" rx="3"/>
+      <rect class="c-fire" x="738" y="180" width="58" height="4" rx="2" opacity=".8"/>
+      <path class="net" d="M730 178 H804 M744 174 V182 M760 174 V182 M776 174 V182 M792 174 V182"/>
+      <rect class="c-cream" x="742" y="164" width="20" height="12" rx="5"/>
+      <rect class="c-cream" x="770" y="164" width="20" height="12" rx="5"/>
+      <circle class="c-cream" cx="782" cy="160" r="6"/>
+      <use href="#cat" class="cat-g" x="806" y="178" width="42" height="50"/>
+      </g>
     </svg>
-    <figcaption><b>ゆうがた</b>仲間の猫たちと、お肉を焼く</figcaption>
+    <figcaption><b>ゆうがた</b>UFOの中で、るるがフライパンとカセットコンロで料理。みんなは黒毛和牛のステーキとお餅を焼く</figcaption>
   </figure>
 
   <section id="story" class="sky-night">
@@ -937,6 +1070,30 @@
     </div>
   </section>
 
+  <figure class="scene scene-swing stars">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <circle class="c-gold" cx="760" cy="246" r="2" opacity=".8"/><circle class="c-cream" cx="790" cy="240" r="1.5" opacity=".7"/>
+      <circle class="c-gold" cx="830" cy="250" r="2" opacity=".8"/><circle class="c-gold" cx="880" cy="238" r="1.6" opacity=".7"/>
+      <circle class="c-cream" cx="920" cy="248" r="2" opacity=".7"/><circle class="c-gold" cx="970" cy="242" r="1.5" opacity=".8"/>
+      <circle class="c-gold" cx="1020" cy="252" r="2" opacity=".7"/><circle class="c-cream" cx="1070" cy="240" r="1.6" opacity=".7"/>
+      <circle class="c-gold" cx="1120" cy="248" r="2" opacity=".8"/><circle class="c-gold" cx="1170" cy="238" r="1.5" opacity=".7"/>
+      <path class="c-night-g" d="M0 200 H660 L690 260 H0 Z"/>
+      <use href="#tree" class="t-night" x="40" y="60" width="90" height="145"/>
+      <use href="#tree" class="t-night" x="130" y="80" width="80" height="125"/>
+      <rect class="c-mountain" x="352" y="118" width="116" height="10"/>
+      <rect class="c-mountain" x="364" y="128" width="8" height="72"/><rect class="c-mountain" x="448" y="128" width="8" height="72"/>
+      <path class="deck" d="M352 118 V100 H468 V118 M380 100 V118 M410 100 V118 M440 100 V118 M400 200 L456 128"/>
+      <path class="frame" d="M516 200 L580 26 L644 200"/>
+      <g class="swing">
+        <path class="rope" d="M580 30 L564 180 M580 30 L596 180"/>
+        <rect class="c-wood" x="554" y="178" width="52" height="6" rx="2"/>
+        <use href="#ruru" x="556" y="104" width="48" height="77"/>
+      </g>
+      <text class="q" x="700" y="92">びゅーん</text>
+    </svg>
+    <figcaption><b>よる</b>展望台のそばの、まっくらな巨大ブランコ。がけの向こうへ、びゅんびゅん</figcaption>
+  </figure>
+
   <figure class="scene scene-drive stars">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <path class="c-cream" transform="translate(110 -14)" d="M895 44.7 A26 26 0 1 0 895 87.3 A24 24 0 0 1 895 44.7 Z"/>
@@ -978,30 +1135,49 @@
   <figure class="scene scene-nabe">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <rect class="c-carpet" y="228" width="1200" height="32" opacity=".35"/>
-      <circle cx="400" cy="206" r="190" fill="url(#glow)"/>
-      <rect class="c-brick" x="330" y="120" width="140" height="108" opacity=".5"/>
-      <path class="c-ink" d="M365 228 V178 Q400 146 435 178 V228 Z"/>
-      <path class="log" d="M380 228 L420 218 M380 218 L420 228"/>
-      <path class="c-fire flame" d="M400 224 C386 216 388 200 397 188 C399 198 405 199 403 190 C413 202 416 216 400 224 Z"/>
-      <path class="c-gold flame" d="M400 224 C393 219 394 210 400 202 C405 210 409 218 400 224 Z"/>
-      <use href="#cat" class="cat-k" x="470" y="176" width="44" height="52"/>
-      <use href="#ruru" x="560" y="150" width="48" height="77" opacity=".85"/>
-      <rect class="c-beam" x="620" y="196" width="230" height="10" rx="3" opacity=".7"/>
-      <rect class="c-beam" x="636" y="206" width="6" height="22" opacity=".7"/><rect class="c-beam" x="828" y="206" width="6" height="22" opacity=".7"/>
-      <rect class="c-ink" x="690" y="168" width="88" height="28" rx="8"/>
-      <ellipse class="c-red" cx="734" cy="170" rx="42" ry="7"/>
-      <path class="noodle" d="M704 170 q6 -4 12 0 t12 0 t12 0 t12 0 t12 0"/>
+      <circle cx="280" cy="206" r="180" fill="url(#glow)"/>
+      <rect class="c-brick" x="210" y="120" width="140" height="108" opacity=".5"/>
+      <path class="c-ink" d="M245 228 V178 Q280 146 315 178 V228 Z"/>
+      <path class="log" d="M260 228 L300 218 M260 218 L300 228"/>
+      <path class="c-fire flame" d="M280 224 C266 216 268 200 277 188 C279 198 285 199 283 190 C293 202 296 216 280 224 Z"/>
+      <path class="c-gold flame" d="M280 224 C273 219 274 210 280 202 C285 210 289 218 280 224 Z"/>
+
+      <!-- アルミホイルに包んだ焼き芋とジャガイモを、暖炉の火に放りこむ -->
+      <ellipse class="c-silver" cx="262" cy="223" rx="9" ry="5"/>
+      <ellipse class="c-silver" cx="300" cy="224" rx="8" ry="5"/>
+      <path class="toss" d="M398 176 Q352 116 300 212"/>
+      <ellipse class="c-silver" cx="352" cy="138" rx="9" ry="5" transform="rotate(-20 352 138)"/>
+      <use href="#cat" class="cat-o" x="388" y="172" width="48" height="56" opacity=".9"/>
+
+      <!-- キムチうどんの闇鍋 -->
+      <rect class="c-beam" x="460" y="198" width="180" height="8" rx="3" opacity=".7"/>
+      <rect class="c-beam" x="472" y="206" width="6" height="22" opacity=".7"/><rect class="c-beam" x="622" y="206" width="6" height="22" opacity=".7"/>
+      <rect class="c-silver-d" x="480" y="184" width="88" height="14" rx="3"/>
+      <path class="c-gas flame" d="M506 184 l4 -6 l4 6 Z M522 184 l4 -6 l4 6 Z M538 184 l4 -6 l4 6 Z"/>
+      <rect class="c-ink" x="486" y="160" width="76" height="24" rx="7"/>
+      <ellipse class="c-red" cx="524" cy="162" rx="36" ry="6"/>
+      <path class="noodle" d="M500 162 q6 -3 12 0 t12 0 t12 0 t12 0"/>
       <g class="smoke">
-        <path d="M720 160 Q708 146 722 132 Q734 120 724 104"/>
-        <path d="M748 160 Q760 142 746 128 Q734 114 748 98"/>
+        <path d="M514 152 Q502 138 516 124 Q528 112 518 96"/>
+        <path d="M538 152 Q550 134 536 120 Q524 106 538 90"/>
       </g>
-      <text class="q" x="650" y="130">?</text>
-      <text class="q" x="806" y="112" style="font-size:20px">?</text>
-      <text class="q" x="590" y="96" style="font-size:18px">?</text>
-      <use href="#cat" class="cat-o" x="800" y="172" width="48" height="56" opacity=".85"/>
-      <use href="#cat" class="cat-g" x="860" y="178" width="42" height="50" opacity=".85"/>
+      <text class="q" x="452" y="112">?</text>
+      <text class="q" x="580" y="100" style="font-size:20px">?</text>
+      <text class="q" x="490" y="80" style="font-size:18px">?</text>
+
+      <!-- お酒 -->
+      <rect class="c-silver" x="584" y="184" width="9" height="14" rx="2"/>
+      <rect class="c-gold" x="600" y="184" width="9" height="14" rx="2"/>
+      <rect class="c-cream" x="616" y="186" width="8" height="12" rx="2" opacity=".7"/>
+
+      <use href="#ruru" x="650" y="150" width="48" height="77" opacity=".9"/>
+      <path class="c-ink" d="M660 196 Q674 210 688 196 Z"/>
+      <ellipse class="c-red" cx="674" cy="196" rx="14" ry="3"/>
+      <use href="#cat" class="cat-g" x="712" y="178" width="42" height="50" opacity=".9"/>
+      <rect class="c-silver" x="748" y="196" width="8" height="12" rx="2"/>
+      <use href="#cat" class="cat-k" x="770" y="180" width="40" height="48"/>
     </svg>
-    <figcaption><b>まよなか</b>まっくらなUFOの中、暖炉の火だけでキムチうどんの闇鍋</figcaption>
+    <figcaption><b>まよなか</b>まっくらなUFOの中。暖炉の火に焼き芋とジャガイモを放りこんで、キムチうどんの闇鍋をつつく。大人はお酒も少し</figcaption>
   </figure>
 
   <figure class="scene scene-bed stars">
