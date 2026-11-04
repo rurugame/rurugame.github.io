@@ -53,6 +53,15 @@
     --cat-gray: #9C9AA8;
     --cat-black: #2E2834;
 
+    /* UFOの中 */
+    --room: #F1E6D6;
+    --room-shade: #E2D3BF;
+    --carpet: #4A4038;
+    --brick: #A8553A;
+    --beam: #5A3A22;
+    --futon: #E9DCCB;
+    --mountain: #1B1535;
+
     --font: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
     --radius: 6px;
   }
@@ -279,9 +288,11 @@
   .scene-arrive { background: var(--sky-afternoon); color: var(--ink); }
   .scene-bbq { background: linear-gradient(var(--sky-sunset), var(--red) 90%); color: var(--ink); }
   .scene-fire { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
-  .scene-sleep { background: var(--night-deep); color: var(--cream); height: auto; padding-top: 48px; display: flex; flex-direction: column; }
-  .scene-sleep figcaption { position: static; order: -1; width: min(1120px, 100% - 48px); margin: 0 auto; }
-  .scene-sleep svg { position: relative; height: 160px; }
+  .scene-inside { background: var(--room); color: var(--ink); height: 300px; }
+  .scene-inside figcaption { left: auto; right: max(24px, calc((100% - 1120px) / 2)); text-align: right; }
+  .scene-drive { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
+  .scene-nabe { background: var(--night-ground); color: var(--cream); }
+  .scene-bed { background: var(--night-deep); color: var(--cream); }
 
   .c-red { fill: var(--red); } .c-red-deep { fill: var(--red-deep); } .c-red-night { fill: var(--red-night); }
   .c-ink { fill: var(--ink); } .c-cream { fill: var(--cream); } .c-gold { fill: var(--gold); }
@@ -296,8 +307,18 @@
   .pipe { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
   .log { fill: none; stroke: var(--wood); stroke-width: 9; stroke-linecap: round; }
   .t1 { color: var(--tree); } .t2 { color: var(--tree-deep); } .t-night { color: var(--night-ground); }
+  .c-room { fill: var(--room); } .c-room-shade { fill: var(--room-shade); } .c-carpet { fill: var(--carpet); }
+  .c-brick { fill: var(--brick); } .c-beam { fill: var(--beam); } .c-futon { fill: var(--futon); } .c-mountain { fill: var(--mountain); }
+  .trim { fill: none; stroke: var(--beam); stroke-width: 2; opacity: .35; }
+  .rail { fill: none; stroke: var(--beam); stroke-width: 3; stroke-linecap: round; }
+  .stringer { fill: none; stroke: var(--beam); stroke-width: 8; stroke-linecap: round; }
+  .string { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .road-line { fill: none; stroke: var(--road); stroke-width: 8; stroke-linecap: round; opacity: .35; }
+  .headlight { fill: var(--gold); opacity: .28; }
+  .noodle { fill: none; stroke: var(--cream); stroke-width: 2; stroke-linecap: round; }
+  .sleepy { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+  .q { fill: var(--cream); opacity: .45; font: 900 26px var(--font); }
   .cat-o { color: var(--cat-orange); } .cat-g { color: var(--cat-gray); } .cat-k { color: var(--cat-black); --eye: var(--gold); }
-  .dome-sleep { --door: var(--night); }
   .glow-a { stop-color: var(--fire); stop-opacity: .5; } .glow-b { stop-color: var(--fire); stop-opacity: 0; }
   .zzz { fill: var(--cream); font: 900 22px var(--font); }
 
@@ -345,6 +366,31 @@
   .qa .a::before { content: "A"; font-weight: 900; color: var(--cream); }
   .qa-more { margin-top: 28px; color: var(--dim); }
 
+  /* はじめかた（UFOの中） */
+  #start { background: linear-gradient(var(--room), var(--sky-afternoon)); }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .steps h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
+  .steps ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); counter-reset: step; }
+  .steps ol[start="6"] { counter-reset: step 5; }
+  .steps li { display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--line); counter-increment: step; }
+  .steps li::before { content: counter(step); font-weight: 900; font-size: 26px; line-height: 1.2; color: var(--red); }
+  .steps li b { display: block; font-size: 16px; }
+  .steps li span { color: var(--dim); font-size: 15px; }
+  .start-note { margin: 36px 0 0; color: var(--dim); }
+  .start-note a { font-weight: 700; color: var(--ink); }
+
+  /* ゴール（メンバーシップ） */
+  #join { background: var(--night-deep); text-align: center; padding-top: 72px; }
+  #join .wrap { max-width: 680px; }
+  #join p { color: var(--dim); }
+  .join-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  .join-actions a { padding: 14px 26px; border-radius: 99px; font-weight: 700; text-decoration: none; }
+  .join-main { background: var(--gold); color: var(--ink); }
+  .join-main:hover { background: var(--cream); }
+  .join-sub { border: 1.5px solid currentColor; }
+  .join-sub:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+  #join .small { font-size: 13px; margin-top: 24px; }
+
   /* お仕事 */
   .work { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
   .work ul { margin: 18px 0 0; padding-left: 1.2em; }
@@ -376,14 +422,14 @@
   .x-frame .twitter-timeline { display: block; padding: 24px; color: var(--ink); }
 
   footer { font-size: 13px; color: var(--cream-dim); background: var(--night-deep); }
-  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 8px 0 56px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 40px 0 56px; border-top: 1px solid var(--line); }
 
   @media (max-width: 900px) {
     .bar nav { display: none; }
     .hero-copy { grid-template-columns: 1fr; }
     .slots { grid-template-columns: 1fr 1fr; }
     .slot.cannon { grid-column: span 2; }
-    .latest, .story, .work, .sub-grid, .x-area { grid-template-columns: 1fr; gap: 40px; }
+    .latest, .story, .work, .sub-grid, .x-area, .steps { grid-template-columns: 1fr; gap: 40px; }
     .archive { grid-template-columns: 1fr 1fr; }
     .vows { grid-template-columns: 1fr; }
     .vow, .vow + .vow { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--line); }
@@ -404,7 +450,7 @@
     .scene figcaption { position: static; order: -1; width: calc(100% - 32px); margin: 0 auto; font-size: 13px; }
     .scene figcaption b { font-size: 18px; }
     .scene svg { position: relative; height: 190px; }
-    .scene-sleep svg { height: 130px; }
+    .scene-inside figcaption { text-align: left; }
   }
   @media (prefers-reduced-motion: reduce) {
     .unit { animation: none; }
@@ -473,7 +519,7 @@
       <a href="#sub">サブチャンネル</a>
       <a href="#story">るるゲームについて</a>
       <a href="#schedule">配信予定</a>
-      <a href="#qa">はじめての方へ</a>
+      <a href="#start">はじめかた</a>
       <a href="#work">お仕事の相談</a>
     </nav>
   </div>
@@ -570,6 +616,83 @@
     </svg>
     <figcaption><b>ひるすぎ</b>森の中のUFOに到着</figcaption>
   </figure>
+
+  <figure class="scene scene-inside">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect class="c-room" width="1200" height="300"/>
+      <rect class="c-room-shade" y="168" width="1200" height="64"/>
+      <path class="trim" d="M0 168 H1200 M780 168 V232 M880 168 V232 M1010 168 V232 M1110 168 V232"/>
+      <rect class="c-carpet" y="232" width="1200" height="68"/>
+      <path class="c-beam" d="M0 0 H460 L400 46 H0 Z"/>
+      <path class="trim" d="M60 0 V46 M140 0 V46 M220 0 V46 M300 0 V46 M380 0 V46"/>
+      <circle class="c-cream" cx="600" cy="34" r="34" opacity=".35"/><circle class="c-cream" cx="600" cy="34" r="10"/>
+      <circle class="c-cream" cx="770" cy="42" r="34" opacity=".35"/><circle class="c-cream" cx="770" cy="42" r="10"/>
+      <rect class="c-red-deep" x="62" y="104" width="166" height="12"/>
+      <rect class="c-brick" x="70" y="116" width="150" height="116"/>
+      <path class="trim" d="M70 136 H220 M70 156 H220 M70 176 H220 M70 196 H220 M70 216 H220"/>
+      <path class="c-ink" d="M110 232 V176 Q145 142 180 176 V232 Z"/>
+      <path class="string" d="M36 92 Q170 104 304 92"/>
+      <path class="c-fire" d="M44 93 L56 110 L68 95 Z M96 97 L108 114 L120 98 Z M148 98 L160 115 L172 98 Z M200 97 L212 114 L224 96 Z M252 95 L264 111 L276 94 Z"/>
+      <path class="c-cream" d="M70 95 L82 112 L94 97 Z M122 98 L134 115 L146 98 Z M174 98 L186 115 L198 97 Z M226 96 L238 113 L250 95 Z"/>
+      <path class="stringer" d="M290 232 L472 50"/>
+      <path class="c-beam" d="M300 218 h36 v5 h-36 Z M320 198 h36 v5 h-36 Z M340 178 h36 v5 h-36 Z M360 158 h36 v5 h-36 Z M380 138 h36 v5 h-36 Z M400 118 h36 v5 h-36 Z M420 98 h36 v5 h-36 Z M440 78 h36 v5 h-36 Z"/>
+      <path class="rail" d="M330 160 L500 -10 M330 160 V218 M390 100 V158 M450 40 V98"/>
+      <rect class="c-ink" x="530" y="92" width="190" height="112" rx="4"/>
+      <rect class="c-sky" x="538" y="100" width="174" height="96"/>
+      <rect class="c-grass" x="538" y="174" width="174" height="22"/>
+      <rect class="c-red-night" x="548" y="148" width="22" height="26"/><rect class="c-ink" x="550" y="141" width="18" height="8"/>
+      <rect class="c-cream" x="680" y="148" width="22" height="26"/><rect class="c-ink" x="682" y="141" width="18" height="8"/>
+      <rect class="c-cream" x="596" y="162" width="9" height="12" rx="4"/>
+      <rect class="c-cream" x="620" y="160" width="10" height="14" rx="4"/>
+      <rect class="c-cream" x="644" y="162" width="9" height="12" rx="4"/>
+      <use href="#ruru" x="470" y="156" width="48" height="77"/>
+      <use href="#cat" class="cat-o" x="728" y="186" width="40" height="47"/>
+      <rect class="c-beam" x="790" y="194" width="220" height="10" rx="3"/>
+      <rect class="c-beam" x="806" y="204" width="6" height="28"/><rect class="c-beam" x="988" y="204" width="6" height="28"/>
+      <rect class="c-gold" x="840" y="176" width="8" height="18" rx="2"/><rect class="c-cream" x="900" y="180" width="18" height="14" rx="3"/><rect class="c-red" x="950" y="178" width="12" height="16" rx="2"/>
+      <rect class="c-ink" x="820" y="186" width="40" height="46" rx="6"/>
+      <rect class="c-ink" x="890" y="186" width="40" height="46" rx="6"/>
+      <rect class="c-ink" x="960" y="186" width="40" height="46" rx="6"/>
+      <ellipse class="c-wood" cx="1090" cy="196" rx="36" ry="30"/>
+      <ellipse class="c-futon" cx="1090" cy="206" rx="26" ry="14"/>
+      <rect class="c-wood" x="1074" y="222" width="32" height="10" rx="3"/>
+      <use href="#cat" class="cat-g" x="1066" y="160" width="40" height="47"/>
+    </svg>
+    <figcaption><b>UFOの中へ</b>そこには、にゃんこ大戦争の世界が待っていた</figcaption>
+  </figure>
+
+  <section id="start" class="sky-day">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2>にゃんこ大戦争を、はじめてみよう</h2>
+          <p>にゃんこ大戦争は、スマホで遊ぶゲームです。インストールしてから、最初のチュートリアルを終えるまでを順番に案内します。</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div>
+          <h3>インストールする</h3>
+          <ol>
+            <li><div><b>スマホを用意する</b><span>iPhoneでも、Androidのスマホでも遊べます。タブレットでも大丈夫です。</span></div></li>
+            <li><div><b>アプリのストアを開く</b><span>iPhoneは「App Store」、Androidは「Google Play ストア」を開きます。</span></div></li>
+            <li><div><b>「にゃんこ大戦争」で検索する</b><span>似た名前のアプリとまちがえないように、提供元が「PONOS」になっているものを選びます。</span></div></li>
+            <li><div><b>インストールする</b><span>「入手」または「インストール」を押します。ダウンロードは無料です。</span></div></li>
+            <li><div><b>アプリを開く</b><span>はじめて開いたときは、ゲームのデータを読み込むのに少し時間がかかります。Wi-Fiにつながっているところで始めると安心です。</span></div></li>
+          </ol>
+        </div>
+        <div>
+          <h3>チュートリアルを進める</h3>
+          <ol start="6">
+            <li><div><b>画面の案内にしたがう</b><span>はじめて遊ぶときは、画面の案内にそってバトルのやり方を教えてもらえます。まずは案内のとおりにタップしてみましょう。</span></div></li>
+            <li><div><b>ネコを出撃させる</b><span>お金がたまったら、画面下のネコのボタンをタップ。ネコが敵の城に向かって進んでいきます。</span></div></li>
+            <li><div><b>ワーカーキャットとにゃんこ砲を使う</b><span>お金に余裕があればワーカーキャットのレベルを上げ、にゃんこ砲がたまったら発射。敵をまとめて押し戻せます。</span></div></li>
+            <li><div><b>敵の城を壊したら勝ち</b><span>最初のバトルに勝てたら、いよいよ「日本編」の冒険が始まります。</span></div></li>
+          </ol>
+        </div>
+      </div>
+      <p class="start-note">わからない言葉が出てきたら、夜の焚き火のそばの<a href="#qa">にゃんこ一問一答</a>も見てみてください。ゲームの中で課金をするときは、かならずおうちの人に相談してね。</p>
+    </div>
+  </section>
 
   <section id="archive" class="sky-day">
     <div class="wrap">
@@ -814,6 +937,23 @@
     </div>
   </section>
 
+  <figure class="scene scene-drive stars">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <path class="c-cream" transform="translate(110 -14)" d="M895 44.7 A26 26 0 1 0 895 87.3 A24 24 0 0 1 895 44.7 Z"/>
+      <path class="c-mountain" d="M0 150 L180 60 L330 130 L520 40 L700 140 L880 70 L1050 140 L1200 90 V260 H0 Z"/>
+      <use href="#tree" class="t-night" x="70" y="34" width="66" height="100"/>
+      <use href="#tree" class="t-night" x="150" y="44" width="56" height="88"/>
+      <path class="c-night-g" d="M0 124 Q300 124 600 192 T1200 242 V260 H0 Z"/>
+      <path class="road-line" d="M40 128 Q300 128 600 196 T1200 246"/>
+      <use href="#dome" x="725" y="145" width="150" height="87"/>
+      <g transform="translate(482 171) rotate(10.5)">
+        <path class="headlight" d="M38 -14 L200 -44 L200 26 Z"/>
+        <use href="#car" x="-40" y="-36" width="80" height="37"/>
+      </g>
+    </svg>
+    <figcaption><b>よるおそく</b>車で山をくだって、またUFOへ</figcaption>
+  </figure>
+
   <section id="work" class="sky-night stars">
     <div class="wrap work">
       <div>
@@ -834,20 +974,85 @@
       </div>
     </div>
   </section>
+
+  <figure class="scene scene-nabe">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect class="c-carpet" y="228" width="1200" height="32" opacity=".35"/>
+      <circle cx="400" cy="206" r="190" fill="url(#glow)"/>
+      <rect class="c-brick" x="330" y="120" width="140" height="108" opacity=".5"/>
+      <path class="c-ink" d="M365 228 V178 Q400 146 435 178 V228 Z"/>
+      <path class="log" d="M380 228 L420 218 M380 218 L420 228"/>
+      <path class="c-fire flame" d="M400 224 C386 216 388 200 397 188 C399 198 405 199 403 190 C413 202 416 216 400 224 Z"/>
+      <path class="c-gold flame" d="M400 224 C393 219 394 210 400 202 C405 210 409 218 400 224 Z"/>
+      <use href="#cat" class="cat-k" x="470" y="176" width="44" height="52"/>
+      <use href="#ruru" x="560" y="150" width="48" height="77" opacity=".85"/>
+      <rect class="c-beam" x="620" y="196" width="230" height="10" rx="3" opacity=".7"/>
+      <rect class="c-beam" x="636" y="206" width="6" height="22" opacity=".7"/><rect class="c-beam" x="828" y="206" width="6" height="22" opacity=".7"/>
+      <rect class="c-ink" x="690" y="168" width="88" height="28" rx="8"/>
+      <ellipse class="c-red" cx="734" cy="170" rx="42" ry="7"/>
+      <path class="noodle" d="M704 170 q6 -4 12 0 t12 0 t12 0 t12 0 t12 0"/>
+      <g class="smoke">
+        <path d="M720 160 Q708 146 722 132 Q734 120 724 104"/>
+        <path d="M748 160 Q760 142 746 128 Q734 114 748 98"/>
+      </g>
+      <text class="q" x="650" y="130">?</text>
+      <text class="q" x="806" y="112" style="font-size:20px">?</text>
+      <text class="q" x="590" y="96" style="font-size:18px">?</text>
+      <use href="#cat" class="cat-o" x="800" y="172" width="48" height="56" opacity=".85"/>
+      <use href="#cat" class="cat-g" x="860" y="178" width="42" height="50" opacity=".85"/>
+    </svg>
+    <figcaption><b>まよなか</b>まっくらなUFOの中、暖炉の火だけでキムチうどんの闇鍋</figcaption>
+  </figure>
+
+  <figure class="scene scene-bed stars">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect class="c-mountain" width="1200" height="204"/>
+      <path class="c-night" d="M60 204 L150 96 H250 L190 204 Z"/>
+      <path class="c-night" d="M210 204 L270 96 H370 L330 204 Z"/>
+      <circle class="c-cream" cx="300" cy="122" r="9"/>
+      <rect class="c-night-g" y="204" width="1200" height="56"/>
+
+      <rect class="c-futon" x="380" y="204" width="170" height="24" rx="8"/>
+      <rect class="c-cream" x="386" y="186" width="46" height="20" rx="10"/>
+      <circle class="c-skin" cx="410" cy="190" r="12"/>
+      <path class="c-ink" d="M398 188 Q398 176 410 176 Q423 176 422 188 Q417 182 409 183 Q403 184 398 188 Z"/>
+      <path class="sleepy" d="M404 192 q2.5 2 5 0 M412 192 q2.5 2 5 0"/>
+      <rect class="c-cream" x="424" y="190" width="124" height="28" rx="14" opacity=".9"/>
+
+      <rect class="c-futon" x="560" y="204" width="170" height="24" rx="8"/>
+      <rect class="c-cream" x="566" y="186" width="46" height="20" rx="10"/>
+      <g class="cat-o"><circle fill="currentColor" cx="590" cy="192" r="12"/><path fill="currentColor" d="M580 186 L581 174 L589 182 Z M600 186 L599 174 L591 182 Z"/></g>
+      <path class="sleepy" d="M584 193 q2.5 2 5 0 M592 193 q2.5 2 5 0"/>
+      <rect class="c-cream" x="604" y="190" width="124" height="28" rx="14" opacity=".9"/>
+
+      <rect class="c-futon" x="740" y="204" width="170" height="24" rx="8"/>
+      <rect class="c-cream" x="746" y="186" width="46" height="20" rx="10"/>
+      <g class="cat-g"><circle fill="currentColor" cx="770" cy="192" r="12"/><path fill="currentColor" d="M760 186 L761 174 L769 182 Z M780 186 L779 174 L771 182 Z"/></g>
+      <path class="sleepy" d="M764 193 q2.5 2 5 0 M772 193 q2.5 2 5 0"/>
+      <rect class="c-cream" x="784" y="190" width="124" height="28" rx="14" opacity=".9"/>
+      <g class="cat-k"><ellipse fill="currentColor" cx="860" cy="182" rx="20" ry="10"/><circle fill="currentColor" cx="844" cy="178" r="8"/><path fill="currentColor" d="M838 174 L839 166 L844 172 Z M850 174 L849 166 L845 172 Z"/></g>
+
+      <text class="zzz" x="420" y="160">Z</text><text class="zzz" x="440" y="140" style="font-size:15px">z</text>
+      <text class="zzz" x="600" y="160">Z</text><text class="zzz" x="620" y="140" style="font-size:15px">z</text>
+      <text class="zzz" x="780" y="160">Z</text><text class="zzz" x="800" y="140" style="font-size:15px">z</text>
+    </svg>
+    <figcaption><b>おやすみ</b>ベッドにもぐって、今日の旅はここでおしまい</figcaption>
+  </figure>
+
+  <section id="join" class="sky-night stars">
+    <div class="wrap">
+      <h2>ここがゴール。いっしょに旅をしてくれて、ありがとう。</h2>
+      <p>楽しかったら、るるゲームのメンバーになって応援してもらえるとうれしいです。登録者10万人を目指す旅を、いちばん近くでいっしょに。</p>
+      <div class="join-actions">
+        <a class="join-main" href="https://www.youtube.com/@RuLgames/join" target="_blank" rel="noopener">メンバーになる（月140円）</a>
+        <a class="join-sub" href="https://www.youtube.com/@RuLgames?sub_confirmation=1" target="_blank" rel="noopener">まずはチャンネル登録</a>
+      </div>
+      <p class="small">メンバーシップはYouTubeの機能です。子どもの人は、かならずおうちの人に相談してから登録してね。</p>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <figure class="scene scene-sleep stars">
-    <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <use href="#tree" class="t-night" x="380" y="40" width="100" height="150"/>
-      <use href="#tree" class="t-night" x="720" y="30" width="110" height="160"/>
-      <use href="#dome" class="dome-sleep" x="480" y="40" width="240" height="140"/>
-      <text class="zzz" x="690" y="58">Z</text>
-      <text class="zzz" x="712" y="38" style="font-size:16px">z</text>
-      <rect class="c-night-g" y="174" width="1200" height="26"/>
-    </svg>
-    <figcaption><b>おやすみ</b>また次の配信で会いましょう</figcaption>
-  </figure>
   <div class="wrap">
     <span>&copy; <span id="year"></span> るるゲーム ／ <a href="https://www.youtube.com/@RuLgames" target="_blank" rel="noopener">YouTube</a> ／ <a href="https://www.youtube.com/channel/UCeI7tXU8GgywzL10AEMPzYQ" target="_blank" rel="noopener">サブチャンネル</a> ／ <a href="https://x.com/Uno_RuL" target="_blank" rel="noopener">X</a></span>
     <span>「にゃんこ大戦争」は株式会社ポノスのゲームです。このサイトは非公式のファン活動として運営しています。</span>
