@@ -403,7 +403,25 @@
   .qa .a::before { content: "A"; font-weight: 900; color: var(--cream); }
   .qa-more { margin-top: 28px; color: var(--dim); }
 
-  /* はじめかた（UFOの中） */
+  /* 攻略ガイド */
+  #guide { background: var(--sky-afternoon); }
+  .guide-block + .guide-block { margin-top: 56px; }
+  .guide-block h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
+  .guide-block > p { margin: 0 0 18px; color: var(--dim); font-size: 15px; }
+  .guide-block > p a { font-weight: 700; color: var(--ink); }
+  .traits { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 18px 14px; }
+  .trait { text-decoration: none; }
+  .trait img { aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; width: 100%; background: var(--red-night); }
+  .trait b { display: block; margin-top: 8px; font-size: 17px; font-weight: 900; }
+  .trait span { font-size: 12px; color: var(--dim); }
+  .trait:hover b { text-decoration: underline; text-underline-offset: 4px; }
+  .rows { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 32px; }
+  .rows a { display: grid; grid-template-columns: 148px 1fr; gap: 14px; text-decoration: none; align-items: start; }
+  .rows img { aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; width: 100%; background: var(--red-night); }
+  .rows strong { font-size: 14px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .rows a:hover strong { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* はじめかた */
   #start { background: linear-gradient(var(--room), var(--sky-afternoon)); }
   .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
   .steps h3 { margin: 0 0 4px; font-size: 20px; font-weight: 900; }
@@ -488,6 +506,7 @@
     .slot.cannon { grid-column: span 2; }
     .latest, .story, .work, .sub-grid, .x-area, .steps { grid-template-columns: 1fr; gap: 40px; }
     .ready ul { grid-template-columns: 1fr; gap: 16px; }
+    .rows { grid-template-columns: 1fr; }
     .trouble dl, .words dl { grid-template-columns: 1fr; }
     .trouble dt, .words dt { border-bottom: 0; padding-bottom: 0; }
     .archive { grid-template-columns: 1fr 1fr; }
@@ -581,7 +600,7 @@
     <a class="logo" href="#">るるゲーム</a>
     <nav aria-label="ページ内リンク">
       <a href="#latest">最新動画</a>
-      <a href="#shorts">ショート</a>
+      <a href="#guide">攻略ガイド</a>
       <a href="#sub">サブチャンネル</a>
       <a href="#story">るるゲームについて</a>
       <a href="#schedule">配信予定</a>
@@ -698,6 +717,21 @@
     </div>
   </section>
 
+  <section id="guide" class="sky-day">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2>にゃんこ攻略ガイド</h2>
+          <p>るるゲームの動画を、目的別にまとめました。気になるところから見てください。新しい動画を公開すると、ここにも自動で入ります。</p>
+        </div>
+        <a class="more" href="videos/">攻略ページ一覧</a>
+      </div>
+      <div id="guide-box">
+        <p class="fallback">攻略動画は<a href="videos/">攻略ページ一覧</a>から見られます。</p>
+      </div>
+    </div>
+  </section>
+
   <figure class="scene scene-stops">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <!-- お店はどちらも、ロゴや看板の色を使わないオリジナルの絵 -->
@@ -752,7 +786,6 @@
       <use href="#dome" x="440" y="50" width="320" height="186"/>
       <use href="#car" x="760" y="190" width="96" height="45"/>
     </svg>
-    <figcaption><b>ひるすぎ</b>森の中のUFOに到着</figcaption>
   </figure>
 
   <figure class="scene scene-inside">
@@ -798,7 +831,6 @@
       <rect class="c-wood" x="1074" y="222" width="32" height="10" rx="3"/>
       <use href="#cat" class="cat-g" x="1066" y="160" width="40" height="47"/>
     </svg>
-    <figcaption><b>UFOの中へ</b>そこには、にゃんこ大戦争の世界が待っていた</figcaption>
   </figure>
 
   <section id="start" class="sky-day">
@@ -854,7 +886,7 @@
         <dl>
           <dt>ダウンロードが進まない</dt><dd>Wi-Fiにつながっているか、スマホの空き容量が足りているかを確認して、アプリを開き直してみてください。</dd>
           <dt>スマホを買いかえるとき</dt><dd>ゲームの中の「データ引き継ぎ」で、新しいスマホにデータを移せます。古いスマホを手放す前に、かならず引き継ぎの手順を確認してください。</dd>
-          <dt>遊び方がわからない</dt><dd>夜の焚き火のそばの<a href="#qa">にゃんこ一問一答</a>を見るか、すぐ下の見かたを読んで、配信で聞いてみてください。</dd>
+          <dt>遊び方がわからない</dt><dd><a href="#qa">にゃんこ一問一答</a>を見るか、すぐ下の見かたを読んで、配信で聞いてみてください。</dd>
         </dl>
       </div>
     </div>
@@ -984,7 +1016,6 @@
       <use href="#cat" class="cat-b" x="852" y="174" width="44" height="54"/>
       </g>
     </svg>
-    <figcaption><b>ゆうがた</b>UFOの中で、るるがフライパンとカセットコンロで料理。みんなは黒毛和牛のステーキとお餅を焼く</figcaption>
   </figure>
 
   <section id="story" class="sky-night">
@@ -1069,14 +1100,13 @@
       <use href="#cat" class="cat-o" x="662" y="172" width="50" height="58"/>
       <use href="#cat" class="cat-k" x="724" y="180" width="43" height="50"/>
     </svg>
-    <figcaption><b>よる</b>焚き火をかこんで、星を見上げる</figcaption>
   </figure>
 
   <section id="qa" class="sky-night stars">
     <div class="wrap">
       <div class="head">
         <div>
-          <h2>焚き火のそばの、にゃんこ一問一答</h2>
+          <h2>にゃんこ一問一答</h2>
           <p>にゃんこ大戦争をやったことがない人、始めたばかりの人へ。まず知っておきたいことをまとめました。問題をタップすると答えが出ます。</p>
         </div>
       </div>
@@ -1195,7 +1225,6 @@
       </g>
       <text class="q" x="700" y="92">びゅーん</text>
     </svg>
-    <figcaption><b>よる</b>展望台のそばの、まっくらな巨大ブランコ。がけの向こうへ、びゅんびゅん</figcaption>
   </figure>
 
   <figure class="scene scene-drive stars">
@@ -1212,7 +1241,6 @@
         <use href="#car" x="-40" y="-36" width="80" height="37"/>
       </g>
     </svg>
-    <figcaption><b>よるおそく</b>車で山をくだって、またUFOへ</figcaption>
   </figure>
 
   <section id="work" class="sky-night stars">
@@ -1283,7 +1311,6 @@
       <use href="#cat" class="cat-b" x="816" y="174" width="44" height="54" opacity=".9"/>
       <rect class="c-gold" x="852" y="194" width="8" height="12" rx="2"/>
     </svg>
-    <figcaption><b>まよなか</b>まっくらなUFOの中。暖炉の火に焼き芋とジャガイモを放りこんで、キムチうどんの闇鍋をつつく。大人はお酒も少し</figcaption>
   </figure>
 
   <figure class="scene scene-bed stars">
@@ -1325,7 +1352,6 @@
       <text class="zzz" x="600" y="160">Z</text><text class="zzz" x="620" y="140" style="font-size:15px">z</text>
       <text class="zzz" x="780" y="160">Z</text><text class="zzz" x="800" y="140" style="font-size:15px">z</text>
     </svg>
-    <figcaption><b>おやすみ</b>ベッドにもぐって、今日はここまで</figcaption>
   </figure>
 
   <figure class="scene scene-home">
@@ -1365,8 +1391,8 @@
 
   <section id="join" class="sky-day">
     <div class="wrap">
-      <h2>ここがゴール。いっしょに旅をしてくれて、ありがとう。</h2>
-      <p>楽しかったら、るるゲームのメンバーになって応援してもらえるとうれしいです。登録者10万人を目指す旅を、いちばん近くでいっしょに。</p>
+      <h2>最後まで見てくれて、ありがとう。</h2>
+      <p>楽しかったら、るるゲームのメンバーになって応援してもらえるとうれしいです。登録者10万人への道のりを、いちばん近くでいっしょに。</p>
       <div class="join-actions">
         <a class="join-main" href="https://www.youtube.com/@RuLgames/join" target="_blank" rel="noopener">メンバーになる（月140円）</a>
         <a class="join-sub" href="https://www.youtube.com/@RuLgames?sub_confirmation=1" target="_blank" rel="noopener">まずはチャンネル登録</a>
@@ -1463,6 +1489,8 @@
       }
     }
 
+    renderGuide(longs);
+
     if (shorts.length) {
       document.getElementById('shorts-box').innerHTML = shorts.slice(0, 10).map(v => `
         <a class="short" href="${watch(v)}" target="_blank" rel="noopener">
@@ -1470,6 +1498,51 @@
           <span>${esc(v.title)}</span>
         </a>`).join('');
     }
+  }
+
+  // 攻略ガイド：動画のタイトルから、目的別に振り分ける
+  const TRAITS = ['赤', '黒', '浮き', 'メタル', 'エイリアン', '天使', 'ゾンビ', '古代', '悪魔'];
+  const bare = t => t.replace(/【にゃんこ大戦争】/g, '').trim();
+  const row = v => `
+    <a href="${page(v)}">
+      <img src="${thumb(v.id, 'mqdefault')}" alt="" loading="lazy">
+      <div><strong>${esc(bare(v.title))}</strong><div class="meta">${v.kind === 'live' ? '配信アーカイブ ／ ' : ''}${day(v.published)}</div></div>
+    </a>`;
+
+  function renderGuide(longs) {
+    const shitenno = longs
+      .map(v => ({ v, trait: (v.title.match(/最強の四天王\s*対(.+?)編/) || [])[1] }))
+      .filter(x => x.trait)
+      .sort((a, b) => (TRAITS.indexOf(a.trait) + 1 || 99) - (TRAITS.indexOf(b.trait) + 1 || 99));
+    const stages = longs.filter(v => /(タップ|枠)(攻略|完走)/.test(v.title));
+    const chars = longs.filter(v => /解説|好きなキャラ/.test(v.title));
+
+    const blocks = [];
+    if (shitenno.length) blocks.push(`
+      <div class="guide-block">
+        <h3>属性別「最強の四天王」</h3>
+        <p>敵の属性ごとに、るるが選んだ最強の4体を紹介するシリーズです。属性がわからない人は<a href="#qa">一問一答</a>からどうぞ。</p>
+        <div class="traits">
+          ${shitenno.map(({ v, trait }) => `
+            <a class="trait" href="${page(v)}">
+              <img src="${thumb(v.id, 'mqdefault')}" alt="" loading="lazy">
+              <b>対 ${esc(trait)}</b><span>${day(v.published)}</span>
+            </a>`).join('')}
+        </div>
+      </div>`);
+    if (stages.length) blocks.push(`
+      <div class="guide-block">
+        <h3>少ない枠・タップ数でのステージ攻略</h3>
+        <p>使えるキャラの数やタップの回数をしぼって、強いステージを突破した動画です。</p>
+        <div class="rows">${stages.map(row).join('')}</div>
+      </div>`);
+    if (chars.length) blocks.push(`
+      <div class="guide-block">
+        <h3>キャラ解説</h3>
+        <p>超本能や第四形態、レベル上げをしたキャラを、使い方といっしょに解説しています。</p>
+        <div class="rows">${chars.map(row).join('')}</div>
+      </div>`);
+    if (blocks.length) document.getElementById('guide-box').innerHTML = blocks.join('');
   }
 
   function renderSub(list) {
