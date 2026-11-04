@@ -63,6 +63,15 @@
     --mountain: #1B1535;
     --gas: #7FB2F0;
 
+    /* るると仲間（るるは黒いパーカー、青い猫がリーダー） */
+    --hoodie: #2A2428;
+    --hood-line: #4A4045;
+    --cat-blue: #4F7FD6;
+
+    /* 東京駅 */
+    --glass: #A9CFE6;
+    --slate: #3D4A52;
+
     --font: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
     --radius: 6px;
   }
@@ -292,6 +301,9 @@
   .scene-inside { background: var(--room); color: var(--ink); height: 300px; }
   .scene-inside figcaption { left: auto; right: max(24px, calc((100% - 1120px) / 2)); text-align: right; }
   .scene-swing { background: var(--night-deep); color: var(--cream); }
+  .scene-yaesu { background: linear-gradient(var(--sky-dawn), var(--sky-morning)); color: var(--ink); }
+  .scene-stops { background: var(--sky-afternoon); color: var(--ink); }
+  .scene-home { background: linear-gradient(var(--sky-dawn), var(--sky-morning)); color: var(--ink); }
   .scene-drive { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
   .scene-nabe { background: var(--night-ground); color: var(--cream); }
   .scene-bed { background: var(--night-deep); color: var(--cream); }
@@ -301,7 +313,15 @@
   .c-silver { fill: var(--silver); } .c-silver-d { fill: var(--silver-dark); }
   .c-hill { fill: var(--hill); } .c-grass { fill: var(--grass); } .c-road { fill: var(--road); }
   .c-wood { fill: var(--wood); } .c-meat { fill: var(--meat); } .c-fire { fill: var(--fire); }
-  .c-skin { fill: var(--skin); } .c-sky { fill: var(--sky-morning); } .c-cat { fill: var(--cat-orange); }
+  .c-skin { fill: var(--skin); } .c-sky { fill: var(--sky-morning); } .c-cat { fill: var(--cat-blue); } .c-cat-o { fill: var(--cat-orange); }
+  .hoodie { fill: var(--hoodie); stroke: var(--hood-line); stroke-width: 1.5; } .hood { fill: var(--hood-line); }
+  .string-w { fill: none; stroke: var(--cream); stroke-width: 1.4; stroke-linecap: round; }
+  .c-glass { fill: var(--glass); } .c-slate { fill: var(--slate); } .c-leaf { fill: var(--grass); }
+  .glass-line { fill: none; stroke: var(--cream); stroke-width: 1.5; opacity: .5; }
+  .brick-line { fill: none; stroke: var(--cream); stroke-width: 2; opacity: .55; }
+  .arm { fill: none; stroke-width: 5; stroke-linecap: round; }
+  .speed { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; opacity: .35; }
+  .heart { fill: var(--red); }
   .c-night { fill: var(--night); } .c-night-g { fill: var(--night-ground); }
   .c-door { fill: var(--door, var(--gold)); }
   .c-eye { fill: var(--eye, var(--ink)); }
@@ -332,7 +352,7 @@
   .deck { fill: none; stroke: var(--mountain); stroke-width: 4; }
   .swing { transform-box: view-box; transform-origin: 580px 30px; animation: swing 2.2s ease-in-out infinite alternate; }
   @keyframes swing { from { transform: rotate(36deg); } to { transform: rotate(-50deg); } }
-  .cat-o { color: var(--cat-orange); } .cat-g { color: var(--cat-gray); } .cat-k { color: var(--cat-black); --eye: var(--gold); }
+  .cat-o { color: var(--cat-orange); } .cat-g { color: var(--cat-gray); } .cat-k { color: var(--cat-black); --eye: var(--gold); } .cat-b { color: var(--cat-blue); }
   .glow-a { stop-color: var(--fire); stop-opacity: .5; } .glow-b { stop-color: var(--fire); stop-opacity: 0; }
   .zzz { fill: var(--cream); font: 900 22px var(--font); }
 
@@ -414,7 +434,7 @@
   #watch { background: linear-gradient(var(--sky-afternoon), var(--sky-afternoon)); }
 
   /* ゴール（メンバーシップ） */
-  #join { background: var(--night-deep); text-align: center; padding-top: 72px; }
+  #join { background: linear-gradient(var(--sky-morning), var(--sky-pale)); text-align: center; padding-top: 72px; }
   #join .wrap { max-width: 680px; }
   #join p { color: var(--dim); }
   .join-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
@@ -509,8 +529,9 @@
     <path class="c-red" d="M6 40 Q6 30 16 28 L36 26 L48 12 Q51 8 58 8 L84 8 Q91 8 95 13 L106 27 Q116 29 116 39 L116 44 L6 44 Z"/>
     <path class="c-sky" d="M50 14 Q52 12 56 12 L70 12 L70 26 L42 26 Z"/>
     <path class="c-sky" d="M74 12 L86 12 Q89 12 91 15 L100 26 L74 26 Z"/>
-    <circle class="c-skin" cx="60" cy="21" r="5"/>
-    <path class="c-ink" d="M55 20 Q55 14 60 14 Q66 14 65 20 Q62 17 55 20 Z"/>
+    <path class="c-cat-o" d="M45 26 L45 20 Q45 16 49 16 Q53 16 53 20 L53 26 Z M46 18 L47 13 L49 16 Z M52 18 L51 13 L49 16 Z"/>
+    <circle class="c-skin" cx="62" cy="21" r="5"/>
+    <path class="c-ink" d="M57 20 Q57 14 62 14 Q68 14 67 20 Q64 17 57 20 Z"/>
     <path class="c-cat" d="M80 26 L80 19 Q80 15 85 15 Q90 15 90 19 L90 26 Z M81 17 L82 12 L85 15 Z M89 17 L88 12 L85 15 Z"/>
     <rect class="c-gold" x="108" y="31" width="7" height="4" rx="2"/>
     <circle class="c-ink" cx="32" cy="44" r="9"/><circle class="c-silver" cx="32" cy="44" r="3.5"/>
@@ -540,7 +561,9 @@
     <circle class="c-eye" cx="25" cy="25" r="1.9"/><circle class="c-eye" cx="35" cy="25" r="1.9"/>
   </symbol>
   <symbol id="ruru" viewBox="0 0 50 80">
-    <path class="c-red" d="M7 80 Q5 46 25 44 Q45 46 43 80 Z"/>
+    <path class="hoodie" d="M7 80 Q5 46 25 44 Q45 46 43 80 Z"/>
+    <path class="hood" d="M13 50 Q25 40 37 50 Q25 46 13 50 Z"/>
+    <path class="string-w" d="M21 50 V60 M29 50 V60"/>
     <circle class="c-skin" cx="25" cy="30" r="13"/>
     <path class="c-ink" d="M12 29 Q11 15 25 15 Q39 15 38 29 Q33 22 24 23 Q17 24 12 29 Z"/>
     <circle class="c-ink" cx="21" cy="32" r="1.6"/><circle class="c-ink" cx="29" cy="32" r="1.6"/>
@@ -603,6 +626,36 @@
 </div>
 
 <main>
+  <figure class="scene scene-yaesu">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <!-- 八重洲側の高いビルと、白い大屋根。オリジナルの絵 -->
+      <rect class="c-glass" x="290" y="20" width="120" height="196"/>
+      <path class="glass-line" d="M314 20 V216 M338 20 V216 M362 20 V216 M386 20 V216 M290 50 H410 M290 80 H410 M290 110 H410 M290 140 H410 M290 170 H410"/>
+      <rect class="c-glass" x="790" y="34" width="120" height="182"/>
+      <path class="glass-line" d="M814 34 V216 M838 34 V216 M862 34 V216 M886 34 V216 M790 64 H910 M790 94 H910 M790 124 H910 M790 154 H910 M790 184 H910"/>
+      <rect class="c-room-shade" x="410" y="140" width="380" height="76"/>
+      <path class="c-cream" d="M410 118 Q600 84 790 118 L790 128 Q600 98 410 128 Z"/>
+      <path class="string" d="M470 116 V140 M540 106 V140 M660 106 V140 M730 116 V140"/>
+      <rect class="c-slate" x="560" y="176" width="80" height="40"/>
+      <rect class="c-road" y="216" width="1200" height="44"/>
+      <use href="#car" x="912" y="180" width="96" height="45"/>
+
+      <!-- るると仲間4匹で、グータッチ -->
+      <path class="arm" style="stroke:var(--cat-black)" d="M494 196 L592 132"/>
+      <path class="arm" style="stroke:var(--cat-orange)" d="M546 194 L596 128"/>
+      <path class="arm" style="stroke:var(--hoodie)" d="M604 196 L602 126"/>
+      <path class="arm" style="stroke:var(--cat-blue)" d="M662 192 L608 128"/>
+      <path class="arm" style="stroke:var(--cat-gray)" d="M712 196 L612 132"/>
+      <path class="c-gold" d="M602 104 L606 116 L618 116 L608 123 L612 135 L602 128 L592 135 L596 123 L586 116 L598 116 Z"/>
+      <use href="#cat" class="cat-k" x="470" y="166" width="44" height="52"/>
+      <use href="#cat" class="cat-o" x="520" y="162" width="48" height="56"/>
+      <use href="#ruru" x="578" y="140" width="48" height="77"/>
+      <use href="#cat" class="cat-b" x="636" y="160" width="50" height="58"/>
+      <use href="#cat" class="cat-g" x="690" y="164" width="46" height="54"/>
+    </svg>
+    <figcaption><b>あさ</b>東京駅の八重洲口でみんなと待ち合わせ。グータッチをして、決起会の合宿へ出発</figcaption>
+  </figure>
+
   <section id="latest" class="sky-day">
     <div class="wrap">
       <div class="head">
@@ -634,6 +687,44 @@
       </div>
     </div>
   </section>
+
+  <figure class="scene scene-stops">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <!-- お店はどちらも、ロゴや看板の色を使わないオリジナルの絵 -->
+      <rect class="c-road" y="216" width="1200" height="44"/>
+      <path class="trim" d="M0 238 H1200"/>
+
+      <!-- コンビニでトイレ休憩 -->
+      <rect class="c-cream" x="230" y="128" width="290" height="88"/>
+      <rect class="c-wood" x="230" y="128" width="290" height="16"/>
+      <rect class="c-glass" x="250" y="156" width="160" height="50"/>
+      <rect class="c-glass" x="430" y="160" width="50" height="56"/>
+      <rect class="c-ink" x="484" y="150" width="28" height="18" rx="3"/>
+      <text class="zzz" x="488" y="164" style="font-size:11px">WC</text>
+      <use href="#cat" class="cat-g" x="432" y="172" width="40" height="47"/>
+      <use href="#car" x="528" y="184" width="96" height="45"/>
+      <use href="#cat" class="cat-b" x="596" y="174" width="42" height="50"/>
+
+      <!-- スーパーで食材の買い出し -->
+      <rect class="c-room" x="660" y="112" width="360" height="104"/>
+      <rect class="c-beam" x="660" y="112" width="360" height="18"/>
+      <rect class="c-glass" x="680" y="150" width="200" height="56"/>
+      <rect class="c-glass" x="900" y="156" width="70" height="60"/>
+      <use href="#ruru" x="640" y="140" width="48" height="77"/>
+      <path class="c-silver-d" d="M690 176 H760 L752 204 H698 Z"/>
+      <path class="string" d="M690 176 L682 168"/>
+      <circle class="c-ink" cx="704" cy="210" r="4"/><circle class="c-ink" cx="748" cy="210" r="4"/>
+      <circle class="c-leaf" cx="706" cy="172" r="9"/>
+      <rect class="c-meat" x="714" y="168" width="18" height="8" rx="2"/>
+      <rect class="c-red" x="734" y="160" width="12" height="16" rx="3"/>
+      <rect class="c-cream" x="746" y="166" width="14" height="10" rx="2"/>
+      <use href="#cat" class="cat-o" x="776" y="170" width="46" height="54"/>
+      <rect class="c-cream" x="818" y="192" width="16" height="18" rx="3"/>
+      <path class="string" d="M820 192 Q826 182 832 192"/>
+      <use href="#cat" class="cat-k" x="838" y="176" width="40" height="48"/>
+    </svg>
+    <figcaption><b>とちゅう</b>ファミマでトイレ休憩。ヤオコーで、夜までの食材を買い出し</figcaption>
+  </figure>
 
   <figure class="scene scene-arrive">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -685,6 +776,8 @@
       <rect class="c-cream" x="644" y="162" width="9" height="12" rx="4"/>
       <use href="#ruru" x="470" y="156" width="48" height="77"/>
       <use href="#cat" class="cat-o" x="728" y="186" width="40" height="47"/>
+      <use href="#cat" class="cat-b" x="236" y="186" width="40" height="47"/>
+      <use href="#cat" class="cat-k" x="412" y="190" width="36" height="43"/>
       <rect class="c-beam" x="790" y="194" width="220" height="10" rx="3"/>
       <rect class="c-beam" x="806" y="204" width="6" height="28"/><rect class="c-beam" x="988" y="204" width="6" height="28"/>
       <rect class="c-gold" x="840" y="176" width="8" height="18" rx="2"/><rect class="c-cream" x="900" y="180" width="18" height="14" rx="3"/><rect class="c-red" x="950" y="178" width="12" height="16" rx="2"/>
@@ -879,6 +972,7 @@
       <rect class="c-cream" x="770" y="164" width="20" height="12" rx="5"/>
       <circle class="c-cream" cx="782" cy="160" r="6"/>
       <use href="#cat" class="cat-g" x="806" y="178" width="42" height="50"/>
+      <use href="#cat" class="cat-b" x="852" y="174" width="44" height="54"/>
       </g>
     </svg>
     <figcaption><b>ゆうがた</b>UFOの中で、るるがフライパンとカセットコンロで料理。みんなは黒毛和牛のステーキとお餅を焼く</figcaption>
@@ -957,6 +1051,7 @@
       <use href="#dome" x="230" y="140" width="190" height="110"/>
       <rect class="c-night-g" y="228" width="1200" height="32"/>
       <circle cx="600" cy="214" r="150" fill="url(#glow)"/>
+      <use href="#cat" class="cat-b" x="372" y="172" width="50" height="58"/>
       <use href="#cat" class="cat-g" x="430" y="172" width="50" height="58"/>
       <use href="#ruru" x="494" y="152" width="48" height="77"/>
       <path class="log" d="M570 230 L630 214 M570 214 L630 230"/>
@@ -1176,6 +1271,8 @@
       <use href="#cat" class="cat-g" x="712" y="178" width="42" height="50" opacity=".9"/>
       <rect class="c-silver" x="748" y="196" width="8" height="12" rx="2"/>
       <use href="#cat" class="cat-k" x="770" y="180" width="40" height="48"/>
+      <use href="#cat" class="cat-b" x="816" y="174" width="44" height="54" opacity=".9"/>
+      <rect class="c-gold" x="852" y="194" width="8" height="12" rx="2"/>
     </svg>
     <figcaption><b>まよなか</b>まっくらなUFOの中。暖炉の火に焼き芋とジャガイモを放りこんで、キムチうどんの闇鍋をつつく。大人はお酒も少し</figcaption>
   </figure>
@@ -1187,6 +1284,13 @@
       <path class="c-night" d="M210 204 L270 96 H370 L330 204 Z"/>
       <circle class="c-cream" cx="300" cy="122" r="9"/>
       <rect class="c-night-g" y="204" width="1200" height="56"/>
+
+      <rect class="c-futon" x="200" y="204" width="170" height="24" rx="8"/>
+      <rect class="c-cream" x="206" y="186" width="46" height="20" rx="10"/>
+      <g class="cat-b"><circle fill="currentColor" cx="230" cy="192" r="12"/><path fill="currentColor" d="M220 186 L221 174 L229 182 Z M240 186 L239 174 L231 182 Z"/></g>
+      <path class="sleepy" d="M224 193 q2.5 2 5 0 M232 193 q2.5 2 5 0"/>
+      <rect class="c-cream" x="244" y="190" width="124" height="28" rx="14" opacity=".9"/>
+      <text class="zzz" x="240" y="160">Z</text><text class="zzz" x="260" y="140" style="font-size:15px">z</text>
 
       <rect class="c-futon" x="380" y="204" width="170" height="24" rx="8"/>
       <rect class="c-cream" x="386" y="186" width="46" height="20" rx="10"/>
@@ -1212,10 +1316,47 @@
       <text class="zzz" x="600" y="160">Z</text><text class="zzz" x="620" y="140" style="font-size:15px">z</text>
       <text class="zzz" x="780" y="160">Z</text><text class="zzz" x="800" y="140" style="font-size:15px">z</text>
     </svg>
-    <figcaption><b>おやすみ</b>ベッドにもぐって、今日の旅はここでおしまい</figcaption>
+    <figcaption><b>おやすみ</b>ベッドにもぐって、今日はここまで</figcaption>
   </figure>
 
-  <section id="join" class="sky-night stars">
+  <figure class="scene scene-home">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <pattern id="windows" width="28" height="28" patternUnits="userSpaceOnUse"><rect class="c-cream" x="9" y="6" width="10" height="14" opacity=".55"/></pattern>
+      </defs>
+      <!-- 赤レンガの駅舎（丸の内側）。オリジナルの絵 -->
+      <rect class="c-brick" x="230" y="146" width="740" height="70"/>
+      <rect x="230" y="150" width="740" height="60" fill="url(#windows)"/>
+      <path class="brick-line" d="M230 170 H970 M230 194 H970"/>
+      <rect class="c-slate" x="230" y="140" width="740" height="8"/>
+      <rect class="c-brick" x="240" y="118" width="80" height="24"/>
+      <path class="c-slate" d="M236 120 Q280 76 324 120 Z"/>
+      <rect class="c-brick" x="880" y="118" width="80" height="24"/>
+      <path class="c-slate" d="M876 120 Q920 76 964 120 Z"/>
+      <rect class="c-brick" x="560" y="126" width="80" height="16"/>
+      <path class="c-slate" d="M554 128 L600 104 L646 128 Z"/>
+      <rect class="c-slate" x="574" y="178" width="52" height="38"/>
+      <rect class="c-road" y="216" width="1200" height="44"/>
+
+      <!-- 青いリーダー猫以外が降りて、はぐ -->
+      <use href="#cat" class="cat-k" x="378" y="166" width="44" height="52"/>
+      <use href="#cat" class="cat-o" x="410" y="162" width="48" height="56"/>
+      <use href="#ruru" x="446" y="140" width="48" height="77"/>
+      <use href="#cat" class="cat-g" x="484" y="162" width="48" height="56"/>
+      <path class="heart" d="M450 128 c-4 -6 -12 -2 -8 4 l8 8 l8 -8 c4 -6 -4 -10 -8 -4 Z"/>
+      <path class="heart" d="M496 118 c-3 -5 -10 -2 -7 3 l7 7 l7 -7 c3 -5 -4 -8 -7 -3 Z"/>
+
+      <!-- 青いリーダー猫は窓から手を出して、あおりながら去っていく -->
+      <path class="speed" d="M640 196 H676 M630 208 H672 M646 220 H680"/>
+      <use href="#car" x="690" y="176" width="110" height="51"/>
+      <path class="arm" style="stroke:var(--cat-blue)" d="M774 192 L792 150"/>
+      <circle class="c-cat" cx="793" cy="146" r="5"/>
+      <text class="q-ink" x="700" y="132">おさきに〜♪</text>
+    </svg>
+    <figcaption><b>つぎのあさ</b>みんなで車で東京へ。東京駅丸の内の駅舎の前で、青いリーダー猫以外が降りて、はぐをしてお別れ。リーダーは窓から手を出して、あおりながら去っていった</figcaption>
+  </figure>
+
+  <section id="join" class="sky-day">
     <div class="wrap">
       <h2>ここがゴール。いっしょに旅をしてくれて、ありがとう。</h2>
       <p>楽しかったら、るるゲームのメンバーになって応援してもらえるとうれしいです。登録者10万人を目指す旅を、いちばん近くでいっしょに。</p>
