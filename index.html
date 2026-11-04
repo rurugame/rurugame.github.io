@@ -288,7 +288,8 @@
   .fallback .player::after { display: none; }
 
   /* ---------- 場面（キャンプの一日） ---------- */
-  .scene { position: relative; margin: 0; height: 260px; overflow: hidden; }
+  /* 絵の縦横比（1200×260）を保つように、広い画面では高さも伸ばす。上下が切れて、つぶれて見えないようにするため */
+  .scene { position: relative; margin: 0; height: clamp(260px, 21.67vw, 520px); overflow: hidden; }
   .scene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .scene figcaption {
     position: absolute; top: 28px; left: max(24px, calc((100% - 1120px) / 2));
@@ -298,7 +299,7 @@
   .scene-arrive { background: var(--sky-afternoon); color: var(--ink); }
   .scene-cook { background: var(--room-shade); color: var(--ink); }
   .scene-fire { background: linear-gradient(var(--night), var(--night-deep)); color: var(--cream); }
-  .scene-inside { background: var(--room); color: var(--ink); height: 300px; }
+  .scene-inside { background: var(--room); color: var(--ink); height: clamp(300px, 25vw, 600px); }
   .scene-inside figcaption { left: auto; right: max(24px, calc((100% - 1120px) / 2)); text-align: right; }
   .scene-swing { background: var(--night-deep); color: var(--cream); }
   .scene-yaesu { background: linear-gradient(var(--sky-dawn), var(--sky-morning)); color: var(--ink); }
@@ -314,6 +315,8 @@
   .c-hill { fill: var(--hill); } .c-grass { fill: var(--grass); } .c-road { fill: var(--road); }
   .c-wood { fill: var(--wood); } .c-meat { fill: var(--meat); } .c-fire { fill: var(--fire); }
   .c-skin { fill: var(--skin); } .c-sky { fill: var(--sky-morning); } .c-cat { fill: var(--cat-blue); } .c-cat-o { fill: var(--cat-orange); }
+  .car-body { fill: var(--silver); stroke: var(--silver-dark); stroke-width: 1.5; }
+  .riders { opacity: var(--riders, 1); }
   .hoodie { fill: var(--hoodie); stroke: var(--hood-line); stroke-width: 1.5; } .hood { fill: var(--hood-line); }
   .string-w { fill: none; stroke: var(--cream); stroke-width: 1.4; stroke-linecap: round; }
   .c-glass { fill: var(--glass); } .c-slate { fill: var(--slate); } .c-leaf { fill: var(--grass); }
@@ -526,12 +529,14 @@
 <!-- 絵の部品（車・UFOの宿・木・猫・るる）。にゃんこ大戦争のキャラは使わず、すべてオリジナル -->
 <svg class="defs" aria-hidden="true">
   <symbol id="car" viewBox="0 0 120 56">
-    <path class="c-red" d="M6 40 Q6 30 16 28 L36 26 L48 12 Q51 8 58 8 L84 8 Q91 8 95 13 L106 27 Q116 29 116 39 L116 44 L6 44 Z"/>
+    <path class="car-body" d="M6 40 Q6 30 16 28 L36 26 L48 12 Q51 8 58 8 L84 8 Q91 8 95 13 L106 27 Q116 29 116 39 L116 44 L6 44 Z"/>
     <path class="c-sky" d="M50 14 Q52 12 56 12 L70 12 L70 26 L42 26 Z"/>
     <path class="c-sky" d="M74 12 L86 12 Q89 12 91 15 L100 26 L74 26 Z"/>
-    <path class="c-cat-o" d="M45 26 L45 20 Q45 16 49 16 Q53 16 53 20 L53 26 Z M46 18 L47 13 L49 16 Z M52 18 L51 13 L49 16 Z"/>
-    <circle class="c-skin" cx="62" cy="21" r="5"/>
-    <path class="c-ink" d="M57 20 Q57 14 62 14 Q68 14 67 20 Q64 17 57 20 Z"/>
+    <g class="riders">
+      <path class="c-cat-o" d="M45 26 L45 20 Q45 16 49 16 Q53 16 53 20 L53 26 Z M46 18 L47 13 L49 16 Z M52 18 L51 13 L49 16 Z"/>
+      <circle class="c-skin" cx="62" cy="21" r="5"/>
+      <path class="c-ink" d="M57 20 Q57 14 62 14 Q68 14 67 20 Q64 17 57 20 Z"/>
+    </g>
     <path class="c-cat" d="M80 26 L80 19 Q80 15 85 15 Q90 15 90 19 L90 26 Z M81 17 L82 12 L85 15 Z M89 17 L88 12 L85 15 Z"/>
     <rect class="c-gold" x="108" y="31" width="7" height="4" rx="2"/>
     <circle class="c-ink" cx="32" cy="44" r="9"/><circle class="c-silver" cx="32" cy="44" r="3.5"/>
@@ -640,20 +645,25 @@
       <rect class="c-road" y="216" width="1200" height="44"/>
       <use href="#car" x="912" y="180" width="96" height="45"/>
 
-      <!-- るると仲間4匹で、グータッチ -->
-      <path class="arm" style="stroke:var(--cat-black)" d="M494 196 L592 132"/>
-      <path class="arm" style="stroke:var(--cat-orange)" d="M546 194 L596 128"/>
-      <path class="arm" style="stroke:var(--hoodie)" d="M604 196 L602 126"/>
-      <path class="arm" style="stroke:var(--cat-blue)" d="M662 192 L608 128"/>
-      <path class="arm" style="stroke:var(--cat-gray)" d="M712 196 L612 132"/>
-      <path class="c-gold" d="M602 104 L606 116 L618 116 L608 123 L612 135 L602 128 L592 135 L596 123 L586 116 L598 116 Z"/>
-      <use href="#cat" class="cat-k" x="470" y="166" width="44" height="52"/>
-      <use href="#cat" class="cat-o" x="520" y="162" width="48" height="56"/>
-      <use href="#ruru" x="578" y="140" width="48" height="77"/>
-      <use href="#cat" class="cat-b" x="636" y="160" width="50" height="58"/>
-      <use href="#cat" class="cat-g" x="690" y="164" width="46" height="54"/>
+      <!-- グータッチは、ひとりひとりと順番に -->
+      <use href="#cat" class="cat-k" x="440" y="166" width="44" height="52"/>
+      <path class="arm" style="stroke:var(--cat-black)" d="M476 198 L486 174"/>
+      <circle class="c-ink" cx="487" cy="171" r="5"/>
+
+      <use href="#ruru" x="520" y="140" width="48" height="77"/>
+      <use href="#cat" class="cat-b" x="590" y="160" width="50" height="58"/>
+      <path class="arm" style="stroke:var(--hoodie)" d="M560 196 L576 178"/>
+      <path class="arm" style="stroke:var(--cat-blue)" d="M600 196 L584 178"/>
+      <circle class="c-skin" cx="577" cy="176" r="5"/><circle class="c-cat" cx="583" cy="176" r="5"/>
+      <path class="c-gold" d="M580 152 L583 160 L591 160 L585 165 L587 173 L580 168 L573 173 L575 165 L569 160 L577 160 Z"/>
+
+      <use href="#cat" class="cat-o" x="670" y="162" width="48" height="56"/>
+      <use href="#cat" class="cat-g" x="730" y="164" width="46" height="54"/>
+      <path class="arm" style="stroke:var(--cat-orange)" d="M708 198 L720 182"/>
+      <path class="arm" style="stroke:var(--cat-gray)" d="M740 198 L728 182"/>
+      <circle class="c-cat-o" cx="721" cy="180" r="5"/><circle class="c-silver-d" cx="727" cy="180" r="5"/>
+      <path class="c-gold" d="M724 158 L726.5 165 L734 165 L728 169.5 L730 177 L724 172.5 L718 177 L720 169.5 L714 165 L721.5 165 Z"/>
     </svg>
-    <figcaption><b>あさ</b>東京駅の八重洲口でみんなと待ち合わせ。グータッチをして、決起会の合宿へ出発</figcaption>
   </figure>
 
   <section id="latest" class="sky-day">
@@ -723,7 +733,6 @@
       <path class="string" d="M820 192 Q826 182 832 192"/>
       <use href="#cat" class="cat-k" x="838" y="176" width="40" height="48"/>
     </svg>
-    <figcaption><b>とちゅう</b>ファミマでトイレ休憩。ヤオコーで、夜までの食材を買い出し</figcaption>
   </figure>
 
   <figure class="scene scene-arrive">
@@ -1348,12 +1357,10 @@
 
       <!-- 青いリーダー猫は窓から手を出して、あおりながら去っていく -->
       <path class="speed" d="M640 196 H676 M630 208 H672 M646 220 H680"/>
-      <use href="#car" x="690" y="176" width="110" height="51"/>
+      <use href="#car" x="690" y="176" width="110" height="51" style="--riders: 0"/>
       <path class="arm" style="stroke:var(--cat-blue)" d="M774 192 L792 150"/>
       <circle class="c-cat" cx="793" cy="146" r="5"/>
-      <text class="q-ink" x="700" y="132">おさきに〜♪</text>
     </svg>
-    <figcaption><b>つぎのあさ</b>みんなで車で東京へ。東京駅丸の内の駅舎の前で、青いリーダー猫以外が降りて、はぐをしてお別れ。リーダーは窓から手を出して、あおりながら去っていった</figcaption>
   </figure>
 
   <section id="join" class="sky-day">
