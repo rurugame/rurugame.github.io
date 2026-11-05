@@ -117,7 +117,7 @@
     position: relative; overflow: hidden;
     background: linear-gradient(180deg, var(--sky-dawn) 0%, var(--sky-morning) 55%, var(--sky-noon) 100%);
   }
-  .sun {
+  .sun { z-index: 1;
     position: absolute; top: 76px; right: 10%; width: 88px; aspect-ratio: 1; border-radius: 50%;
     background: var(--cream);
     box-shadow: 0 0 0 14px rgba(255,244,230,.4), 0 0 80px 40px rgba(255,244,230,.55);
@@ -206,6 +206,7 @@
   .castle.enemy.fall { animation: fall 1.4s ease-in forwards; }
   @keyframes fall { 30% { translate: -4px 0; } 60% { translate: 4px 6px; } 100% { translate: 0 40px; rotate: -10deg; opacity: .15; } }
   .lane.quake { animation: quake .45s; }
+  .lane.paused .u .b, .lane.paused .car { animation-play-state: paused; }
   @keyframes quake { 20% { translate: -4px 2px; } 40% { translate: 4px -2px; } 60% { translate: -3px 1px; } 80% { translate: 2px 0; } }
   .hud {
     position: absolute; left: 50%; top: 4px; z-index: 2; transform: translateX(-50%);
@@ -283,8 +284,7 @@
   #archive { background: linear-gradient(var(--sky-afternoon), var(--sky-golden)); }
   #sub { background: linear-gradient(var(--sky-golden), var(--sky-sunset)); }
   #story { background: linear-gradient(var(--red), var(--dusk)); }
-  #schedule { background: linear-gradient(var(--dusk), var(--night)); --star: .55; }
-  #work { background: var(--night-deep); }
+  #quiz { background: linear-gradient(var(--dusk), var(--night)); --star: .55; }
 
   /* 星（夜のセクションだけ） */
   .stars { position: relative; isolation: isolate; }
@@ -447,14 +447,70 @@
   .vow h3 { margin: 0 0 8px; font-size: 20px; font-weight: 900; }
   .vow p { margin: 0; color: var(--dim); font-size: 15px; }
 
-  /* スケジュール */
-  .week { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid var(--line); }
-  .day { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); }
-  .day b { display: block; font-size: 22px; font-weight: 900; }
-  .day span { display: block; font-size: 14px; line-height: 1.5; }
-  .day .time { color: var(--gold); font-weight: 700; margin-top: 4px; }
-  .day.off span { color: var(--dim); }
-  .note { font-size: 13px; color: var(--dim); margin-top: 16px; }
+  /* にゃんこ検定 */
+  .quiz { max-width: 780px; }
+  .quiz-start { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .quiz-go {
+    padding: 14px 28px; border: 0; border-radius: 99px; background: var(--gold); color: var(--ink);
+    font: 900 16px/1.2 var(--font); cursor: pointer; text-decoration: none;
+  }
+  .quiz-go:hover { background: var(--cream); }
+  .quiz-go.sub { background: transparent; color: var(--cream); border: 1.5px solid currentColor; }
+  .quiz-go.sub:hover { background: var(--cream); color: var(--ink); }
+  .quiz-best { margin: 0; color: var(--dim); }
+  .quiz-top { display: flex; justify-content: space-between; gap: 12px; font: 700 14px/1.6 var(--font); color: var(--dim); font-variant-numeric: tabular-nums; }
+  .quiz-top .combo { color: var(--gold); }
+  .quiz-timer { height: 6px; margin: 10px 0 24px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .quiz-timer span { display: block; height: 100%; background: var(--gold); transform-origin: left; animation: timer 15s linear forwards; }
+  .quiz-timer.stop span { animation-play-state: paused; }
+  @keyframes timer { to { transform: scaleX(0); } }
+  .quiz-q { margin: 0 0 20px; font-size: clamp(20px, 2.6vw, 26px); font-weight: 900; line-height: 1.5; }
+  .quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px; text-align: left;
+    border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,244,230,.06);
+    color: var(--cream); font: 700 16px/1.4 var(--font); cursor: pointer;
+  }
+  .choice b { color: var(--gold); font-variant-numeric: tabular-nums; }
+  .choice:hover:not(:disabled) { background: rgba(255,244,230,.14); }
+  .choice:disabled { cursor: default; }
+  .choice.ok { background: var(--grass-deep); border-color: var(--grass); }
+  .choice.ng { background: var(--red-deep); border-color: var(--red); }
+  .quiz-feedback { min-height: 3.4em; margin: 18px 0 0; color: var(--dim); }
+  .quiz-feedback b { color: var(--cream); }
+  .quiz-feedback .gain { color: var(--gold); font-weight: 900; }
+  .quiz-result .rank { margin: 0; font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1.3; }
+  .quiz-result p { color: var(--dim); }
+  .quiz-result .score { color: var(--gold); font-weight: 900; font-variant-numeric: tabular-nums; }
+  .quiz-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+
+  /* 実績・トースト・場面の猫 */
+  .ach-btn {
+    position: fixed; right: 16px; bottom: 16px; z-index: 20; padding: 8px 14px;
+    border: 0; border-radius: 99px; background: var(--ink); color: var(--cream);
+    font: 700 13px/1.4 var(--font); cursor: pointer;
+  }
+  .ach-btn b { color: var(--gold); font-variant-numeric: tabular-nums; }
+  .ach-panel {
+    position: fixed; right: 16px; bottom: 60px; z-index: 20; width: min(340px, calc(100% - 32px)); max-height: 62vh; overflow: auto;
+    padding: 18px 20px; background: var(--cream); color: var(--ink); border-radius: var(--radius); box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  }
+  .ach-panel h2 { margin: 0 0 6px; font-size: 18px; }
+  .ach-panel ul { list-style: none; margin: 0; padding: 0; }
+  .ach-panel li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid rgba(59,13,9,.12); font-weight: 700; font-size: 14px; }
+  .ach-panel li small { display: block; font-weight: 500; font-size: 12px; color: var(--ink-dim); }
+  .ach-panel li .mark { color: var(--grass-deep); font-weight: 900; }
+  .ach-panel li.locked { opacity: .5; }
+  .toast {
+    position: fixed; left: 50%; top: 16px; z-index: 30; transform: translate(-50%, -90px);
+    padding: 10px 18px; border-radius: 99px; background: var(--ink); color: var(--cream);
+    font: 700 14px/1.4 var(--font); white-space: nowrap; pointer-events: none; transition: transform .35s;
+  }
+  .toast b { color: var(--gold); }
+  .toast.show { transform: translate(-50%, 0); }
+  .scene use[href="#cat"] { cursor: pointer; transform-box: fill-box; transform-origin: 50% 100%; }
+  .scene use.nyan { animation: nyan .45s ease-out; }
+  @keyframes nyan { 35% { transform: translateY(-14px) rotate(-6deg); } }
 
   /* 一問一答 */
   #qa { background: var(--night-deep); }
@@ -536,15 +592,6 @@
   .join-sub:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
   #join .small { font-size: 13px; margin-top: 24px; }
 
-  /* お仕事 */
-  .work { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-  .work ul { margin: 18px 0 0; padding-left: 1.2em; }
-  .contact { background: var(--cream); color: var(--ink); border-radius: var(--radius); padding: 32px; }
-  .contact dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; }
-  .contact dt { font-weight: 700; }
-  .contact dd { margin: 0; }
-  .contact p { margin: 20px 0 0; font-size: 14px; }
-
   /* サブチャンネル */
   .sub-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
   .sub-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
@@ -582,19 +629,20 @@
     .archive { grid-template-columns: 1fr 1fr; }
     .vows { grid-template-columns: 1fr; }
     .vow, .vow + .vow { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--line); }
-    .week { grid-template-columns: repeat(4, 1fr); }
+
     .head { flex-direction: column; align-items: start; }
   }
   @media (max-width: 560px) {
     .wrap { width: calc(100% - 32px); }
     section { padding: 72px 0; }
     .archive { grid-template-columns: 1fr; }
-    .week { grid-template-columns: 1fr 1fr; }
+    .quiz-choices { grid-template-columns: 1fr; }
     .side a { grid-template-columns: 120px 1fr; }
     .castle { transform: scale(.75); transform-origin: bottom; }
     .lane-ui { gap: 4px; padding: 0 8px; }
     .wallet { min-width: 0; font-size: 12px; }
     .ubtn { min-width: 0; flex: 1; padding: 0 4px; font-size: 12px; }
+    .ubtn .o { display: none; }
     .goal { min-width: 0; }
     .sun { top: 64px; right: 16px; width: 56px; }
     /* スマホでは文字を絵の上に分けて、絵と重ならないようにする */
@@ -675,9 +723,8 @@
       <a href="#guide">攻略ガイド</a>
       <a href="#sub">サブチャンネル</a>
       <a href="#story">るるゲームについて</a>
-      <a href="#schedule">配信予定</a>
       <a href="#start">はじめかた</a>
-      <a href="#work">お仕事の相談</a>
+      <a href="#quiz">にゃんこ検定</a>
     </nav>
   </div>
 
@@ -703,7 +750,7 @@
     <div class="castle enemy" aria-hidden="true"><span class="flag">敵の城</span><div class="hp"><span id="hp-enemy"></span></div><div class="roof"></div><div class="body"></div><div class="door"></div></div>
     <div class="beam" id="beam" aria-hidden="true"></div>
     <div class="castle mine" aria-hidden="true"><span class="flag">るるの城</span><div class="hp"><span id="hp-mine"></span></div><div class="roof"></div><div class="body"></div><div class="door"></div></div>
-    <div class="hud"><span id="stage">ステージ 1</span><span class="keys">1〜4で出撃 ／ Wでお財布 ／ Cでにゃんこ砲</span><button type="button" id="sound" aria-pressed="false">音：オフ</button></div>
+    <div class="hud"><span id="stage">ステージ 1</span><span class="keys">1〜4で出撃 ／ Wでお財布 ／ Cでにゃんこ砲 ／ Pで一時停止</span><button type="button" id="pause" aria-pressed="false">一時停止</button><button type="button" id="speed" aria-pressed="false">2倍速</button><button type="button" id="sound" aria-pressed="false">音：オフ</button></div>
     <div class="shout" id="shout" role="status">配信で会いましょう</div>
     <div class="ground" aria-hidden="true"></div>
     <div class="lane-ui" role="group" aria-label="ミニバトル：お金をためてユニットを出撃させ、敵の城を壊そう">
@@ -1124,24 +1171,20 @@
     </div>
   </section>
 
-  <section id="schedule" class="sky-night stars">
+  <section id="quiz" class="sky-night stars">
     <div class="wrap">
       <div class="head">
         <div>
-          <h2>今週の出撃予定</h2>
-          <p>配信はYouTubeで行います。</p>
+          <h2>にゃんこ検定</h2>
+          <p>にゃんこ大戦争の基本から、全10問。1問15秒で、早く答えるほど点が高く、続けて正解するとコンボで点が増えます。パソコンではキーボードの1〜4でも答えられます。</p>
         </div>
       </div>
-      <div class="week">
-        <div class="day"><b>月</b><span>ステージ攻略・縛り</span><span class="time">21:00〜</span></div>
-        <div class="day off"><b>火</b><span>おやすみ</span></div>
-        <div class="day"><b>水</b><span>雑談しながら攻略</span><span class="time">21:00〜</span></div>
-        <div class="day off"><b>木</b><span>企画動画の公開</span></div>
-        <div class="day"><b>金</b><span>他のゲーム・コラボ</span><span class="time">21:00〜</span></div>
-        <div class="day off"><b>土</b><span>ショートの公開</span></div>
-        <div class="day off"><b>日</b><span>おやすみ</span></div>
+      <div class="quiz" id="quiz-box" aria-live="polite">
+        <div class="quiz-start">
+          <button class="quiz-go" type="button" data-quiz="start">検定をはじめる</button>
+          <p class="quiz-best" id="quiz-best">まだ記録はありません</p>
+        </div>
       </div>
-      <p class="note">曜日と時間は仮です。決まりしだい更新します。</p>
 
       <div class="x-area" id="x">
         <div>
@@ -1320,27 +1363,6 @@
       </g>
     </svg>
   </figure>
-
-  <section id="work" class="sky-night stars">
-    <div class="wrap work">
-      <div>
-        <h2>お仕事の相談</h2>
-        <p>ゲームのプロモーション、コラボ配信、イベント出演などのご相談を受け付けています。</p>
-        <ul>
-          <li>スマホゲームの紹介動画・案件配信</li>
-          <li>配信者さんとのコラボ</li>
-          <li>イベントへの出演</li>
-        </ul>
-      </div>
-      <div class="contact">
-        <dl>
-          <dt>メール</dt><dd>準備中</dd>
-          <dt>X</dt><dd><a href="https://x.com/Uno_RuL" target="_blank" rel="noopener">@Uno_RuL</a>（DM）</dd>
-        </dl>
-        <p>内容、ご予算、希望の日程を添えてご連絡ください。</p>
-      </div>
-    </div>
-  </section>
 
   <figure class="scene scene-nabe">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -1648,10 +1670,12 @@
     if (!spawn('p', type)) return false;
     money -= s.cost; cool[type] = s.cd;
     sfx('deploy');
+    if (!demo) achieve('deploy');
     if (type === 'ruru') {
       buff = BUFF_SEC;
       msg('るる先生「攻略法を教えます！」', 2400);
       sfx('buff');
+      if (!demo) achieve('ruru');
     }
     return true;
   }
@@ -1680,7 +1704,7 @@
       money = Math.min(walletCap(), money + r);
       pop(u.x, 54 + u.s.h + 20, `+${r}円`, 'coin');
       sfx('coin');
-      if (u.type === 'boss') msg('ボスをたおした！', 1800);
+      if (u.type === 'boss') { msg('ボスをたおした！', 1800); if (!demo) achieve('boss'); }
     }
   }
 
@@ -1697,6 +1721,7 @@
       confetti();
       sfx('win');
       msg(`ステージ${stage} クリア！`, 3800);
+      if (!demo) achieve('win');
       stage++;
       if (!demo && stage > best) {
         best = stage;
@@ -1782,7 +1807,7 @@
       b.style.setProperty('--cd', (cool[t] / s.cd).toFixed(3));
       b.setAttribute('aria-disabled', money < s.cost || cool[t] > 0 || (t === 'ruru' && ruruOut()) ? 'true' : 'false');
     });
-    workerBtn.innerHTML = lv >= 5 ? 'お財布Lv5<small>最大</small>' : `お財布Lv${lv}<small>${workerCost()}円</small>`;
+    workerBtn.innerHTML = `<span class="o">お</span>財布Lv${lv}<small>${lv >= 5 ? '最大' : workerCost() + '円'}</small>`;
     workerBtn.setAttribute('aria-disabled', lv >= 5 || money < workerCost() ? 'true' : 'false');
     cannonState.textContent = charge >= 1 ? '発射できる' : `チャージ ${Math.floor(charge * 100)}%`;
     cannonBtn.classList.toggle('ready', charge >= 1);
@@ -1790,13 +1815,39 @@
     document.getElementById('hp-mine').style.width = (castle.p / castleMax.p * 100) + '%';
   }
 
-  let running = false, visible = true, last = 0;
+  // 一時停止（P）と2倍速。2倍速は1コマで2回すすめる（1回の進み幅を変えると当たり判定がずれるため）
+  let running = false, visible = true, last = 0, paused = false, speed = 1;
   function frame(t) {
     if (!running) return;
     const dt = Math.min(0.05, (t - (last || t)) / 1000);
     last = t;
-    step(dt); draw();
+    if (!paused) for (let i = 0; i < speed; i++) step(dt);
+    draw();
     requestAnimationFrame(frame);
+  }
+  const pauseBtn = document.getElementById('pause');
+  const speedBtn = document.getElementById('speed');
+  function togglePause() {
+    paused = !paused;
+    pauseBtn.textContent = paused ? '再開' : '一時停止';
+    pauseBtn.setAttribute('aria-pressed', paused);
+    lane.classList.toggle('paused', paused);
+    if (paused) msg('一時停止中', 600000); else shout.classList.remove('show');
+  }
+  pauseBtn.addEventListener('click', togglePause);
+  speedBtn.addEventListener('click', () => {
+    speed = speed === 1 ? 2 : 1;
+    speedBtn.textContent = speed === 2 ? '2倍速：オン' : '2倍速';
+    speedBtn.setAttribute('aria-pressed', speed === 2);
+  });
+
+  // ひみつのコマンドのごほうび：にゃんこ砲とお金が満タンになる
+  function grantBonus() {
+    charge = 1;
+    money = walletCap();
+    msg('ひみつのコマンド！ にゃんこ砲とお金が満タン', 2600);
+    sfx('buff');
+    draw();
   }
   const start = () => {
     if (running || !visible || document.hidden) return;
@@ -1828,6 +1879,7 @@
     replay(lane, 'quake');
     sfx('cannon');
     if (navigator.vibrate) navigator.vibrate(60);
+    if (!demo && bump('cannon') >= 5) achieve('cannon');
     units.filter(u => u.side === 'e' && !u.dead).forEach(u => { u.kbT = 0.35; damage(u, 60 * (1 + 0.1 * (stage - 1))); });
     msg('配信で会いましょう');
     return true;
@@ -1859,6 +1911,244 @@
     if (KEYS[k]) { play(); deploy(KEYS[k]); draw(); }
     else if (k === 'w') workerBtn.click();
     else if (k === 'c') cannonBtn.click();
+    else if (k === 'p') togglePause();
+  });
+
+  // ---------- サイト全体のゲーム要素：実績・にゃんこ検定・場面の猫・ひみつのコマンド ----------
+  const store = {
+    get(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch (e) { return fallback; } },
+    set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* 保存できなくても遊べる */ } },
+  };
+
+  // 実績：条件を満たすと解除され、画面の上に知らせが出る。ブラウザに保存する
+  const ACH = [
+    ['hello', 'はじめまして', 'るるゲームのサイトに来た'],
+    ['deploy', '出撃！', 'ミニバトルで、自分でユニットを出撃させた'],
+    ['win', '初勝利', 'ミニバトルで敵の城を壊した'],
+    ['boss', 'ボス討伐', 'ミニバトルでボスをたおした'],
+    ['ruru', '先生登場', 'ミニバトルで、るるを出撃させた'],
+    ['cannon', 'にゃんこ砲の名手', 'にゃんこ砲を5回撃った'],
+    ['scenes', '一日を見とどけた', 'ページの絵を全部見た'],
+    ['cats', '猫なで名人', '絵の中の猫を10回なでた'],
+    ['qa', '物知り', '一問一答を5問ひらいた'],
+    ['quiz7', '検定合格', 'にゃんこ検定で7問以上正解した'],
+    ['quiz10', '満点', 'にゃんこ検定で全問正解した'],
+    ['secret', 'ひみつのコマンド', 'かくされた操作を見つけた'],
+  ];
+  const got = new Set(store.get('rurugame-ach', []));
+  const counts = store.get('rurugame-count', {});
+  const bump = key => { counts[key] = (counts[key] || 0) + 1; store.set('rurugame-count', counts); return counts[key]; };
+
+  const achBtn = document.createElement('button');
+  achBtn.type = 'button';
+  achBtn.className = 'ach-btn';
+  achBtn.setAttribute('aria-expanded', 'false');
+  achBtn.setAttribute('aria-controls', 'ach-panel');
+  const achPanel = document.createElement('div');
+  achPanel.className = 'ach-panel';
+  achPanel.id = 'ach-panel';
+  achPanel.hidden = true;
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.setAttribute('role', 'status');
+  document.body.append(achBtn, achPanel, toast);
+
+  function renderAch() {
+    achBtn.innerHTML = `実績 <b>${got.size}</b> / ${ACH.length}`;
+    achPanel.innerHTML = `<h2>実績</h2><ul>${ACH.map(([id, name, how]) => {
+      const done = got.has(id), hide = id === 'secret' && !done;
+      return `<li class="${done ? '' : 'locked'}"><span class="mark">${done ? '✓' : ''}</span><span>${hide ? '？？？' : name}<small>${hide ? 'どこかに、かくされた操作がある' : how}</small></span></li>`;
+    }).join('')}</ul>`;
+  }
+  function achieve(id) {
+    if (got.has(id)) return;
+    got.add(id);
+    store.set('rurugame-ach', [...got]);
+    renderAch();
+    const a = ACH.find(x => x[0] === id);
+    toast.innerHTML = `実績解除！ <b>${a[1]}</b>`;
+    toast.classList.add('show');
+    clearTimeout(achieve.t);
+    achieve.t = setTimeout(() => toast.classList.remove('show'), 2600);
+    sfx('coin');
+  }
+  achBtn.addEventListener('click', () => {
+    achPanel.hidden = !achPanel.hidden;
+    achBtn.setAttribute('aria-expanded', !achPanel.hidden);
+  });
+  document.addEventListener('click', e => {
+    if (!achPanel.hidden && !achPanel.contains(e.target) && e.target !== achBtn && !achBtn.contains(e.target)) {
+      achPanel.hidden = true;
+      achBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  renderAch();
+  setTimeout(() => achieve('hello'), 1200);
+
+  // ページの絵を全部見たら解除
+  const scenes = [...document.querySelectorAll('.scene')], seen = new Set();
+  const sceneObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { seen.add(e.target); sceneObs.unobserve(e.target); } });
+    if (seen.size === scenes.length) achieve('scenes');
+  }, { threshold: 0.5 });
+  scenes.forEach(s => sceneObs.observe(s));
+
+  // 一問一答を5問ひらいたら解除
+  const opened = new Set();
+  document.querySelectorAll('#qa details').forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) opened.add(d);
+    if (opened.size >= 5) achieve('qa');
+  }));
+
+  // 絵の中の猫は、タップすると「にゃ」と鳴いてはねる
+  document.addEventListener('click', e => {
+    const cat = e.target.closest && e.target.closest('.scene use[href="#cat"]');
+    if (!cat) return;
+    replay(cat, 'nyan');
+    const fig = cat.closest('.scene'), r = fig.getBoundingClientRect();
+    const p = document.createElement('div');
+    p.className = 'pop';
+    p.setAttribute('aria-hidden', 'true');
+    p.textContent = ['にゃ', 'にゃーん', 'にゃっ', 'ごろごろ'][Math.floor(Math.random() * 4)];
+    p.style.left = (e.clientX - r.left) + 'px';
+    p.style.bottom = (r.bottom - e.clientY + 10) + 'px';
+    fig.appendChild(p);
+    setTimeout(() => p.remove(), 900);
+    if (bump('cats') >= 10) achieve('cats');
+  });
+
+  // ひみつのコマンド：太陽を5回タップするか、キーボードで r u r u と打つ
+  let sunTaps = [], typed = '';
+  const unlockSecret = () => { achieve('secret'); grantBonus(); };
+  document.querySelector('.sun').addEventListener('click', () => {
+    const now = Date.now();
+    sunTaps = sunTaps.filter(t => now - t < 3000).concat(now);
+    if (sunTaps.length >= 5) { sunTaps = []; unlockSecret(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+    typed = (typed + e.key.toLowerCase()).slice(-4);
+    if (typed === 'ruru') { typed = ''; unlockSecret(); }
+  });
+
+  // にゃんこ検定：問題は一問一答と同じく、確かな基本だけから出す
+  const QUIZ = [
+    ['敵の城を壊すと、どうなる？', ['勝ち', '負け', '引き分け', 'ステージが最初から'], 'にゃんこ大戦争は、敵の城を壊せば勝ちです。'],
+    ['先に自分の城を壊されると、どうなる？', ['負け', '勝ち', '敵の城も壊れる', 'お金が倍になる'], '自分の城を先に壊されると負けです。'],
+    ['バトル中に、時間がたつとたまっていくものは？', ['お金', 'ネコカン', '経験値', '統率力'], 'お金がたまったら、ネコを出撃させられます。'],
+    ['お金がたまる速さと、ためられる上限を上げるのは？', ['ワーカーキャット', 'にゃんこ砲', 'お宝', 'レアチケット'], 'ワーカーキャットのレベルを上げると、お金がたまる速さと上限が上がります。'],
+    ['城から撃てて、近くの敵をまとめて押し戻すのは？', ['にゃんこ砲', 'ワーカーキャット', '統率力', 'ガチャ'], 'たまったら撃てる、ピンチのときの切り札です。'],
+    ['編成に入れられるネコは、最大何体？', ['10体', '5体', '8体', '15体'], '1回のバトルに連れて行けるのは最大10体です。'],
+    ['安くて何度も出せるネコで、敵の足止めをする役は？', ['壁', '城', '砲', '盾'], '壁が時間をかせいでいる間に、後ろから強いネコが攻撃します。'],
+    ['攻撃が届く距離のことを、何という？', ['射程', '速度', '体力', '再生産'], '敵より射程が長いと、先に攻撃できます。'],
+    ['体力が減って、後ろに押し戻されることを何という？', ['ノックバック', 'ワープ', 'ふっとばし', 'クリティカル'], '押し戻されている間は攻撃できません。'],
+    ['ステージに挑戦するときに使うポイントは？', ['統率力', 'ネコカン', 'お金', 'XP'], '使っても、時間がたつと回復します。'],
+    ['ガチャを引くときなどに使う、ゲームの中のお金は？', ['ネコカン', '統率力', 'お宝', 'マタタビ'], '課金で買えるほか、ログインボーナスやイベントでももらえます。'],
+    ['ネコのレベル上げやパワーアップに使う「XP」とは？', ['経験値', 'お金', '統率力', 'ネコカン'], 'XPは経験値のことです。'],
+    ['レベルを上げて、ネコの姿が変わって強くなることを何という？', ['進化', '覚醒', '合体', '変身'], '多くのネコは、レベル10で第2形態に進化できます。'],
+    ['多くのネコが第2形態に進化できるのは、レベルいくつ？', ['10', '5', '20', '30'], 'レベル10が、最初の進化の目安です。'],
+    ['ストーリーで、最初に遊ぶのは？', ['日本編', '未来編', '宇宙編', 'レジェンド編'], '日本編から始まり、未来編、宇宙編と続きます。'],
+    ['日本編の次に続くのは？', ['未来編', '宇宙編', '世界編', '古代編'], '日本編、未来編、宇宙編の順です。'],
+    ['赤い敵・浮いてる敵・黒い敵などの「敵の種類」を何という？', ['属性', '射程', '形態', 'ランク'], '属性に強いネコをぶつけると戦いやすくなります。'],
+    ['この中で、いちばん出にくいレア度は？', ['伝説レア', '超激レア', '激レア', 'レア'], 'レア、激レア、超激レア、伝説レアの順に出にくくなります。'],
+    ['アイテムや経験値のために、同じステージを何度も遊ぶことを何という？', ['周回', '初見', '縛り', '編成'], '配信でもよく出てくる言葉です。'],
+    ['配信のコメントの「初見です」の意味は？', ['はじめて見に来た', 'もう帰る', '何回も来ている', 'ゲームが初めて'], 'はじめて来たことを伝えるあいさつです。'],
+    ['にゃんこ大戦争を作っている会社は？', ['ポノス', 'るるゲーム', 'ネコカン社', 'にゃんこ商事'], '「にゃんこ大戦争」は株式会社ポノスのゲームです。'],
+    ['にゃんこ大戦争の基本プレイは？', ['無料', '月額制', '買い切り', '1日1回まで'], '基本プレイは無料です。'],
+    ['るるゲームが目指している、チャンネル登録者数は？', ['10万人', '1万人', '100万人', '5000人'], 'るるゲームは、登録者10万人を本気で目指しています。'],
+  ];
+  const RANKS = [[10, 'るる先生レベル'], [9, '師範'], [7, '上級者'], [4, '一人前'], [0, '見習いネコ']];
+  const quizBox = document.getElementById('quiz-box');
+  const quizSec = document.getElementById('quiz');
+  let qz = null, quizVisible = false, quizBest = store.get('rurugame-quiz', null);
+  new IntersectionObserver(([e]) => { quizVisible = e.isIntersecting; }).observe(quizSec);
+  const bestText = () => quizBest ? `最高記録：${quizBest.score}点（${quizBest.correct}/10問）` : 'まだ記録はありません';
+  document.getElementById('quiz-best').textContent = bestText();
+  const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  function startQuiz() {
+    qz = { list: shuffle(QUIZ).slice(0, 10), i: 0, score: 0, correct: 0, combo: 0 };
+    ask();
+  }
+  function ask() {
+    const [q, answers, why] = qz.list[qz.i];
+    qz.choices = shuffle(answers);
+    qz.answer = answers[0];
+    qz.why = why;
+    qz.locked = false;
+    qz.started = performance.now();
+    quizBox.innerHTML = `
+      <div class="quiz-top"><span>第${qz.i + 1}問 / 10</span><span class="combo">${qz.combo > 1 ? `${qz.combo}コンボ` : ''}</span><span>スコア ${qz.score}</span></div>
+      <div class="quiz-timer"><span></span></div>
+      <p class="quiz-q">${esc(q)}</p>
+      <div class="quiz-choices">${qz.choices.map((c, n) => `<button class="choice" type="button" data-choice="${n}"><b>${n + 1}</b>${esc(c)}</button>`).join('')}</div>
+      <p class="quiz-feedback"></p>`;
+    clearTimeout(qz.timer);
+    qz.timer = setTimeout(() => answer(-1), 15000);
+  }
+  function answer(n) {
+    if (!qz || qz.locked) return;
+    qz.locked = true;
+    clearTimeout(qz.timer);
+    quizBox.querySelector('.quiz-timer').classList.add('stop');
+    const btns = [...quizBox.querySelectorAll('.choice')];
+    btns.forEach(b => { b.disabled = true; if (qz.choices[b.dataset.choice] === qz.answer) b.classList.add('ok'); });
+    const right = n >= 0 && qz.choices[n] === qz.answer;
+    const fb = quizBox.querySelector('.quiz-feedback');
+    if (right) {
+      qz.combo++;
+      qz.correct++;
+      const left = Math.max(0, 15 - (performance.now() - qz.started) / 1000);
+      const gain = Math.round((100 + left * 10) * Math.min(2, 1 + 0.1 * (qz.combo - 1)));
+      qz.score += gain;
+      fb.innerHTML = `<b>正解！</b> <span class="gain">+${gain}点</span>${qz.combo > 1 ? `（${qz.combo}コンボ）` : ''}<br>${esc(qz.why)}`;
+      sfx('coin');
+    } else {
+      qz.combo = 0;
+      if (n >= 0) btns[n].classList.add('ng');
+      fb.innerHTML = `<b>${n < 0 ? '時間切れ' : 'ざんねん'}</b>　答えは「${esc(qz.answer)}」<br>${esc(qz.why)}`;
+      sfx('hit');
+    }
+    fb.insertAdjacentHTML('beforeend', `<br><button class="quiz-go" type="button" data-quiz="next" style="margin-top:14px">${qz.i < 9 ? '次の問題へ' : '結果を見る'}</button>`);
+    fb.querySelector('[data-quiz="next"]').focus({ preventScroll: true });
+  }
+  function next() {
+    if (!qz || !qz.locked) return;
+    if (++qz.i < 10) { ask(); return; }
+    finish();
+  }
+  function finish() {
+    const rank = RANKS.find(([n]) => qz.correct >= n)[1];
+    const isBest = !quizBest || qz.score > quizBest.score;
+    if (isBest) { quizBest = { score: qz.score, correct: qz.correct }; store.set('rurugame-quiz', quizBest); }
+    if (qz.correct >= 7) achieve('quiz7');
+    if (qz.correct === 10) achieve('quiz10');
+    const text = `にゃんこ検定で${qz.correct}/10問正解、${qz.score}点！ 称号は「${rank}」でした。`;
+    const share = `https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://rurugame.github.io/')}`;
+    quizBox.innerHTML = `
+      <div class="quiz-result">
+        <p>${qz.correct}/10問正解　<span class="score">${qz.score}点</span>${isBest ? '　最高記録！' : ''}</p>
+        <p class="rank">${rank}</p>
+        <p>${qz.correct === 10 ? '全問正解。配信のコメント欄で、初心者さんに教えてあげてください。' : 'わからなかったところは、一問一答や配信で聞いてみてください。'}</p>
+        <div class="quiz-actions">
+          <button class="quiz-go" type="button" data-quiz="start">もう一度</button>
+          <a class="quiz-go sub" href="${share}" target="_blank" rel="noopener">結果をXでシェア</a>
+        </div>
+        <p class="quiz-best">${bestText()}</p>
+      </div>`;
+    sfx(qz.correct >= 7 ? 'win' : 'lose');
+    qz = null;
+  }
+  quizBox.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.quiz === 'start') startQuiz();
+    else if (b.dataset.quiz === 'next') next();
+    else if (b.dataset.choice) answer(+b.dataset.choice);
+  });
+  document.addEventListener('keydown', e => {
+    if (!qz || !quizVisible || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (!qz.locked && /^[1-4]$/.test(e.key)) { e.preventDefault(); answer(+e.key - 1); }
   });
 
   // 動画一覧（GitHub Actions が1時間ごとに更新する data/videos.json）
