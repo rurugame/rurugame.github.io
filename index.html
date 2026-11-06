@@ -283,8 +283,8 @@
   #shorts { background: linear-gradient(var(--sky-pale), var(--sky-afternoon)); }
   #archive { background: linear-gradient(var(--sky-afternoon), var(--sky-golden)); }
   #sub { background: linear-gradient(var(--sky-golden), var(--sky-sunset)); }
-  #story { background: linear-gradient(var(--red), var(--dusk)); }
-  #quiz { background: linear-gradient(var(--dusk), var(--night)); --star: .55; }
+
+  #quiz { background: linear-gradient(var(--red), var(--dusk) 40%, var(--night)); --star: .55; }
 
   /* 星（夜のセクションだけ） */
   .stars { position: relative; isolation: isolate; }
@@ -436,9 +436,43 @@
   .flame + .flame { animation-duration: .7s; animation-delay: -.3s; }
   @keyframes flicker { from { transform: scale(1, .88); } to { transform: scale(.94, 1.06); } }
 
-  /* ストーリー */
-  .story { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; align-items: start; }
-  .story h2 { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.35; }
+  /* るるってどんな人？（wikiのように、プロフィール欄と目次つき） */
+  #about { background: linear-gradient(var(--cream), var(--sky-dawn)); }
+  .about { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+  .infobox { position: sticky; top: 24px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.5); }
+  .infobox-name { margin: 0; font-size: 30px; font-weight: 900; line-height: 1.3; }
+  .infobox-sub { margin: 0 0 14px; font-size: 14px; color: var(--dim); }
+  .infobox dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0 14px; font-size: 14px; line-height: 1.6; }
+  .infobox dt, .infobox dd { margin: 0; padding: 9px 0; border-top: 1px solid var(--line); }
+  .infobox dt { font-weight: 700; color: var(--dim); white-space: nowrap; }
+  .infobox dd a { font-weight: 700; }
+  .about-head { grid-column: 1 / -1; max-width: 760px; }
+  .about-head h2 { font-size: clamp(30px, 4vw, 44px); }
+  .about-lead { margin: 14px 0 0; font-size: 17px; color: var(--dim); }
+  .toc { margin: 0; padding: 16px 20px; border-left: 3px solid var(--gold); background: rgba(255,255,255,.45); }
+  .toc b { display: block; font-size: 14px; }
+  .toc ol { margin: 6px 0 0; padding-left: 1.4em; columns: 2; font-size: 15px; }
+  .toc a { font-weight: 700; }
+  .about-main h3 { margin: 56px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 24px; font-weight: 900; scroll-margin-top: 16px; }
+  .quote { margin: 0 0 16px; font-size: clamp(20px, 2.4vw, 26px); font-weight: 900; line-height: 1.5; }
+  .about-list { margin: 0; padding-left: 1.2em; }
+  .about-list li { margin: 6px 0; }
+  .about-note { margin: 12px 0 18px; color: var(--dim); }
+  .about-note a { font-weight: 700; color: var(--ink); }
+  .history { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+  .history li { position: relative; padding: 0 0 18px 22px; }
+  .history li::before { content: ""; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+  .history li.milestone::before { background: var(--red); }
+  .history .y { display: block; font-size: 13px; font-weight: 700; color: var(--dim); }
+  .history a { font-weight: 700; text-decoration: none; }
+  .history a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .history small { display: block; font-size: 13px; color: var(--red); font-weight: 700; }
+  .thinks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .thinks a { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 700; text-decoration: none; }
+  .thinks a::before { content: "▶"; flex-shrink: 0; font-size: 11px; line-height: 2.2; color: var(--red); }
+  .thinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  #about .vows { margin-top: 0; }
+  .vow h4 { margin: 0 0 8px; font-size: 20px; font-weight: 900; }
   .story-body p { margin: 0 0 1.4em; font-size: 17px; line-height: 2; }
   .story-body .sign { font-weight: 700; color: var(--dim); margin: 0; }
   .vows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 72px; border-top: 1px solid var(--line); }
@@ -621,7 +655,9 @@
     .hero-copy { grid-template-columns: 1fr; }
     .slots { grid-template-columns: 1fr 1fr; }
     .slot.cannon { grid-column: span 2; }
-    .latest, .story, .work, .sub-grid, .x-area, .steps { grid-template-columns: 1fr; gap: 40px; }
+    .latest, .sub-grid, .x-area, .steps, .about { grid-template-columns: 1fr; gap: 40px; }
+    .infobox { position: static; }
+    .toc ol, .thinks { columns: 1; grid-template-columns: 1fr; }
     .ready ul { grid-template-columns: 1fr; gap: 16px; }
     .rows { grid-template-columns: 1fr; }
     .trouble dl, .words dl { grid-template-columns: 1fr; }
@@ -719,10 +755,10 @@
   <div class="wrap bar">
     <a class="logo" href="#">るるゲーム</a>
     <nav aria-label="ページ内リンク">
+      <a href="#about">るるについて</a>
       <a href="#latest">最新動画</a>
       <a href="#guide">攻略ガイド</a>
       <a href="#sub">サブチャンネル</a>
-      <a href="#story">るるゲームについて</a>
       <a href="#start">はじめかた</a>
       <a href="#quiz">にゃんこ検定</a>
     </nav>
@@ -731,7 +767,7 @@
   <div class="wrap hero-copy">
     <div>
       <h1 class="title">るるゲーム</h1>
-      <p class="lead">にゃんこ大戦争の攻略を、生配信でいっしょに考えるチャンネル。詰まっているステージがあれば、配信に持ってきてください。</p>
+      <p class="lead">にゃんこ大戦争の「先生」、るるの公式サイト。攻略を生配信でいっしょに考えています。詰まっているステージがあれば、配信に持ってきてください。</p>
     </div>
     <div class="goal" aria-label="登録者10万人への進み具合">
       <div class="goal-label"><span>るるの城の体力</span><span>目標 10万人</span></div>
@@ -775,6 +811,87 @@
 </div>
 
 <main>
+  <section id="about" class="sky-day">
+    <div class="wrap about">
+      <div class="about-head">
+        <h2>るるってどんな人？</h2>
+        <p class="about-lead">にゃんこ大戦争の攻略を、YouTubeの生配信でいっしょに考えている「るる」です。どんな思いでにゃんこを始めて、どんな配信をしているのかを、ここにまとめています。</p>
+      </div>
+      <aside class="infobox" aria-label="るるのプロフィール">
+        <p class="infobox-name">るる</p>
+        <p class="infobox-sub">にゃんこ大戦争の「先生」</p>
+        <dl>
+          <dt>メインのゲーム</dt><dd>にゃんこ大戦争</dd>
+          <dt>活動</dt><dd>YouTubeでの生配信と動画</dd>
+          <dt>スタイル</dt><dd>生配信で、攻略法やアドバイスを教える</dd>
+          <dt>チャンネル</dt><dd><a href="https://www.youtube.com/@RuLgames" target="_blank" rel="noopener">るるゲーム</a><br><a href="https://www.youtube.com/channel/UCeI7tXU8GgywzL10AEMPzYQ" target="_blank" rel="noopener">るるゲームアルファ</a>（サブ）</dd>
+          <dt>X</dt><dd><a href="https://x.com/Uno_RuL" target="_blank" rel="noopener">@Uno_RuL</a></dd>
+          <dt>登録者</dt><dd>約2.51万人（2026年11月）</dd>
+          <dt>目標</dt><dd>10万人</dd>
+        </dl>
+      </aside>
+
+      <div class="about-main">
+        <nav class="toc" aria-label="るるについての目次">
+          <b>目次</b>
+          <ol>
+            <li><a href="#about-start">はじまり</a></li>
+            <li><a href="#about-vows">3つの約束</a></li>
+            <li><a href="#about-live">配信はこんな感じ</a></li>
+            <li><a href="#about-history">あゆみ</a></li>
+            <li><a href="#about-think">るるの考えがわかるショート</a></li>
+          </ol>
+        </nav>
+
+        <h3 id="about-start">はじまり</h3>
+        <p class="quote">ゲームをほとんどしなかった僕が、にゃんこの先生になるまで。</p>
+        <div class="story-body">
+          <p>にゃんこ大戦争を始めたきっかけは、富士急ハイランドに一緒に行った当時の彼女に勧められたことでした。それまでゲームはほとんどやらなかったのに、気づけば毎日ステージのことを考えるくらい好きになっていました。</p>
+          <p>ここまで楽しませてくれたにゃんこ大戦争に、恩返しがしたい。だから生配信では、来てくれた人に攻略法やアドバイスを伝える先生として、一緒にステージを突破しています。うまくいかなかったステージを、コメント欄のみんなと乗り越える瞬間が、この活動で一番うれしい時間です。</p>
+          <p>目標はチャンネル登録者10万人。本気で目指しています。</p>
+          <p class="sign">るる</p>
+        </div>
+
+        <h3 id="about-vows">3つの約束</h3>
+        <div class="vows">
+          <div class="vow">
+            <h4>教える</h4>
+            <p>詰まったステージは、編成と立ち回りまで一緒に考えます。課金していなくても突破できる方法を探します。</p>
+          </div>
+          <div class="vow">
+            <h4>恩返しする</h4>
+            <p>にゃんこ大戦争の楽しさを、まだ知らない人にも届けます。昔の自分のような初心者も歓迎です。</p>
+          </div>
+          <div class="vow">
+            <h4>本気でやる</h4>
+            <p>登録者10万人を目指して、毎週出撃し続けます。</p>
+          </div>
+        </div>
+
+        <h3 id="about-live">配信はこんな感じ</h3>
+        <ul class="about-list">
+          <li>視聴者さんが詰まっているステージを、編成と立ち回りまでいっしょに考えます</li>
+          <li>課金していなくても突破できる方法を探します</li>
+          <li>雑談しながらの攻略や、ほかの配信者さんとのコラボ企画もあります</li>
+          <li>「初見です」のひとことも、初心者の質問も大歓迎です</li>
+        </ul>
+        <p class="about-note">はじめての人向けに、<a href="#start">にゃんこ大戦争のはじめかた</a>と<a href="#watch">配信の見かた</a>も用意しています。</p>
+
+        <h3 id="about-history">あゆみ</h3>
+        <p class="about-note">これまでの配信と動画から、コラボ企画や節目を並べています。新しい企画をやると、ここにも自動で入ります。</p>
+        <ol class="history" id="history-box">
+          <li>あゆみは<a href="https://www.youtube.com/@RuLgames/streams" target="_blank" rel="noopener">YouTubeの配信一覧</a>から見られます。</li>
+        </ol>
+
+        <h3 id="about-think">るるの考えがわかるショート</h3>
+        <p class="about-note">キャラの評価や育て方について、るるの考え方が出ているショートです。</p>
+        <ul class="thinks" id="think-box">
+          <li><a href="https://www.youtube.com/@RuLgames/shorts" target="_blank" rel="noopener">ショートの一覧を見る</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <figure class="scene scene-yaesu">
     <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <!-- 八重洲側の高いビルと、白い大屋根。オリジナルの絵 -->
@@ -815,7 +932,7 @@
       <div class="head">
         <div>
           <h2>最新の動画</h2>
-          <p>新しい動画を公開すると、ここも自動で入れ替わります。</p>
+          <p>ここからは、るるがやっているYouTubeチャンネル「るるゲーム」の動画です。新しい動画を公開すると、ここも自動で入れ替わります。</p>
         </div>
         <a class="more" href="https://www.youtube.com/@RuLgames/videos" target="_blank" rel="noopener">すべての動画</a>
       </div>
@@ -1142,34 +1259,6 @@
       </g>
     </svg>
   </figure>
-
-  <section id="story" class="sky-night">
-    <div class="wrap">
-      <div class="story">
-        <h2>ゲームをほとんどしなかった僕が、にゃんこの先生になるまで。</h2>
-        <div class="story-body">
-          <p>にゃんこ大戦争を始めたきっかけは、富士急ハイランドに一緒に行った当時の彼女に勧められたことでした。それまでゲームはほとんどやらなかったのに、気づけば毎日ステージのことを考えるくらい好きになっていました。</p>
-          <p>ここまで楽しませてくれたにゃんこ大戦争に、恩返しがしたい。だから生配信では、来てくれた人に攻略法やアドバイスを伝える先生として、一緒にステージを突破しています。うまくいかなかったステージを、コメント欄のみんなと乗り越える瞬間が、この活動で一番うれしい時間です。</p>
-          <p>目標はチャンネル登録者10万人。本気で目指しています。</p>
-          <p class="sign">るる</p>
-        </div>
-      </div>
-      <div class="vows">
-        <div class="vow">
-          <h3>教える</h3>
-          <p>詰まったステージは、編成と立ち回りまで一緒に考えます。課金していなくても突破できる方法を探します。</p>
-        </div>
-        <div class="vow">
-          <h3>恩返しする</h3>
-          <p>にゃんこ大戦争の楽しさを、まだ知らない人にも届けます。昔の自分のような初心者も歓迎です。</p>
-        </div>
-        <div class="vow">
-          <h3>本気でやる</h3>
-          <p>登録者10万人を目指して、毎週出撃し続けます。</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section id="quiz" class="sky-night stars">
     <div class="wrap">
@@ -1878,7 +1967,7 @@
     beam.classList.remove('fire'); void beam.offsetWidth; beam.classList.add('fire');
     replay(lane, 'quake');
     sfx('cannon');
-    if (navigator.vibrate) navigator.vibrate(60);
+    if (!demo && navigator.vibrate) navigator.vibrate(60);
     if (!demo && bump('cannon') >= 5) achieve('cannon');
     units.filter(u => u.side === 'e' && !u.dead).forEach(u => { u.kbT = 0.35; damage(u, 60 * (1 + 0.1 * (stage - 1))); });
     msg('配信で会いましょう');
@@ -2217,6 +2306,7 @@
     }
 
     renderGuide(longs);
+    renderAbout(videos);
 
     if (shorts.length) {
       document.getElementById('shorts-box').innerHTML = shorts.slice(0, 10).map(v => `
@@ -2270,6 +2360,27 @@
         <div class="rows">${chars.map(row).join('')}</div>
       </div>`);
     if (blocks.length) document.getElementById('guide-box').innerHTML = blocks.join('');
+  }
+
+  // るるってどんな人？：「あゆみ」と「考えがわかるショート」を、動画のタイトルと日付から作る
+  const MILESTONE = /コラボ|企画|達成|大運動会|別塔|選抜祭|完走|さんと/;
+  const THINK = /理由|考え|べきか|勧める|なら？|ダメなとき/;
+  function renderAbout(videos) {
+    const byDate = (a, b) => new Date(a.published) - new Date(b.published);
+    const longs = videos.filter(v => !v.short).sort(byDate);
+    const firstSeries = longs.find(v => /最強の四天王/.test(v.title));
+    const history = longs.filter(v => MILESTONE.test(v.title) || v === firstSeries);
+    if (history.length) document.getElementById('history-box').innerHTML = history.map(v => {
+      const d = new Date(v.published);
+      return `<li class="${/達成/.test(v.title) ? 'milestone' : ''}">
+        <span class="y">${d.getFullYear()}年${d.getMonth() + 1}月</span>
+        <a href="${page(v)}">${esc(bare(v.title))}</a>
+        ${v === firstSeries ? '<small>シリーズ「最強の四天王」がスタート</small>' : ''}
+      </li>`;
+    }).join('');
+    const thinks = videos.filter(v => v.short && THINK.test(v.title)).slice(0, 8);
+    if (thinks.length) document.getElementById('think-box').innerHTML = thinks.map(v =>
+      `<li><a href="${watch(v)}" target="_blank" rel="noopener">${esc(v.title)}</a></li>`).join('');
   }
 
   function renderSub(list) {
