@@ -1,12 +1,22 @@
 {
  "videos": [
   {
+   "id": "JDhORITg4Zw",
+   "title": "ナーラや限定無しでいけるのか？",
+   "published": "2026-11-12T02:26:44+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1107,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "cvYRXrIddyQ",
    "title": "アイスって強いよな",
    "published": "2026-11-11T22:00:15+00:00",
    "short": true,
    "kind": "short",
-   "views": 2720,
+   "views": 3500,
    "excerpt": "",
    "description": ""
   },
@@ -16,7 +26,7 @@
    "published": "2026-11-11T08:00:12+00:00",
    "short": true,
    "kind": "short",
-   "views": 18238,
+   "views": 18871,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +36,7 @@
    "published": "2026-11-10T22:49:34+00:00",
    "short": true,
    "kind": "short",
-   "views": 14438,
+   "views": 14637,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +46,7 @@
    "published": "2026-11-10T03:34:17+00:00",
    "short": true,
    "kind": "short",
-   "views": 38241,
+   "views": 38454,
    "excerpt": "",
    "description": ""
   },
@@ -46,7 +56,7 @@
    "published": "2026-11-10T03:06:09+00:00",
    "short": true,
    "kind": "short",
-   "views": 31946,
+   "views": 32396,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +76,7 @@
    "published": "2026-11-08T22:30:05+00:00",
    "short": true,
    "kind": "short",
-   "views": 7368,
+   "views": 7452,
    "excerpt": "",
    "description": ""
   },
@@ -76,7 +86,7 @@
    "published": "2026-11-08T10:30:12+00:00",
    "short": true,
    "kind": "short",
-   "views": 11724,
+   "views": 11735,
    "excerpt": "",
    "description": ""
   },
@@ -86,7 +96,7 @@
    "published": "2026-11-07T22:30:28+00:00",
    "short": true,
    "kind": "short",
-   "views": 10428,
+   "views": 10470,
    "excerpt": "",
    "description": ""
   },
@@ -96,7 +106,7 @@
    "published": "2026-11-06T22:30:15+00:00",
    "short": true,
    "kind": "short",
-   "views": 14927,
+   "views": 14955,
    "excerpt": "",
    "description": ""
   },
@@ -106,7 +116,7 @@
    "published": "2026-11-06T22:30:05+00:00",
    "short": true,
    "kind": "short",
-   "views": 13471,
+   "views": 13521,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +136,7 @@
    "published": "2026-11-06T07:00:28+00:00",
    "short": true,
    "kind": "short",
-   "views": 14316,
+   "views": 14325,
    "excerpt": "",
    "description": ""
   },
@@ -156,7 +166,7 @@
    "published": "2026-11-05T13:12:20+00:00",
    "short": true,
    "kind": "short",
-   "views": 13483,
+   "views": 13495,
    "excerpt": "",
    "description": ""
   },
