@@ -52,11 +52,12 @@ def main():
     try:
         label, views = read_counts(fetch())
     except Exception as e:  # 通信エラーなど。動画の更新は止めない
-        print(f"登録者数を取得できませんでした: {e}")
+        # 「::warning::」で始まる行は、GitHub Actions の実行ページ上部に注意書きとして出る（ログインなしで見られる）
+        print(f"::warning title=登録者数::取得できませんでした: {e}")
         return
     subs = to_number(label) if label else None
     if not subs:
-        print("ページの中に登録者数が見つかりませんでした")
+        print("::warning title=登録者数::ページの中に登録者数が見つかりませんでした")
         return
 
     data = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {"history": []}
@@ -70,7 +71,7 @@ def main():
     else:
         history.append(entry)
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"{today} 登録者 {label}（{subs}）")
+    print(f"::notice title=登録者数::{today} {label}（{subs}人）を記録しました")
 
 
 if __name__ == "__main__":
