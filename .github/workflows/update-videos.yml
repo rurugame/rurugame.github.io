@@ -10,6 +10,7 @@ on:
       - ".github/workflows/update-videos.yml"
       - "scripts/fetch_videos.py"
       - "scripts/build_pages.py"
+      - "scripts/fetch_subs.py"
 
 permissions:
   contents: write
@@ -27,11 +28,13 @@ jobs:
         run: python3 scripts/fetch_videos.py
       - name: 攻略ページとサイトマップを作る
         run: python3 scripts/build_pages.py
+      - name: 登録者数を記録
+        run: python3 scripts/fetch_subs.py
       - name: 変更があればコミット
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/videos.json videos sitemap.xml
+          git add data/videos.json data/subs.json videos sitemap.xml
           if git diff --cached --quiet; then
             echo "変更なし"
           else

@@ -137,7 +137,7 @@
   .goal-num { font-weight: 900; font-size: 30px; line-height: 1.3; font-variant-numeric: tabular-nums; }
   .goal-num small { font-size: 15px; font-weight: 700; color: var(--dim); }
   .meter { height: 10px; background: var(--red-night); border-radius: 99px; overflow: hidden; margin-top: 8px; }
-  .meter span { display: block; height: 100%; width: 25.1%; background: var(--gold); border-radius: 99px; }
+  .meter span { display: block; height: 100%; width: 26.2%; background: var(--gold); border-radius: 99px; }
 
   /* 戦場のレーン（昼の草原。奥の丘の道を、るるを乗せた車が走る） */
   .lane { position: relative; height: 184px; margin-top: 28px; overflow: hidden; }
@@ -471,6 +471,26 @@
   .thinks a { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 700; text-decoration: none; }
   .thinks a::before { content: "▶"; flex-shrink: 0; font-size: 11px; line-height: 2.2; color: var(--red); }
   .thinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* 登録者のうつりかわり（線グラフ。点に重ねると数字が出る。表でも見られる） */
+  .subs-chart { position: relative; }
+  .subs-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .subs-chart .grid { stroke: var(--line); stroke-width: 1; }
+  .subs-chart .axis { fill: var(--dim); font: 500 12px var(--font); }
+  .subs-chart .line { fill: none; stroke: var(--red); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .subs-chart .dot { fill: var(--red); stroke: var(--cream); stroke-width: 2; }
+  .subs-chart .hit { fill: transparent; cursor: pointer; }
+  .subs-chart .now { fill: var(--ink); font: 900 14px var(--font); }
+  .subs-tip {
+    position: absolute; z-index: 2; transform: translate(-50%, calc(-100% - 12px)); pointer-events: none;
+    padding: 6px 10px; border-radius: var(--radius); background: var(--ink); color: var(--cream);
+    font: 700 13px/1.4 var(--font); white-space: nowrap;
+  }
+  .subs-tip small { display: block; font-weight: 500; color: var(--cream-dim); }
+  .subs-table { margin-top: 12px; font-size: 14px; }
+  .subs-table summary { cursor: pointer; font-weight: 700; color: var(--dim); }
+  .subs-table table { margin-top: 8px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .subs-table th, .subs-table td { padding: 6px 24px 6px 0; border-bottom: 1px solid var(--line); text-align: left; }
   #about .vows { margin-top: 0; }
   .vow h4 { margin: 0 0 8px; font-size: 20px; font-weight: 900; }
   .story-body p { margin: 0 0 1.4em; font-size: 17px; line-height: 2; }
@@ -771,8 +791,8 @@
     </div>
     <div class="goal" aria-label="登録者10万人への進み具合">
       <div class="goal-label"><span>るるの城の体力</span><span>目標 10万人</span></div>
-      <div class="goal-num">約2.51万<small> 人</small></div>
-      <div class="meter"><span></span></div>
+      <div class="goal-num" id="goal-num">約2.62万<small> 人</small></div>
+      <div class="meter"><span id="goal-meter"></span></div>
     </div>
   </div>
 
@@ -826,7 +846,7 @@
           <dt>スタイル</dt><dd>生配信で、攻略法やアドバイスを教える</dd>
           <dt>チャンネル</dt><dd><a href="https://www.youtube.com/@RuLgames" target="_blank" rel="noopener">るるゲーム</a><br><a href="https://www.youtube.com/channel/UCeI7tXU8GgywzL10AEMPzYQ" target="_blank" rel="noopener">るるゲームアルファ</a>（サブ）</dd>
           <dt>X</dt><dd><a href="https://x.com/Uno_RuL" target="_blank" rel="noopener">@Uno_RuL</a></dd>
-          <dt>登録者</dt><dd>約2.51万人（2026年11月）</dd>
+          <dt>登録者</dt><dd id="info-subs">約2.62万人（2026年11月）</dd>
           <dt>目標</dt><dd>10万人</dd>
         </dl>
       </aside>
@@ -839,6 +859,7 @@
             <li><a href="#about-vows">3つの約束</a></li>
             <li><a href="#about-live">配信はこんな感じ</a></li>
             <li><a href="#about-history">あゆみ</a></li>
+            <li><a href="#about-subs">登録者のうつりかわり</a></li>
             <li><a href="#about-think">るるの考えがわかるショート</a></li>
           </ol>
         </nav>
@@ -882,6 +903,14 @@
         <ol class="history" id="history-box">
           <li>あゆみは<a href="https://www.youtube.com/@RuLgames/streams" target="_blank" rel="noopener">YouTubeの配信一覧</a>から見られます。</li>
         </ol>
+
+        <h3 id="about-subs">登録者のうつりかわり</h3>
+        <p class="about-note">目標の10万人まで、どこまで来たか。YouTubeに表示される登録者数を、毎日記録しています（YouTubeの表示は上3桁で丸められた数字です）。</p>
+        <div class="subs-chart" id="subs-chart"></div>
+        <details class="subs-table">
+          <summary>数字で見る</summary>
+          <table><thead><tr><th scope="col">日付</th><th scope="col">登録者</th></tr></thead><tbody id="subs-rows"><tr><td>2026年11月5日</td><td>2.51万人</td></tr><tr><td>2026年11月21日</td><td>2.62万人</td></tr></tbody></table>
+        </details>
 
         <h3 id="about-think">るるの考えがわかるショート</h3>
         <p class="about-note">キャラの評価や育て方について、るるの考え方が出ているショートです。</p>
@@ -2239,6 +2268,76 @@
     if (!qz || !quizVisible || e.ctrlKey || e.metaKey || e.altKey) return;
     if (!qz.locked && /^[1-4]$/.test(e.key)) { e.preventDefault(); answer(+e.key - 1); }
   });
+
+  // 登録者数（GitHub Actions が scripts/fetch_subs.py で毎日記録する data/subs.json）
+  // ヒーローの「るるの城の体力」、プロフィール欄、線グラフをいっしょに更新する
+  const SUBS_GOAL = 100000;
+  const ymd = iso => { const [y, m, d] = iso.split('-').map(Number); return `${y}年${m}月${d}日`; };
+  function renderSubs(history) {
+    const last = history[history.length - 1];
+    const [y, m] = last.date.split('-').map(Number);
+    document.getElementById('goal-num').innerHTML = `約${esc(last.label.replace(/人$/, ''))}<small> 人</small>`;
+    document.getElementById('goal-meter').style.width = Math.min(100, last.subs / SUBS_GOAL * 100) + '%';
+    document.getElementById('info-subs').textContent = `約${last.label}（${y}年${m}月）`;
+    document.getElementById('subs-rows').innerHTML = history.map(h =>
+      `<tr><td>${ymd(h.date)}</td><td>${esc(h.label)}</td></tr>`).join('');
+
+    // 線グラフ：横は日付、縦は登録者数（ふえ方が見えるよう、記録の範囲に合わせて縦軸をとる）
+    const box = document.getElementById('subs-chart');
+    // 画面の幅に合わせて描き直す（縮めると、スマホで文字が小さくなりすぎるため）
+    const W = Math.max(300, Math.round(box.clientWidth) || 640), H = 220, L = 56, R = 64, T = 20, B = 28;
+    const t = h => new Date(h.date + 'T00:00:00+09:00').getTime();
+    const t0 = t(history[0]), t1 = Math.max(t(last), t0 + 86400000);
+    const step = 500;
+    const lo = Math.floor(Math.min(...history.map(h => h.subs)) / step) * step - step;
+    const hi = Math.ceil(Math.max(...history.map(h => h.subs)) / step) * step + step;
+    const x = h => L + (t(h) - t0) / (t1 - t0) * (W - L - R);
+    const yv = v => T + (hi - v) / (hi - lo) * (H - T - B);
+    const ticks = [lo, (lo + hi) / 2, hi];
+    const man = v => `${(v / 10000).toFixed(2).replace(/0$/, '')}万`;
+    const pts = history.map(h => `${x(h).toFixed(1)},${yv(h.subs).toFixed(1)}`).join(' ');
+    box.innerHTML = `
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="登録者数のうつりかわり。${esc(ymd(history[0].date))}の${esc(history[0].label)}から、${esc(ymd(last.date))}の${esc(last.label)}まで">
+        ${ticks.map(v => `<line class="grid" x1="${L}" x2="${W - R}" y1="${yv(v)}" y2="${yv(v)}"/><text class="axis" x="${L - 8}" y="${yv(v) + 4}" text-anchor="end">${man(v)}</text>`).join('')}
+        <text class="axis" x="${L}" y="${H - 6}">${esc(ymd(history[0].date))}</text>
+        <text class="axis" x="${W - R}" y="${H - 6}" text-anchor="end">${esc(ymd(last.date))}</text>
+        <polyline class="line" points="${pts}"/>
+        ${history.map((h, i) => `<circle class="dot" cx="${x(h)}" cy="${yv(h.subs)}" r="5"/><circle class="hit" cx="${x(h)}" cy="${yv(h.subs)}" r="16" data-i="${i}" tabindex="0" aria-label="${esc(ymd(h.date))} ${esc(h.label)}"/>`).join('')}
+        <text class="now" x="${x(last) + 10}" y="${yv(last.subs) + 5}">${esc(last.label)}</text>
+      </svg>`;
+    const tip = document.createElement('div');
+    tip.className = 'subs-tip';
+    tip.hidden = true;
+    box.appendChild(tip);
+    const show = el => {
+      const h = history[el.dataset.i], svg = box.querySelector('svg').getBoundingClientRect(), s = svg.width / W;
+      tip.innerHTML = `${esc(h.label)}<small>${esc(ymd(h.date))}${h.note ? `（${esc(h.note)}）` : ''}</small>`;
+      tip.style.left = x(h) * s + 'px';
+      tip.style.top = yv(h.subs) * s + 'px';
+      tip.hidden = false;
+    };
+    box.querySelectorAll('.hit').forEach(el => {
+      el.addEventListener('pointerenter', () => show(el));
+      el.addEventListener('focus', () => show(el));
+      el.addEventListener('pointerleave', () => { tip.hidden = true; });
+      el.addEventListener('blur', () => { tip.hidden = true; });
+    });
+  }
+  (async () => {
+    for (const url of ['https://raw.githubusercontent.com/rurugame/rurugame.github.io/main/data/subs.json', 'data/subs.json']) {
+      try {
+        const res = await fetch(url, { cache: 'no-cache' });
+        if (!res.ok) continue;
+        const data = await res.json();
+        if (Array.isArray(data.history) && data.history.length) {
+          renderSubs(data.history);
+          let t;
+          addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => renderSubs(data.history), 200); });
+          return;
+        }
+      } catch (e) { /* 次の取得先を試す */ }
+    }
+  })();
 
   // 動画一覧（GitHub Actions が1時間ごとに更新する data/videos.json）
   const SOURCES = [
