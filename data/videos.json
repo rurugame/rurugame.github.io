@@ -1,12 +1,52 @@
 {
  "videos": [
   {
+   "id": "LB7lHqQSpis",
+   "title": "キャットマンは強い…だが…",
+   "published": "2026-11-25T10:47:59+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 785,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "Eo4K2AfPJMc",
+   "title": "攻略にアイテムを使うのはアリか無しか",
+   "published": "2026-11-25T10:34:26+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 818,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "0719UB3KD-s",
+   "title": "前田Lv.60にするか悩んでいる",
+   "published": "2026-11-25T10:26:58+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 957,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "eVoOyQjmU2I",
+   "title": "世間では黒ルナの評価が低い？",
+   "published": "2026-11-25T10:01:23+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1713,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "8IPSdLdwOn0",
    "title": "にゃんこ塔50階 真っ向勝負で戦う男",
    "published": "2026-11-24T06:10:37+00:00",
    "short": true,
    "kind": "short",
-   "views": 17575,
+   "views": 17948,
    "excerpt": "",
    "description": ""
   },
@@ -16,7 +56,7 @@
    "published": "2026-11-24T05:15:56+00:00",
    "short": true,
    "kind": "short",
-   "views": 15386,
+   "views": 15617,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +66,7 @@
    "published": "2026-11-24T05:14:55+00:00",
    "short": true,
    "kind": "short",
-   "views": 6144,
+   "views": 6267,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +76,7 @@
    "published": "2026-11-24T05:13:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 17491,
+   "views": 17873,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +106,7 @@
    "published": "2026-11-23T04:42:41+00:00",
    "short": true,
    "kind": "short",
-   "views": 207239,
+   "views": 208600,
    "excerpt": "",
    "description": ""
   },
@@ -86,7 +126,7 @@
    "published": "2026-11-22T12:03:21+00:00",
    "short": true,
    "kind": "short",
-   "views": 31422,
+   "views": 32027,
    "excerpt": "",
    "description": ""
   },
@@ -106,7 +146,7 @@
    "published": "2026-11-22T08:59:21+00:00",
    "short": true,
    "kind": "short",
-   "views": 25180,
+   "views": 25417,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +166,7 @@
    "published": "2026-11-21T08:29:03+00:00",
    "short": true,
    "kind": "short",
-   "views": 22383,
+   "views": 22481,
    "excerpt": "",
    "description": ""
   },
@@ -146,7 +186,7 @@
    "published": "2026-11-21T04:03:46+00:00",
    "short": true,
    "kind": "short",
-   "views": 29157,
+   "views": 29393,
    "excerpt": "",
    "description": ""
   },
@@ -757,46 +797,6 @@
    "short": true,
    "kind": "short",
    "views": 12813,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "XHUjuMoLUZI",
-   "title": "黒キャス98点",
-   "published": "2026-10-31T11:14:14+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 28501,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "39EMAqtjbA4",
-   "title": "レベル60でハヤブサを勧める理由",
-   "published": "2026-10-31T09:48:17+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 63120,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "omn1Gu06NWk",
-   "title": "真レジェ初期、レベル60にするなら？",
-   "published": "2026-10-30T22:30:08+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 25071,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "g9zHuMayd7g",
-   "title": "斎藤さん、クオリネスのド適正になるか？",
-   "published": "2026-10-30T10:30:34+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 22442,
    "excerpt": "",
    "description": ""
   }
