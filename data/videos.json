@@ -1,12 +1,42 @@
 {
  "videos": [
   {
+   "id": "ex33IMFdSt0",
+   "title": "ショベリンの手柄じゃ…ない？",
+   "published": "2026-11-26T07:23:29+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1449,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "XpzCBuKbg2c",
+   "title": "汎用編成を作らない理由",
+   "published": "2026-11-26T06:56:42+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1564,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "3nUvUNmAiJA",
+   "title": "遅延ってどうなん？",
+   "published": "2026-11-26T06:43:28+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 945,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "Tox9HIApQQE",
    "title": "【Lv.60】かぐやとパラディンどっちにするか？",
    "published": "2026-11-26T04:54:57+00:00",
    "short": true,
    "kind": "short",
-   "views": 2173,
+   "views": 4161,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +56,7 @@
    "published": "2026-11-25T10:47:59+00:00",
    "short": true,
    "kind": "short",
-   "views": 11698,
+   "views": 12067,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +66,7 @@
    "published": "2026-11-25T10:34:26+00:00",
    "short": true,
    "kind": "short",
-   "views": 9302,
+   "views": 9469,
    "excerpt": "",
    "description": ""
   },
@@ -46,7 +76,7 @@
    "published": "2026-11-25T10:26:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 16150,
+   "views": 16705,
    "excerpt": "",
    "description": ""
   },
@@ -56,7 +86,7 @@
    "published": "2026-11-25T10:01:23+00:00",
    "short": true,
    "kind": "short",
-   "views": 13428,
+   "views": 13937,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +96,7 @@
    "published": "2026-11-24T06:10:37+00:00",
    "short": true,
    "kind": "short",
-   "views": 19372,
+   "views": 19460,
    "excerpt": "",
    "description": ""
   },
@@ -76,7 +106,7 @@
    "published": "2026-11-24T05:15:56+00:00",
    "short": true,
    "kind": "short",
-   "views": 16539,
+   "views": 16508,
    "excerpt": "",
    "description": ""
   },
@@ -86,7 +116,7 @@
    "published": "2026-11-24T05:14:55+00:00",
    "short": true,
    "kind": "short",
-   "views": 7683,
+   "views": 7816,
    "excerpt": "",
    "description": ""
   },
@@ -96,7 +126,7 @@
    "published": "2026-11-24T05:13:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 19695,
+   "views": 19779,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +156,7 @@
    "published": "2026-11-23T04:42:41+00:00",
    "short": true,
    "kind": "short",
-   "views": 216308,
+   "views": 216884,
    "excerpt": "",
    "description": ""
   },
@@ -146,7 +176,7 @@
    "published": "2026-11-22T12:03:21+00:00",
    "short": true,
    "kind": "short",
-   "views": 34095,
+   "views": 34174,
    "excerpt": "",
    "description": ""
   },
@@ -156,7 +186,7 @@
    "published": "2026-11-22T10:53:40+00:00",
    "short": true,
    "kind": "short",
-   "views": 25150,
+   "views": 25187,
    "excerpt": "",
    "description": ""
   },
@@ -767,36 +797,6 @@
    "short": true,
    "kind": "short",
    "views": 43596,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "N7NOb48Hq28",
-   "title": "爆波について無効以外を考える",
-   "published": "2026-11-02T11:21:14+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 31997,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "YQwlh4Hc7Dk",
-   "title": "『あの』ディオラムスがダメなとき",
-   "published": "2026-11-01T22:13:14+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 33589,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "o_En_969oTU",
-   "title": "全員ヤバい",
-   "published": "2026-10-31T23:37:12+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 155534,
    "excerpt": "",
    "description": ""
   }
