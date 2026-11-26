@@ -1,6 +1,16 @@
 {
  "videos": [
   {
+   "id": "Tox9HIApQQE",
+   "title": "【Lv.60】かぐやとパラディンどっちにするか？",
+   "published": "2026-11-26T04:54:57+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 2173,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "Fmo88cnLt_A",
    "title": "にゃんこ塔×脱獄バージョン【にゃんこ大戦争】",
    "published": "2026-11-25T11:27:39+00:00",
@@ -16,7 +26,7 @@
    "published": "2026-11-25T10:47:59+00:00",
    "short": true,
    "kind": "short",
-   "views": 11098,
+   "views": 11698,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +36,7 @@
    "published": "2026-11-25T10:34:26+00:00",
    "short": true,
    "kind": "short",
-   "views": 9097,
+   "views": 9302,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +46,7 @@
    "published": "2026-11-25T10:26:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 15218,
+   "views": 16150,
    "excerpt": "",
    "description": ""
   },
@@ -46,7 +56,7 @@
    "published": "2026-11-25T10:01:23+00:00",
    "short": true,
    "kind": "short",
-   "views": 12546,
+   "views": 13428,
    "excerpt": "",
    "description": ""
   },
@@ -56,7 +66,7 @@
    "published": "2026-11-24T06:10:37+00:00",
    "short": true,
    "kind": "short",
-   "views": 19224,
+   "views": 19372,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +76,7 @@
    "published": "2026-11-24T05:15:56+00:00",
    "short": true,
    "kind": "short",
-   "views": 16459,
+   "views": 16539,
    "excerpt": "",
    "description": ""
   },
@@ -76,7 +86,7 @@
    "published": "2026-11-24T05:14:55+00:00",
    "short": true,
    "kind": "short",
-   "views": 7506,
+   "views": 7683,
    "excerpt": "",
    "description": ""
   },
@@ -116,7 +126,7 @@
    "published": "2026-11-23T04:42:41+00:00",
    "short": true,
    "kind": "short",
-   "views": 215663,
+   "views": 216308,
    "excerpt": "",
    "description": ""
   },
@@ -136,7 +146,7 @@
    "published": "2026-11-22T12:03:21+00:00",
    "short": true,
    "kind": "short",
-   "views": 33981,
+   "views": 34095,
    "excerpt": "",
    "description": ""
   },
@@ -156,7 +166,7 @@
    "published": "2026-11-22T08:59:21+00:00",
    "short": true,
    "kind": "short",
-   "views": 26343,
+   "views": 26410,
    "excerpt": "",
    "description": ""
   },
@@ -176,7 +186,7 @@
    "published": "2026-11-21T08:29:03+00:00",
    "short": true,
    "kind": "short",
-   "views": 22822,
+   "views": 22846,
    "excerpt": "",
    "description": ""
   },
@@ -186,7 +196,7 @@
    "published": "2026-11-21T06:56:48+00:00",
    "short": true,
    "kind": "short",
-   "views": 41934,
+   "views": 41993,
    "excerpt": "",
    "description": ""
   },
@@ -787,16 +797,6 @@
    "short": true,
    "kind": "short",
    "views": 155534,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "XXs85nJuosM",
-   "title": "ソラクティスでも成田が強い",
-   "published": "2026-10-31T22:32:05+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 28402,
    "excerpt": "",
    "description": ""
   }
