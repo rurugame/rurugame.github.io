@@ -1,6 +1,26 @@
 {
  "videos": [
   {
+   "id": "rfNqRPVT-LQ",
+   "title": "エターニス実装初日の感想",
+   "published": "2026-11-27T10:19:58+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1720,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "iUGFLTcUuX4",
+   "title": "エターニス降臨の瞬間",
+   "published": "2026-11-27T09:33:25+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 4367,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "rmqDpNKOJdM",
    "title": "14周年【にゃんこ大戦争】",
    "published": "2026-11-26T10:14:54+00:00",
@@ -16,7 +36,7 @@
    "published": "2026-11-26T07:23:29+00:00",
    "short": true,
    "kind": "short",
-   "views": 30214,
+   "views": 30721,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +46,7 @@
    "published": "2026-11-26T06:56:42+00:00",
    "short": true,
    "kind": "short",
-   "views": 22214,
+   "views": 22477,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +56,7 @@
    "published": "2026-11-26T06:43:28+00:00",
    "short": true,
    "kind": "short",
-   "views": 16116,
+   "views": 17523,
    "excerpt": "",
    "description": ""
   },
@@ -46,7 +66,7 @@
    "published": "2026-11-26T04:54:57+00:00",
    "short": true,
    "kind": "short",
-   "views": 18921,
+   "views": 19227,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +86,7 @@
    "published": "2026-11-25T10:47:59+00:00",
    "short": true,
    "kind": "short",
-   "views": 13935,
+   "views": 14021,
    "excerpt": "",
    "description": ""
   },
@@ -76,7 +96,7 @@
    "published": "2026-11-25T10:34:26+00:00",
    "short": true,
    "kind": "short",
-   "views": 10589,
+   "views": 10651,
    "excerpt": "",
    "description": ""
   },
@@ -86,7 +106,7 @@
    "published": "2026-11-25T10:26:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 21756,
+   "views": 21997,
    "excerpt": "",
    "description": ""
   },
@@ -96,7 +116,7 @@
    "published": "2026-11-25T10:01:23+00:00",
    "short": true,
    "kind": "short",
-   "views": 16087,
+   "views": 16171,
    "excerpt": "",
    "description": ""
   },
@@ -106,7 +126,7 @@
    "published": "2026-11-24T06:10:37+00:00",
    "short": true,
    "kind": "short",
-   "views": 20273,
+   "views": 20283,
    "excerpt": "",
    "description": ""
   },
@@ -116,7 +136,7 @@
    "published": "2026-11-24T05:15:56+00:00",
    "short": true,
    "kind": "short",
-   "views": 17118,
+   "views": 17143,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +146,7 @@
    "published": "2026-11-24T05:14:55+00:00",
    "short": true,
    "kind": "short",
-   "views": 9310,
+   "views": 9499,
    "excerpt": "",
    "description": ""
   },
@@ -136,7 +156,7 @@
    "published": "2026-11-24T05:13:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 21063,
+   "views": 21164,
    "excerpt": "",
    "description": ""
   },
@@ -166,7 +186,7 @@
    "published": "2026-11-23T04:42:41+00:00",
    "short": true,
    "kind": "short",
-   "views": 222839,
+   "views": 223049,
    "excerpt": "",
    "description": ""
   },
@@ -777,26 +797,6 @@
    "short": true,
    "kind": "short",
    "views": 16774,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "TP3QzQcFRls",
-   "title": "ちびゴムの魂攻撃について",
-   "published": "2026-11-03T08:54:53+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 16703,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "CAfkKbT9q1o",
-   "title": "にゃんまの本能、体力アップについて",
-   "published": "2026-11-02T22:30:03+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 28809,
    "excerpt": "",
    "description": ""
   }
