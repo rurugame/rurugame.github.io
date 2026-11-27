@@ -1,6 +1,16 @@
 {
  "videos": [
   {
+   "id": "uy-k4yi9jZ0",
+   "title": "エターニスはクレイG？",
+   "published": "2026-11-27T22:28:08+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 1798,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "-yZwqCwsZoQ",
    "title": "14周年【にゃんこ大戦争】",
    "published": "2026-11-27T11:19:39+00:00",
@@ -16,7 +26,7 @@
    "published": "2026-11-27T10:19:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 15796,
+   "views": 16194,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +36,7 @@
    "published": "2026-11-27T09:33:25+00:00",
    "short": true,
    "kind": "short",
-   "views": 38119,
+   "views": 39341,
    "excerpt": "",
    "description": ""
   },
@@ -46,7 +56,7 @@
    "published": "2026-11-26T07:23:29+00:00",
    "short": true,
    "kind": "short",
-   "views": 32696,
+   "views": 32728,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +76,7 @@
    "published": "2026-11-26T06:43:28+00:00",
    "short": true,
    "kind": "short",
-   "views": 20502,
+   "views": 20590,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +136,7 @@
    "published": "2026-11-25T10:01:23+00:00",
    "short": true,
    "kind": "short",
-   "views": 16564,
+   "views": 16599,
    "excerpt": "",
    "description": ""
   },
@@ -787,16 +797,6 @@
    "short": true,
    "kind": "short",
    "views": 13127,
-   "excerpt": "",
-   "description": ""
-  },
-  {
-   "id": "Z_4RuYK459w",
-   "title": "超極について",
-   "published": "2026-11-03T22:00:16+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 37670,
    "excerpt": "",
    "description": ""
   }
