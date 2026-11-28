@@ -1,12 +1,32 @@
 {
  "videos": [
   {
+   "id": "hjmV-9dwxBo",
+   "title": "サンディアは持っておいた方が良い",
+   "published": "2026-11-28T05:07:50+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 5721,
+   "excerpt": "",
+   "description": ""
+  },
+  {
+   "id": "ISvCelhr0SQ",
+   "title": "ディオラムスを宣伝する男",
+   "published": "2026-11-28T04:42:28+00:00",
+   "short": true,
+   "kind": "short",
+   "views": 7560,
+   "excerpt": "",
+   "description": ""
+  },
+  {
    "id": "uy-k4yi9jZ0",
    "title": "エターニスはクレイG？",
    "published": "2026-11-27T22:28:08+00:00",
    "short": true,
    "kind": "short",
-   "views": 16183,
+   "views": 33380,
    "excerpt": "",
    "description": ""
   },
@@ -26,7 +46,7 @@
    "published": "2026-11-27T10:19:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 19115,
+   "views": 20726,
    "excerpt": "",
    "description": ""
   },
@@ -36,7 +56,7 @@
    "published": "2026-11-27T09:33:25+00:00",
    "short": true,
    "kind": "short",
-   "views": 55434,
+   "views": 69605,
    "excerpt": "",
    "description": ""
   },
@@ -56,7 +76,7 @@
    "published": "2026-11-26T07:23:29+00:00",
    "short": true,
    "kind": "short",
-   "views": 33309,
+   "views": 33767,
    "excerpt": "",
    "description": ""
   },
@@ -66,7 +86,7 @@
    "published": "2026-11-26T06:56:42+00:00",
    "short": true,
    "kind": "short",
-   "views": 23886,
+   "views": 24289,
    "excerpt": "",
    "description": ""
   },
@@ -76,7 +96,7 @@
    "published": "2026-11-26T06:43:28+00:00",
    "short": true,
    "kind": "short",
-   "views": 21839,
+   "views": 24063,
    "excerpt": "",
    "description": ""
   },
@@ -86,7 +106,7 @@
    "published": "2026-11-26T04:54:57+00:00",
    "short": true,
    "kind": "short",
-   "views": 20543,
+   "views": 21101,
    "excerpt": "",
    "description": ""
   },
@@ -106,7 +126,7 @@
    "published": "2026-11-25T10:47:59+00:00",
    "short": true,
    "kind": "short",
-   "views": 14472,
+   "views": 14625,
    "excerpt": "",
    "description": ""
   },
@@ -116,7 +136,7 @@
    "published": "2026-11-25T10:34:26+00:00",
    "short": true,
    "kind": "short",
-   "views": 11301,
+   "views": 11438,
    "excerpt": "",
    "description": ""
   },
@@ -126,7 +146,7 @@
    "published": "2026-11-25T10:26:58+00:00",
    "short": true,
    "kind": "short",
-   "views": 22762,
+   "views": 23023,
    "excerpt": "",
    "description": ""
   },
@@ -136,7 +156,7 @@
    "published": "2026-11-25T10:01:23+00:00",
    "short": true,
    "kind": "short",
-   "views": 16653,
+   "views": 16889,
    "excerpt": "",
    "description": ""
   },
@@ -146,7 +166,7 @@
    "published": "2026-11-24T06:10:37+00:00",
    "short": true,
    "kind": "short",
-   "views": 20750,
+   "views": 20853,
    "excerpt": "",
    "description": ""
   },
@@ -156,7 +176,7 @@
    "published": "2026-11-24T05:15:56+00:00",
    "short": true,
    "kind": "short",
-   "views": 17425,
+   "views": 17515,
    "excerpt": "",
    "description": ""
   },
@@ -779,26 +799,6 @@
    "views": 16601,
    "excerpt": "",
    "description": ""
-  },
-  {
-   "id": "ewTgHmRwX2U",
-   "title": "雑談【にゃんこ大戦争】",
-   "published": "2026-11-04T12:03:26+00:00",
-   "short": false,
-   "kind": "live",
-   "views": 4027,
-   "excerpt": "・道義（道徳、モラル、配慮、いわゆる人としての部分）",
-   "description": "チャンネル登録者10万人目指しているのでチャンネル登録、いいね、宜しくお願い致します！\n\n【生配信において大事なこと】\n・道義（道徳、モラル、配慮、いわゆる人としての部分）\n・ネット特有の言葉遣い、立ち回り、未公開情報やネタバレはご遠慮ください\n・質問はなるべく具体的にが望ましい\n\n【メンバーになると↓】\nアーカイブ＆メンバー限定動画が見れます！\nhttps://www.youtube.com/channel/UCI4sJGfpJaa15xWM8D78pAg/join\n\n【X】\ntwitter.com/Uno_RuL\n\n【Lv.60にするならどっち？】\nhttps://www.youtube.com/playlist?list=PLf8nCzBbZyLU\n\n#にゃんこ大戦争 #雑談"
-  },
-  {
-   "id": "ZLie0cOMfd0",
-   "title": "味方のワープについて",
-   "published": "2026-11-04T10:00:17+00:00",
-   "short": true,
-   "kind": "short",
-   "views": 13127,
-   "excerpt": "",
-   "description": ""
   }
  ],
  "sub": [
@@ -808,7 +808,7 @@
    "published": "2026-10-20T03:34:22+00:00",
    "short": false,
    "kind": "live",
-   "views": 1016,
+   "views": 1017,
    "excerpt": "",
    "description": "#スマブラSP #スマブラ #shorts"
   },
@@ -818,7 +818,7 @@
    "published": "2026-10-18T15:20:24+00:00",
    "short": false,
    "kind": "live",
-   "views": 570,
+   "views": 571,
    "excerpt": "ポケモン金で止まっています！ほぼほぼ何も知りません！初見楽しみます！！",
    "description": "ポケモン金で止まっています！ほぼほぼ何も知りません！初見楽しみます！！\n\n#Pokémon #ポケモンza #るるゲーム #shorts"
   },
@@ -828,7 +828,7 @@
    "published": "2026-10-16T04:16:19+00:00",
    "short": false,
    "kind": "live",
-   "views": 1389,
+   "views": 1390,
    "excerpt": "",
    "description": "#スマブラSP #スマブラ #shorts"
   },
@@ -878,7 +878,7 @@
    "published": "2026-08-17T13:12:49+00:00",
    "short": true,
    "kind": "short",
-   "views": 1790,
+   "views": 1791,
    "excerpt": "",
    "description": ""
   },
@@ -928,7 +928,7 @@
    "published": "2026-07-12T22:30:16+00:00",
    "short": true,
    "kind": "short",
-   "views": 2941,
+   "views": 2942,
    "excerpt": "",
    "description": ""
   },
@@ -938,7 +938,7 @@
    "published": "2026-07-11T22:30:29+00:00",
    "short": true,
    "kind": "short",
-   "views": 6197,
+   "views": 6199,
    "excerpt": "",
    "description": ""
   },
@@ -948,7 +948,7 @@
    "published": "2026-07-10T22:30:33+00:00",
    "short": true,
    "kind": "short",
-   "views": 3266,
+   "views": 3267,
    "excerpt": "",
    "description": ""
   },
@@ -1018,7 +1018,7 @@
    "published": "2026-02-10T10:00:14+00:00",
    "short": true,
    "kind": "short",
-   "views": 723,
+   "views": 724,
    "excerpt": "",
    "description": ""
   },
@@ -1028,7 +1028,7 @@
    "published": "2026-02-09T15:47:47+00:00",
    "short": true,
    "kind": "short",
-   "views": 1860,
+   "views": 1862,
    "excerpt": "",
    "description": ""
   },
@@ -1078,7 +1078,7 @@
    "published": "2024-11-11T10:30:14+00:00",
    "short": true,
    "kind": "short",
-   "views": 7248,
+   "views": 7249,
    "excerpt": "",
    "description": ""
   },
